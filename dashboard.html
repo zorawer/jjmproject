@@ -1,9 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JJM Project</title>
+    <title>Drilling Chart</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <h1>JJM Project</h1>
+    <div id="drilling-chart"></div>
+
+    <script>
+        // Fetch data from the CSV file
+        fetch('https://zorawer.github.io/jjmproject/testfetch.csv')
+            .then(response => response.text())
+            .then(data => {
+                // Process the data
+                const parsedData = Plotly.d3.csv.parse(data);
+
+                const drillingDates = [];
+                const drillingCounts = [];
+
+                parsedData.forEach(row => {
+                    if (row['Drilling Status'] === 'Completed' && row['T/W Drill Start Date']) {
+                        drillingDates.push(row['T/W Drill Start Date']);
+                        drillingCounts.push(1);
+                    }
+                });
+
+                // Create the drilling chart
+                const drillingChart = {
+                    x: drillingDates,
+                    y: drillingCounts,
+                    type: 'scatter',
+                    mode: 'markers',
+                    name: 'Drilling Completion',
+                    marker: {
+                        color: '#1f77b4'
+                    }
+                };
+
+                // Define the layout
+                const layout = {
+                    title: 'Drilling Completion by Date',
+                    xaxis: {
+                        title: 'Date'
+                    },
+                    yaxis: {
+                        title: 'Number of Drilling Schemes'
+                    }
+                };
+
+                // Create the chart
+                Plotly.newPlot('drilling-chart', [drillingChart], layout);
+            })
+            .catch(error => console.error(error));
+    </script>
 </body>
 </html>
