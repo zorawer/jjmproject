@@ -51,13 +51,16 @@
                 const drillingCounts = drillingMonths.map(month => drillingData[month].completed);
                 const drillingWIP = drillingMonths.map(month => drillingData[month].wip);
 
+                // Calculate total drilling completions
+                const totalDrillingCompletions = drillingCounts.reduce((total, count) => total + count, 0);
+
                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingMonths,
                     y: drillingCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: 'Drilling Completion',
+                    name: `Drilling Completion (${totalDrillingCompletions})`,
                     marker: {
                         color: '#1f77b4'
                     }
