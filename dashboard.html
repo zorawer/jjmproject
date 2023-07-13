@@ -46,12 +46,24 @@
                 const drillingChart = {
                     x: drillingDates,
                     y: drillingCompleted,
-                    type: 'bar',
+                    mode: 'lines+markers',
                     name: 'Completed',
                     marker: {
                         color: '#1f77b4'
                     }
                 };
+
+                const drillingInProgressTrace = {
+                    x: drillingDates,
+                    y: drillingInProgress,
+                    mode: 'lines+markers',
+                    name: 'In Progress',
+                    marker: {
+                        color: '#FFA500'
+                    }
+                };
+
+                const drillingData = [drillingChart, drillingInProgressTrace];
 
                 const drillingLayout = {
                     title: 'Drilling Completion by Month',
@@ -67,12 +79,24 @@
                 const loweringChart = {
                     x: loweringDates,
                     y: loweringCompleted,
-                    type: 'bar',
+                    mode: 'lines+markers',
                     name: 'Completed',
                     marker: {
                         color: '#1f77b4'
                     }
                 };
+
+                const loweringInProgressTrace = {
+                    x: loweringDates,
+                    y: loweringInProgress,
+                    mode: 'lines+markers',
+                    name: 'In Progress',
+                    marker: {
+                        color: '#FFA500'
+                    }
+                };
+
+                const loweringData = [loweringChart, loweringInProgressTrace];
 
                 const loweringLayout = {
                     title: 'Lowering Completion by Month',
@@ -83,34 +107,6 @@
                         title: 'Number of Lowering Schemes'
                     }
                 };
-
-                // Create the drilling in-progress trace
-                const drillingInProgressTrace = {
-                    x: drillingDates,
-                    y: drillingInProgress,
-                    type: 'bar',
-                    name: 'In Progress',
-                    marker: {
-                        color: '#FFA500'
-                    }
-                };
-
-                // Create the lowering in-progress trace
-                const loweringInProgressTrace = {
-                    x: loweringDates,
-                    y: loweringInProgress,
-                    type: 'bar',
-                    name: 'In Progress',
-                    marker: {
-                        color: '#FFA500'
-                    }
-                };
-
-                // Combine drilling completed and in-progress traces
-                const drillingData = [drillingChart, drillingInProgressTrace];
-
-                // Combine lowering completed and in-progress traces
-                const loweringData = [loweringChart, loweringInProgressTrace];
 
                 // Create the drilling and lowering charts
                 Plotly.newPlot('drilling-chart', drillingData, drillingLayout);
