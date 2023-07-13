@@ -19,7 +19,7 @@
                 const drillingData = parsedData.reduce((accumulator, row) => {
                     if (row['Drilling Status'] === 'Completed' && row['T/W Drill Start Date']) {
                         const dateParts = row['T/W Drill Start Date'].split('/');
-                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long', year: 'numeric' });
+                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
                             accumulator[month] += 1;
                         } else {
@@ -29,9 +29,12 @@
                     return accumulator;
                 }, {});
 
-                // Extract the month labels and drilling counts
-                const drillingMonths = Object.keys(drillingData);
-                const drillingCounts = Object.values(drillingData);
+                // Define the order of month names
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+                // Create the drilling chart data
+                const drillingMonths = monthNames.filter(month => drillingData.hasOwnProperty(month));
+                const drillingCounts = drillingMonths.map(month => drillingData[month]);
 
                 // Create the drilling chart
                 const drillingChart = {
