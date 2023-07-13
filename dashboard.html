@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Drilling and Lowering Completion</title>
+    <title>Drilling Completion</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <div id="drilling-chart"></div>
-    <div id="lowering-chart"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -16,54 +15,34 @@
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
 
-                // Process drilling data
-                const drillingCompleted = [];
-                const drillingInProgress = [];
-                const drillingDates = [];
-
-                parsedData.forEach(row => {
+                // Group the data by month
+                const drillingData = parsedData.reduce((accumulator, row) => {
                     if (row['Drilling Status'] === 'Completed' && row['T/W Drill Start Date']) {
-                        drillingCompleted.push(1);
-                        drillingInProgress.push(null); // Placeholder for work in progress
-                        drillingDates.push(new Date(row['T/W Drill Start Date']).toLocaleString('default', { month: 'long', year: 'numeric' }));
+                        const month = new Date(row['T/W Drill Start Date']).toLocaleString('default', { month: 'long', year: 'numeric' });
+                        if (accumulator.hasOwnProperty(month)) {
+                            accumulator[month] += 1;
+                        } else {
+                            accumulator[month] = 1;
+                        }
                     }
-                });
+                    return accumulator;
+                }, {});
 
-                // Process lowering data
-                const loweringCompleted = [];
-                const loweringInProgress = [];
-                const loweringDates = [];
-
-                parsedData.forEach(row => {
-                    if (row['T/W Lowering Status'] === 'Completed' && row['T/W Lowering Date']) {
-                        loweringCompleted.push(1);
-                        loweringInProgress.push(null); // Placeholder for work in progress
-                        loweringDates.push(new Date(row['T/W Lowering Date']).toLocaleString('default', { month: 'long', year: 'numeric' }));
-                    }
-                });
+                // Extract the month labels and drilling counts
+                const drillingMonths = Object.keys(drillingData);
+                const drillingCounts = Object.values(drillingData);
 
                 // Create the drilling chart
                 const drillingChart = {
-                    x: drillingDates,
-                    y: drillingCompleted,
+                    x: drillingMonths,
+                    y: drillingCounts,
+                    type: 'line',
                     mode: 'lines+markers',
-                    name: 'Completed',
+                    name: 'Drilling Completion',
                     marker: {
                         color: '#1f77b4'
                     }
                 };
-
-                const drillingInProgressTrace = {
-                    x: drillingDates,
-                    y: drillingInProgress,
-                    mode: 'lines+markers',
-                    name: 'In Progress',
-                    marker: {
-                        color: '#FFA500'
-                    }
-                };
-
-                const drillingData = [drillingChart, drillingInProgressTrace];
 
                 const drillingLayout = {
                     title: 'Drilling Completion by Month',
@@ -75,42 +54,8 @@
                     }
                 };
 
-                // Create the lowering chart
-                const loweringChart = {
-                    x: loweringDates,
-                    y: loweringCompleted,
-                    mode: 'lines+markers',
-                    name: 'Completed',
-                    marker: {
-                        color: '#1f77b4'
-                    }
-                };
-
-                const loweringInProgressTrace = {
-                    x: loweringDates,
-                    y: loweringInProgress,
-                    mode: 'lines+markers',
-                    name: 'In Progress',
-                    marker: {
-                        color: '#FFA500'
-                    }
-                };
-
-                const loweringData = [loweringChart, loweringInProgressTrace];
-
-                const loweringLayout = {
-                    title: 'Lowering Completion by Month',
-                    xaxis: {
-                        title: 'Month'
-                    },
-                    yaxis: {
-                        title: 'Number of Lowering Schemes'
-                    }
-                };
-
-                // Create the drilling and lowering charts
-                Plotly.newPlot('drilling-chart', drillingData, drillingLayout);
-                Plotly.newPlot('lowering-chart', loweringData, loweringLayout);
+                // Create the drilling chart
+                Plotly.newPlot('drilling-chart', [drillingChart], drillingLayout);
             })
             .catch(error => console.error(error));
     </script>
