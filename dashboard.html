@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Drilling Chart</title>
+    <title>Drilling and Lowering Completion</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <div id="drilling-chart"></div>
+    <div id="lowering-chart"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -15,41 +16,105 @@
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
 
+                // Process drilling data
+                const drillingCompleted = [];
+                const drillingInProgress = [];
                 const drillingDates = [];
-                const drillingCounts = [];
 
                 parsedData.forEach(row => {
                     if (row['Drilling Status'] === 'Completed' && row['T/W Drill Start Date']) {
-                        drillingDates.push(row['T/W Drill Start Date']);
-                        drillingCounts.push(1);
+                        drillingCompleted.push(1);
+                        drillingInProgress.push(null); // Placeholder for work in progress
+                        drillingDates.push(new Date(row['T/W Drill Start Date']).toLocaleString('default', { month: 'long', year: 'numeric' }));
+                    }
+                });
+
+                // Process lowering data
+                const loweringCompleted = [];
+                const loweringInProgress = [];
+                const loweringDates = [];
+
+                parsedData.forEach(row => {
+                    if (row['T/W Lowering Status'] === 'Completed' && row['T/W Lowering Date']) {
+                        loweringCompleted.push(1);
+                        loweringInProgress.push(null); // Placeholder for work in progress
+                        loweringDates.push(new Date(row['T/W Lowering Date']).toLocaleString('default', { month: 'long', year: 'numeric' }));
                     }
                 });
 
                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingDates,
-                    y: drillingCounts,
-                    type: 'scatter',
-                    mode: 'markers',
-                    name: 'Drilling Completion',
+                    y: drillingCompleted,
+                    type: 'bar',
+                    name: 'Completed',
                     marker: {
                         color: '#1f77b4'
                     }
                 };
 
-                // Define the layout
-                const layout = {
-                    title: 'Drilling Completion by Date',
+                const drillingLayout = {
+                    title: 'Drilling Completion by Month',
                     xaxis: {
-                        title: 'Date'
+                        title: 'Month'
                     },
                     yaxis: {
                         title: 'Number of Drilling Schemes'
                     }
                 };
 
-                // Create the chart
-                Plotly.newPlot('drilling-chart', [drillingChart], layout);
+                // Create the lowering chart
+                const loweringChart = {
+                    x: loweringDates,
+                    y: loweringCompleted,
+                    type: 'bar',
+                    name: 'Completed',
+                    marker: {
+                        color: '#1f77b4'
+                    }
+                };
+
+                const loweringLayout = {
+                    title: 'Lowering Completion by Month',
+                    xaxis: {
+                        title: 'Month'
+                    },
+                    yaxis: {
+                        title: 'Number of Lowering Schemes'
+                    }
+                };
+
+                // Create the drilling in-progress trace
+                const drillingInProgressTrace = {
+                    x: drillingDates,
+                    y: drillingInProgress,
+                    type: 'bar',
+                    name: 'In Progress',
+                    marker: {
+                        color: '#FFA500'
+                    }
+                };
+
+                // Create the lowering in-progress trace
+                const loweringInProgressTrace = {
+                    x: loweringDates,
+                    y: loweringInProgress,
+                    type: 'bar',
+                    name: 'In Progress',
+                    marker: {
+                        color: '#FFA500'
+                    }
+                };
+
+                // Combine drilling completed and in-progress traces
+                const drillingData = [drillingChart, drillingInProgressTrace];
+
+                // Combine lowering completed and in-progress traces
+                const loweringData = [loweringChart, loweringInProgressTrace];
+
+                // Create the drilling and lowering charts
+                Plotly.newPlot('drilling-chart', drillingData, drillingLayout);
+                Plotly.newPlot('lowering-chart', loweringData, loweringLayout);
             })
             .catch(error => console.error(error));
     </script>
