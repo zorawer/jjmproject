@@ -18,7 +18,8 @@
                 // Group the data by month
                 const drillingData = parsedData.reduce((accumulator, row) => {
                     if (row['Drilling Status'] === 'Completed' && row['T/W Drill Start Date']) {
-                        const month = new Date(row['T/W Drill Start Date']).toLocaleString('default', { month: 'long', year: 'numeric' });
+                        const dateParts = row['T/W Drill Start Date'].split('/');
+                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long', year: 'numeric' });
                         if (accumulator.hasOwnProperty(month)) {
                             accumulator[month] += 1;
                         } else {
