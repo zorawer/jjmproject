@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JJM UP Drilling and Lowering Completion</title>
+    <title>Drilling and Lowering Completion</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
@@ -111,14 +111,37 @@
                     }
                 };
 
+                const drillingTargetLine = {
+                    x: drillingMonths,
+                    y: Array(drillingMonths.length).fill(60),
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'Drilling Target',
+                    line: {
+                        color: '#FF0000',
+                        dash: 'dash'
+                    }
+                };
+
+                const drillingAnnotations = drillingMonths.map((month, index) => ({
+                    x: month,
+                    y: 60,
+                    text: 'Target: 60',
+                    xanchor: 'left',
+                    yanchor: 'middle',
+                    showarrow: false
+                }));
+
                 const drillingLayout = {
                     title: 'Drilling Completion by Month',
                     xaxis: {
                         title: 'Month'
                     },
                     yaxis: {
-                        title: 'Number of Drilling Schemes'
-                    }
+                        title: 'Number of Drilling Schemes',
+                        range: [0, Math.max(...drillingCounts, ...drillingWIP, 60)]
+                    },
+                    annotations: drillingAnnotations
                 };
 
                 // Create the lowering chart
@@ -129,7 +152,7 @@
                     mode: 'lines+markers',
                     name: `Lowering Completion (${loweringCounts.reduce((total, count) => total + count, 0)})`,
                     marker: {
-                        color: '#00FF00'
+                        color: '#1f77b4'
                     }
                 };
 
@@ -147,21 +170,44 @@
                     }
                 };
 
+                const loweringTargetLine = {
+                    x: loweringMonths,
+                    y: Array(loweringMonths.length).fill(60),
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'Lowering Target',
+                    line: {
+                        color: '#FF0000',
+                        dash: 'dash'
+                    }
+                };
+
+                const loweringAnnotations = loweringMonths.map((month, index) => ({
+                    x: month,
+                    y: 60,
+                    text: 'Target: 60',
+                    xanchor: 'left',
+                    yanchor: 'middle',
+                    showarrow: false
+                }));
+
                 const loweringLayout = {
                     title: 'Lowering Completion by Month',
                     xaxis: {
                         title: 'Month'
                     },
                     yaxis: {
-                        title: 'Number of Lowering Schemes'
-                    }
+                        title: 'Number of Lowering Schemes',
+                        range: [0, Math.max(...loweringCounts, ...loweringWIP, 60)]
+                    },
+                    annotations: loweringAnnotations
                 };
 
                 // Create the drilling chart
-                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLayout);
+                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker, drillingTargetLine], drillingLayout);
 
                 // Create the lowering chart
-                Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], loweringLayout);
+                Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker, loweringTargetLine], loweringLayout);
             })
             .catch(error => console.error(error));
     </script>
