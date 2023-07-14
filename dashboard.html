@@ -19,26 +19,15 @@
 
                 // Group the data by month for drilling completion
                 const drillingData = parsedData.reduce((accumulator, row) => {
-                    if (row['Drilling Status'] === 'Completed' && row['T/W Drill Start Date']) {
+                    if (row['T/W Drill Start Date'] && (row['Drilling Status'] === 'Completed' || row['Drilling Status'] === 'WIP')) {
                         const dateParts = row['T/W Drill Start Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month].completed += 1;
+                            accumulator[month][row['Drilling Status']] += 1;
                         } else {
                             accumulator[month] = {
-                                completed: 1,
-                                wip: 0
-                            };
-                        }
-                    } else if (row['Drilling Status'] === 'WIP' && row['T/W Drill Start Date']) {
-                        const dateParts = row['T/W Drill Start Date'].split('/');
-                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
-                        if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month].wip += 1;
-                        } else {
-                            accumulator[month] = {
-                                completed: 0,
-                                wip: 1
+                                'Completed': row['Drilling Status'] === 'Completed' ? 1 : 0,
+                                'WIP': row['Drilling Status'] === 'WIP' ? 1 : 0
                             };
                         }
                     }
@@ -47,26 +36,15 @@
 
                 // Group the data by month for lowering completion
                 const loweringData = parsedData.reduce((accumulator, row) => {
-                    if (row['T/W Lowering Date']) {
+                    if (row['T/W Lowering Date'] && (row['T/W Lowering Status'] === 'Completed' || row['T/W Lowering Status'] === 'WIP')) {
                         const dateParts = row['T/W Lowering Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month].completed += 1;
+                            accumulator[month][row['T/W Lowering Status']] += 1;
                         } else {
                             accumulator[month] = {
-                                completed: 1,
-                                wip: 0
-                            };
-                        }
-                    } else if (row['T/W Lowering Status'] === 'WIP' && row['T/W Drill Start Date']) {
-                        const dateParts = row['T/W Drill Start Date'].split('/');
-                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
-                        if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month].wip += 1;
-                        } else {
-                            accumulator[month] = {
-                                completed: 0,
-                                wip: 1
+                                'Completed': row['T/W Lowering Status'] === 'Completed' ? 1 : 0,
+                                'WIP': row['T/W Lowering Status'] === 'WIP' ? 1 : 0
                             };
                         }
                     }
@@ -78,21 +56,21 @@
 
                 // Create the drilling chart data
                 const drillingMonths = monthNames.filter(month => drillingData.hasOwnProperty(month));
-                const drillingCounts = drillingMonths.map(month => drillingData[month].completed);
-                const drillingWIP = drillingMonths.map(month => drillingData[month].wip);
+                const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed']);
+                const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP']);
 
                 // Create the lowering chart data
                 const loweringMonths = monthNames.filter(month => loweringData.hasOwnProperty(month));
-                const loweringCounts = loweringMonths.map(month => loweringData[month].completed);
-                const loweringWIP = loweringMonths.map(month => loweringData[month].wip);
+                const loweringCompleted = loweringMonths.map(month => loweringData[month]['Completed']);
+                const loweringWIP = loweringMonths.map(month => loweringData[month]['WIP']);
 
                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingMonths,
-                    y: drillingCounts,
+                    y: drillingCompleted,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Drilling Completion (${drillingCounts.reduce((total, count) => total + count, 0)})`,
+                    name: `Drilling Completion (${drillingCompleted.reduce((total, count) => total + count, 0)})`,
                     marker: {
                         color: '#1f77b4'
                     }
@@ -114,8 +92,8 @@
 
                 const drillingAnnotations = drillingMonths.map((month, index) => ({
                     x: month,
-                    y: drillingCounts[index],
-                    text: drillingCounts[index].toString(),
+                    y: drillingCompleted[index],
+                    text: drillingCompleted[index].toString(),
                     xanchor: 'left',
                     yanchor: 'middle',
                     showarrow: false
@@ -143,7 +121,7 @@
                     },
                     yaxis: {
                         title: 'Number of Drilling Schemes',
-                        range: [0, Math.max(...drillingCounts, ...drillingWIP, 60)]
+                        range: [0, Math.max(...drillingCompleted, ...drillingWIP, 60)]
                     },
                     annotations: drillingAnnotations.concat([drillingTargetAnnotation])
                 };
@@ -151,10 +129,10 @@
                 // Create the lowering chart
                 const loweringChart = {
                     x: loweringMonths,
-                    y: loweringCounts,
+                    y: loweringCompleted,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Lowering Completion (${loweringCounts.reduce((total, count) => total + count, 0)})`,
+                    name: `Lowering Completion (${loweringCompleted.reduce((total, count) => total + count, 0)})`,
                     marker: {
                         color: '#1f77b4'
                     }
@@ -176,8 +154,8 @@
 
                 const loweringAnnotations = loweringMonths.map((month, index) => ({
                     x: month,
-                    y: loweringCounts[index],
-                    text: loweringCounts[index].toString(),
+                    y: loweringCompleted[index],
+                    text: loweringCompleted[index].toString(),
                     xanchor: 'left',
                     yanchor: 'middle',
                     showarrow: false
@@ -205,7 +183,7 @@
                     },
                     yaxis: {
                         title: 'Number of Lowering Schemes',
-                        range: [0, Math.max(...loweringCounts, ...loweringWIP, 60)]
+                        range: [0, Math.max(...loweringCompleted, ...loweringWIP, 60)]
                     },
                     annotations: loweringAnnotations.concat([loweringTargetAnnotation])
                 };
@@ -230,27 +208,27 @@
                 }, {});
 
                 // Calculate the percentages
-                const totalCount = drillingCounts.reduce((total, count) => total + count, 0) + loweringCounts.reduce((total, count) => total + count, 0);
+                const totalCount = drillingCompleted.reduce((total, count) => total + count, 0) + loweringCompleted.reduce((total, count) => total + count, 0);
                 const notStartedPercentage = ((pipeLayingStatusData['Not Started'] / totalCount) * 100).toFixed(2);
                 const wipPercentage = ((pipeLayingStatusData['WIP'] / totalCount) * 100).toFixed(2);
 
-                // Create the pipe laying chart data
-                const pipeLayingLabels = Object.keys(pipeLayingData);
-                const pipeLayingValues = pipeLayingLabels.map(label => pipeLayingData[label]);
+                // Create the pipe laying pie chart data
+                const pipeLayingLabels = ['Not Started', 'WIP'];
+                const pipeLayingValues = [notStartedPercentage, wipPercentage];
 
-                // Create the pipe laying chart
-                const pipeLayingChart = {
+                // Create the pipe laying pie chart
+                const pipeLayingPieChart = {
                     labels: pipeLayingLabels,
                     values: pipeLayingValues,
                     type: 'pie'
                 };
 
-                const pipeLayingLayout = {
+                const pipeLayingPieLayout = {
                     title: 'D/N Pipe Laying Status',
                 };
 
-                // Create the pipe laying chart
-                Plotly.newPlot('pipe-laying-chart', [pipeLayingChart], pipeLayingLayout);
+                // Create the pipe laying pie chart
+                Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingPieChart], pipeLayingPieLayout);
             })
             .catch(error => console.error(error));
     </script>
