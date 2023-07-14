@@ -23,10 +23,10 @@
                         const dateParts = row['T/W Drill Start Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month].completed += 1;
+                            accumulator[month].completed += parseInt(row['D/N Pipe Laying (m)']) || 0;
                         } else {
                             accumulator[month] = {
-                                completed: 1,
+                                completed: parseInt(row['D/N Pipe Laying (m)']) || 0,
                                 wip: 0
                             };
                         }
@@ -34,11 +34,11 @@
                         const dateParts = row['T/W Drill Start Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month].wip += 1;
+                            accumulator[month].wip += parseInt(row['D/N Pipe Laying (m)']) || 0;
                         } else {
                             accumulator[month] = {
                                 completed: 0,
-                                wip: 1
+                                wip: parseInt(row['D/N Pipe Laying (m)']) || 0
                             };
                         }
                     }
@@ -51,10 +51,10 @@
                         const dateParts = row['T/W Lowering Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month].completed += 1;
+                            accumulator[month].completed += parseInt(row['D/N Pipe Laying (m)']) || 0;
                         } else {
                             accumulator[month] = {
-                                completed: 1,
+                                completed: parseInt(row['D/N Pipe Laying (m)']) || 0,
                                 wip: 0
                             };
                         }
@@ -62,11 +62,11 @@
                         const dateParts = row['T/W Lowering Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month].wip += 1;
+                            accumulator[month].wip += parseInt(row['D/N Pipe Laying (m)']) || 0;
                         } else {
                             accumulator[month] = {
                                 completed: 0,
-                                wip: 1
+                                wip: parseInt(row['D/N Pipe Laying (m)']) || 0
                             };
                         }
                     }
@@ -77,6 +77,12 @@
                 const excavationSum = parsedData.reduce((sum, row) => {
                     const excavation = parseInt(row['D/N Excavation (m)']) || 0;
                     return sum + excavation;
+                }, 0);
+
+                // Calculate the sum of Distribition System Length
+                const distributionSum = parsedData.reduce((sum, row) => {
+                    const distribution = parseInt(row['Distribition System Length']) || 0;
+                    return sum + distribution;
                 }, 0);
 
                 // Create the drilling chart data
@@ -91,7 +97,7 @@
 
                 // Create the excavation pie chart data
                 const excavationPieData = [{
-                    values: [excavationSum, 100 - excavationSum],
+                    values: [excavationSum, distributionSum - excavationSum],
                     labels: ['Work Done', 'Scope Remaining'],
                     type: 'pie',
                     marker: {
@@ -99,7 +105,7 @@
                     },
                     textinfo: 'label+percent',
                     hoverinfo: 'text',
-                    text: [`${excavationSum} m`, `${100 - excavationSum}%`]
+                    text: [`${excavationSum} m (${((excavationSum / distributionSum) * 100).toFixed(2)}%)`, `${(distributionSum - excavationSum)} m (${(((distributionSum - excavationSum) / distributionSum) * 100).toFixed(2)}%)`]
                 }];
 
                 // Create the drilling chart
@@ -122,7 +128,7 @@
                     mode: 'markers',
                     name: 'Drilling WIP',
                     marker: {
-                        symbol: 'diamond',
+                        symbol: 'circle',
                         size: 10,
                         color: '#FFA500'
                     }
@@ -148,40 +154,59 @@
                     mode: 'markers',
                     name: 'Lowering WIP',
                     marker: {
-                        symbol: 'diamond',
+                        symbol: 'circle',
                         size: 10,
                         color: '#FFA500'
                     }
                 };
 
+                // Create the layout for drilling and lowering charts
                 const drillingLayout = {
                     title: 'Drilling and Lowering Progress',
                     xaxis: {
                         title: 'Month'
                     },
                     yaxis: {
-                        title: 'Number of Schemes'
-                    }
-                };
-
-                const loweringLayout = {
-                    title: 'Drilling and Lowering Progress',
-                    xaxis: {
-                        title: 'Month'
+                        title: 'D/N Pipe Laying (m)',
+                        range: [0, Math.max(...drillingCounts, ...drillingWIP, ...loweringCounts, ...loweringWIP)]
                     },
-                    yaxis: {
-                        title: 'Number of Schemes'
-                    }
+                    legend: {
+                        x: 1,
+                        xanchor: 'right',
+                        y: 1.1,
+                        orientation: 'h',
+                        traceorder: 'normal',
+                        tracegroupgap: 10,
+                        itemclick: 'toggle'
+                    },
+                    shapes: [
+                        // Target shape for July
+                        {
+                            type: 'rect',
+                            xref: 'x',
+                            yref: 'y',
+                            x0: 'July',
+                            y0: 0,
+                            x1: 'July',
+                            y1: 60,
+                            fillcolor: 'red',
+                            opacity: 0.5,
+                            line: {
+                                width: 0
+                            }
+                        }
+                    ]
                 };
 
+                // Create the excavation pie chart layout
                 const excavationPieLayout = {
-                    title: 'Scope of D/N Excavation',
+                    title: 'Percentage of Work Completed vs Scope (D/N Excavation)',
                     showlegend: false
                 };
 
-                // Create the drilling and lowering charts
+                // Plot the charts
                 Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLayout);
-                Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], loweringLayout);
+                Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], drillingLayout);
 
                 // Create the excavation pie chart
                 Plotly.newPlot('excavation-pie-chart', excavationPieData, excavationPieLayout);
