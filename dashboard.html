@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JJM Drilling and Lowering Completion</title>
+    <title>Drilling and Lowering Completion</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <div id="drilling-chart"></div>
     <div id="lowering-chart"></div>
+    <div id="distribution-system-length-chart"></div>
+    <div id="dn-excavation-chart"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -16,7 +18,7 @@
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
 
-                // Group the data by month for drilling completion
+                // Group the data for drilling and lowering
                 const drillingData = parsedData.reduce((accumulator, row) => {
                     if (row['Drilling Status'] === 'Completed' && row['T/W Drill Start Date']) {
                         const dateParts = row['T/W Drill Start Date'].split('/');
@@ -44,9 +46,8 @@
                     return accumulator;
                 }, {});
 
-                // Group the data by month for lowering completion
                 const loweringData = parsedData.reduce((accumulator, row) => {
-                    if (row['T/W Lowering Date']) {
+                    if (row['T/W Lowering Status'] === 'Completed' && row['T/W Lowering Date']) {
                         const dateParts = row['T/W Lowering Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
@@ -57,8 +58,8 @@
                                 wip: 0
                             };
                         }
-                    } else if (row['T/W Lowering Status'] === 'WIP' && row['T/W Drill Start Date']) {
-                        const dateParts = row['T/W Drill Start Date'].split('/');
+                    } else if (row['T/W Lowering Status'] === 'WIP' && row['T/W Lowering Date']) {
+                        const dateParts = row['T/W Lowering Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
                             accumulator[month].wip += 1;
@@ -91,63 +92,25 @@
                     y: drillingCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Drilling Completion (${drillingCounts.reduce((total, count) => total + count, 0)})`,
+                    name: 'Drilling Completion',
                     marker: {
-                        color: '#1f77b4'
+                        color: '#1f77b4',
+                        symbol: 'circle'
                     }
                 };
 
-                // Create the WIP marker for drilling
+                // Create the drilling WIP marker
                 const drillingWIPMarker = {
                     x: drillingMonths,
                     y: drillingWIP,
                     type: 'scatter',
                     mode: 'markers',
-                    name: `Drilling WIP (${drillingWIP.reduce((total, count) => total + count, 0)})`,
+                    name: 'Drilling WIP',
                     marker: {
                         symbol: 'circle',
                         size: 10,
                         color: '#FFA500'
                     }
-                };
-
-                const drillingAnnotations = drillingMonths.map((month, index) => ({
-                    x: month,
-                    y: drillingCounts[index],
-                    text: drillingCounts[index].toString(),
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: false
-                }));
-
-                const drillingTargetAnnotation = {
-                     x: 'July',
-    y: 60,
-    text: 'Target: 60',
-    xanchor: 'left',
-    yanchor: 'middle',
-    showarrow: false,
-    font: {
-        color: '#FF0000',
-        size: 12
-    },
-    marker: {
-        symbol: 'diamond',
-        size: 10,
-        color: '#FF0000'
-    }
-};
-
-                const drillingLayout = {
-                    title: 'Drilling Completion by Month',
-                    xaxis: {
-                        title: 'Month'
-                    },
-                    yaxis: {
-                        title: 'Number of Drilling Schemes',
-                        range: [0, Math.max(...drillingCounts, ...drillingWIP, 60)]
-                    },
-                    annotations: drillingAnnotations.concat([drillingTargetAnnotation])
                 };
 
                 // Create the lowering chart
@@ -156,52 +119,38 @@
                     y: loweringCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Lowering Completion (${loweringCounts.reduce((total, count) => total + count, 0)})`,
+                    name: 'Lowering Completion',
                     marker: {
-                        color: '#1f77b4'
+                        color: '#2ca02c',
+                        symbol: 'square'
                     }
                 };
 
-                // Create the WIP marker for lowering
+                // Create the lowering WIP marker
                 const loweringWIPMarker = {
                     x: loweringMonths,
                     y: loweringWIP,
                     type: 'scatter',
                     mode: 'markers',
-                    name: `Lowering WIP (${loweringWIP.reduce((total, count) => total + count, 0)})`,
+                    name: 'Lowering WIP',
                     marker: {
-                        symbol: 'circle',
+                        symbol: 'square',
                         size: 10,
                         color: '#FFA500'
                     }
                 };
 
-                const loweringAnnotations = loweringMonths.map((month, index) => ({
-                    x: month,
-                    y: loweringCounts[index],
-                    text: loweringCounts[index].toString(),
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: false
-                }));
+                const drillingLayout = {
+                    title: 'Drilling Completion by Month',
+                    xaxis: {
+                        title: 'Month'
+                    },
+                    yaxis: {
+                        title: 'Number of Drilling Schemes',
+                        range: [0, Math.max(...drillingCounts, ...drillingWIP)]
+                    }
+                };
 
-             const loweringTargetAnnotation = {
-    x: 'July',
-    y: 60,
-    text: 'Target: 60',
-    xanchor: 'left',
-    yanchor: 'middle',
-    showarrow: false,
-    font: {
-        color: '#FF0000',
-        size: 12
-    },
-    marker: {
-        symbol: 'square',
-        size: 10,
-        color: '#FF0000'
-    }
-};
                 const loweringLayout = {
                     title: 'Lowering Completion by Month',
                     xaxis: {
@@ -209,83 +158,86 @@
                     },
                     yaxis: {
                         title: 'Number of Lowering Schemes',
-                        range: [0, Math.max(...loweringCounts, ...loweringWIP, 60)]
-                    },
-                    annotations: loweringAnnotations.concat([loweringTargetAnnotation])
+                        range: [0, Math.max(...loweringCounts, ...loweringWIP)]
+                    }
                 };
 
-                // Create the drilling chart
+                // Plot the drilling chart
                 Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLayout);
 
-                // Create the lowering chart
+                // Plot the lowering chart
                 Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], loweringLayout);
+
+                // Filter the data for "Distribution System Length" and "D/N Excavation (m)"
+                const pieChartData = parsedData.map(row => ({
+                    distributionSystemLength: row['Distribition System Length'],
+                    dnExcavation: row['D/N Excavation (m)']
+                }));
+
+                // Count the occurrences of each value
+                const countDistributionSystemLength = {};
+                const countDnExcavation = {};
+
+                pieChartData.forEach(row => {
+                    countDistributionSystemLength[row.distributionSystemLength] = (countDistributionSystemLength[row.distributionSystemLength] || 0) + 1;
+                    countDnExcavation[row.dnExcavation] = (countDnExcavation[row.dnExcavation] || 0) + 1;
+                });
+
+                // Extract the unique values and their counts
+                const distributionSystemLengthValues = Object.keys(countDistributionSystemLength);
+                const distributionSystemLengthCounts = Object.values(countDistributionSystemLength);
+                const dnExcavationValues = Object.keys(countDnExcavation);
+                const dnExcavationCounts = Object.values(countDnExcavation);
+
+                // Create the pie chart data for "Distribution System Length"
+                const distributionSystemLengthPieData = [{
+                    labels: distributionSystemLengthValues,
+                    values: distributionSystemLengthCounts,
+                    type: 'pie',
+                    name: 'Distribution System Length',
+                    textinfo: 'label+percent',
+                    hoverinfo: 'text',
+                    text: distributionSystemLengthValues.map((value, index) => `${value}: ${distributionSystemLengthCounts[index]} schemes`),
+                    marker: {
+                        colors: ['#1f77b4', '#2ca02c', '#ff7f0e', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
+                    }
+                }];
+
+                // Create the pie chart data for "D/N Excavation (m)"
+                const dnExcavationPieData = [{
+                    labels: dnExcavationValues,
+                    values: dnExcavationCounts,
+                    type: 'pie',
+                    name: 'D/N Excavation (m)',
+                    textinfo: 'label+percent',
+                    hoverinfo: 'text',
+                    text: dnExcavationValues.map((value, index) => `${value}: ${dnExcavationCounts[index]} schemes`),
+                    marker: {
+                        colors: ['#1f77b4', '#2ca02c', '#ff7f0e', '#d62728', '#9467bd', '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf']
+                    }
+                }];
+
+                // Create the pie chart layout
+                const pieLayout = {
+                    title: 'Distribution System Length and D/N Excavation',
+                    showlegend: true,
+                    legend: {
+                        x: 0.5,
+                        y: 1.1,
+                        orientation: 'h',
+                        traceorder: 'normal'
+                    },
+                    grid: {
+                        rows: 1,
+                        columns: 2
+                    }
+                };
+
+                // Plot the pie charts
+                Plotly.newPlot('distribution-system-length-chart', distributionSystemLengthPieData, pieLayout);
+                Plotly.newPlot('dn-excavation-chart', dnExcavationPieData, pieLayout);
             })
             .catch(error => console.error(error));
     </script>
-
-// Filter the data for "Distribution System Length" and "D/N Excavation (m)"
-const pieChartData = parsedData.map(row => ({
-    distributionSystemLength: row['Distribition System Length'],
-    dnExcavation: row['D/N Excavation (m)']
-}));
-
-// Count the occurrences of each value
-const countDistributionSystemLength = {};
-const countDnExcavation = {};
-
-pieChartData.forEach(row => {
-    countDistributionSystemLength[row.distributionSystemLength] = (countDistributionSystemLength[row.distributionSystemLength] || 0) + 1;
-    countDnExcavation[row.dnExcavation] = (countDnExcavation[row.dnExcavation] || 0) + 1;
-});
-
-// Extract the unique values and their counts
-const distributionSystemLengthValues = Object.keys(countDistributionSystemLength);
-const distributionSystemLengthCounts = Object.values(countDistributionSystemLength);
-const dnExcavationValues = Object.keys(countDnExcavation);
-const dnExcavationCounts = Object.values(countDnExcavation);
-
-// Create the pie chart data for "Distribution System Length"
-const distributionSystemLengthPieData = [{
-    labels: distributionSystemLengthValues,
-    values: distributionSystemLengthCounts,
-    type: 'pie',
-    name: 'Distribution System Length',
-    textinfo: 'label+percent',
-    hoverinfo: 'text',
-    text: distributionSystemLengthValues.map((value, index) => `${value}: ${distributionSystemLengthCounts[index]} schemes`)
-}];
-
-// Create the pie chart data for "D/N Excavation (m)"
-const dnExcavationPieData = [{
-    labels: dnExcavationValues,
-    values: dnExcavationCounts,
-    type: 'pie',
-    name: 'D/N Excavation (m)',
-    textinfo: 'label+percent',
-    hoverinfo: 'text',
-    text: dnExcavationValues.map((value, index) => `${value}: ${dnExcavationCounts[index]} schemes`)
-}];
-
-// Create the pie chart layout
-const pieLayout = {
-    title: 'Distribution System Length and D/N Excavation',
-    showlegend: true,
-    legend: {
-        x: 0.5,
-        y: 1.1,
-        orientation: 'h',
-        traceorder: 'normal'
-    },
-    grid: {
-        rows: 1,
-        columns: 2
-    }
-};
-
-// Plot the pie charts
-Plotly.newPlot('distribution-system-length-chart', distributionSystemLengthPieData, pieLayout);
-Plotly.newPlot('dn-excavation-chart', dnExcavationPieData, pieLayout);
-
-
 </body>
 </html>
