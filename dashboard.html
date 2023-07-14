@@ -25,7 +25,19 @@
                             accumulator[month].completed += 1;
                         } else {
                             accumulator[month] = {
-                                completed: 1
+                                completed: 1,
+                                wip: 0
+                            };
+                        }
+                    } else if (row['Drilling Status'] === 'WIP' && row['T/W Drill Start Date']) {
+                        const dateParts = row['T/W Drill Start Date'].split('/');
+                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
+                        if (accumulator.hasOwnProperty(month)) {
+                            accumulator[month].wip += 1;
+                        } else {
+                            accumulator[month] = {
+                                completed: 0,
+                                wip: 1
                             };
                         }
                     }
@@ -36,18 +48,33 @@
                 const drillingMonths = Object.keys(drillingData).sort((a, b) => new Date(a + '-01-01') - new Date(b + '-01-01'));
 
                 // Create the drilling chart data
-                const drillingCounts = drillingMonths.map(month => drillingData[month].completed);
+                const drillingCompletedCounts = drillingMonths.map(month => drillingData[month].completed);
+                const drillingWIPCounts = drillingMonths.map(month => drillingData[month].wip);
 
-                // Calculate total drilling completions
-                const totalDrillingCompletions = drillingCounts.reduce((total, count) => total + count, 0);
+                // Calculate total drilling completions and WIP counts
+                const totalDrillingCompletions = drillingCompletedCounts.reduce((total, count) => total + count, 0);
+                const totalDrillingWIP = drillingWIPCounts.reduce((total, count) => total + count, 0);
 
                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingMonths,
-                    y: drillingCounts,
+                    y: drillingCompletedCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
                     name: `Drilling Completion (${totalDrillingCompletions})`
+                };
+
+                const drillingWIPChart = {
+                    x: drillingMonths,
+                    y: drillingWIPCounts,
+                    type: 'scatter',
+                    mode: 'markers',
+                    name: `Drilling WIP (${totalDrillingWIP})`,
+                    marker: {
+                        color: 'red',
+                        size: 8,
+                        symbol: 'circle'
+                    }
                 };
 
                 const drillingLayout = {
@@ -57,13 +84,17 @@
                     },
                     yaxis: {
                         title: 'Number of Drilling Schemes',
-                        range: [0, Math.max(...drillingCounts)], // Set the range from zero to the maximum count
+                        range: [0, Math.max(...drillingCompletedCounts, ...drillingWIPCounts)],
                         rangemode: 'normal'
+                    },
+                    legend: {
+                        x: 1,
+                        y: 1
                     }
                 };
 
                 // Create the drilling chart
-                Plotly.newPlot('drilling-chart', [drillingChart], drillingLayout);
+                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPChart], drillingLayout);
 
 
                 // Group the data by month for lowering completion
@@ -75,7 +106,19 @@
                             accumulator[month].completed += 1;
                         } else {
                             accumulator[month] = {
-                                completed: 1
+                                completed: 1,
+                                wip: 0
+                            };
+                        }
+                    } else if (row['T/W Lowering Status'] === 'WIP' && row['T/W Lowering Date']) {
+                        const dateParts = row['T/W Lowering Date'].split('/');
+                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
+                        if (accumulator.hasOwnProperty(month)) {
+                            accumulator[month].wip += 1;
+                        } else {
+                            accumulator[month] = {
+                                completed: 0,
+                                wip: 1
                             };
                         }
                     }
@@ -86,20 +129,32 @@
                 const loweringMonths = Object.keys(loweringData).sort((a, b) => new Date(a + '-01-01') - new Date(b + '-01-01'));
 
                 // Create the lowering chart data
-                const loweringCounts = loweringMonths.map(month => loweringData[month].completed);
+                const loweringCompletedCounts = loweringMonths.map(month => loweringData[month].completed);
+                const loweringWIPCounts = loweringMonths.map(month => loweringData[month].wip);
 
-                // Calculate total lowering completions
-                const totalLoweringCompletions = loweringCounts.reduce((total, count) => total + count, 0);
+                // Calculate total lowering completions and WIP counts
+                const totalLoweringCompletions = loweringCompletedCounts.reduce((total, count) => total + count, 0);
+                const totalLoweringWIP = loweringWIPCounts.reduce((total, count) => total + count, 0);
 
                 // Create the lowering chart
                 const loweringChart = {
                     x: loweringMonths,
-                    y: loweringCounts,
+                    y: loweringCompletedCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Lowering Completion (${totalLoweringCompletions})`,
+                    name: `Lowering Completion (${totalLoweringCompletions})`
+                };
+
+                const loweringWIPChart = {
+                    x: loweringMonths,
+                    y: loweringWIPCounts,
+                    type: 'scatter',
+                    mode: 'markers',
+                    name: `Lowering WIP (${totalLoweringWIP})`,
                     marker: {
-                        color: '#FFA500'
+                        color: 'red',
+                        size: 8,
+                        symbol: 'circle'
                     }
                 };
 
@@ -110,14 +165,9 @@
                     },
                     yaxis: {
                         title: 'Number of Lowering Schemes',
-                        range: [0, Math.max(...loweringCounts)], // Set the range from zero to the maximum count
+                        range: [0, Math.max(...loweringCompletedCounts, ...loweringWIPCounts)],
                         rangemode: 'normal'
-                    }
-                };
-
-                // Create the lowering chart
-                Plotly.newPlot('lowering-chart', [loweringChart], loweringLayout);
-            })
-            .catch(error => console.error(error));
-    </script>
-</body>
+                    },
+                    legend: {
+                        x: 1,
+                        y: 
