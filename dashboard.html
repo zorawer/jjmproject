@@ -92,7 +92,7 @@
                     y: drillingCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: 'Drilling Completion',
+                    name: `Drilling Completion (${drillingCounts.reduce((a, b) => a + b, 0)})`,
                     marker: {
                         color: '#1f77b4',
                         symbol: 'circle'
@@ -105,7 +105,7 @@
                     y: drillingWIP,
                     type: 'scatter',
                     mode: 'markers',
-                    name: 'Drilling WIP',
+                    name: `Drilling WIP (${drillingWIP.reduce((a, b) => a + b, 0)})`,
                     marker: {
                         symbol: 'circle',
                         size: 10,
@@ -119,7 +119,7 @@
                     y: loweringCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: 'Lowering Completion',
+                    name: `Lowering Completion (${loweringCounts.reduce((a, b) => a + b, 0)})`,
                     marker: {
                         color: '#2ca02c',
                         symbol: 'square'
@@ -132,7 +132,7 @@
                     y: loweringWIP,
                     type: 'scatter',
                     mode: 'markers',
-                    name: 'Lowering WIP',
+                    name: `Lowering WIP (${loweringWIP.reduce((a, b) => a + b, 0)})`,
                     marker: {
                         symbol: 'square',
                         size: 10,
@@ -168,19 +168,16 @@
                 // Plot the lowering chart
                 Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], loweringLayout);
 
-                // Filter the data for "Distribution System Length" and "D/N Excavation (m)"
-                const pieChartData = parsedData.map(row => ({
-                    distributionSystemLength: row['Distribition System Length'],
-                    dnExcavation: row['D/N Excavation (m)']
-                }));
+                // Filter the data for "Distribution System Length" and "D/N Excavation (m)" where Distribution work has started
+                const filteredData = parsedData.filter(row => row['D/N Excavation Status'] !== 'Not Started' && row['D/N Excavation Status'] !== 'WIP');
 
-                // Count the occurrences of each value
+                // Calculate the counts for "Distribution System Length" and "D/N Excavation (m)"
                 const countDistributionSystemLength = {};
                 const countDnExcavation = {};
 
-                pieChartData.forEach(row => {
-                    countDistributionSystemLength[row.distributionSystemLength] = (countDistributionSystemLength[row.distributionSystemLength] || 0) + 1;
-                    countDnExcavation[row.dnExcavation] = (countDnExcavation[row.dnExcavation] || 0) + 1;
+                filteredData.forEach(row => {
+                    countDistributionSystemLength[row['Distribution System Length']] = (countDistributionSystemLength[row['Distribution System Length']] || 0) + 1;
+                    countDnExcavation[row['D/N Excavation (m)']] = (countDnExcavation[row['D/N Excavation (m)']] || 0) + 1;
                 });
 
                 // Extract the unique values and their counts
