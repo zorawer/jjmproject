@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+#<!DOCTYPE html>
 <html>
 <head>
     <title>Drilling and Lowering Completion</title>
@@ -47,7 +47,10 @@
                     y: drillingCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Drilling Completion (${totalDrillingCompletions})`
+                    name: `Drilling Completion (${totalDrillingCompletions})`,
+                    marker: {
+                        color: 'blue'
+                    }
                 };
 
                 const drillingLayout = {
@@ -62,7 +65,17 @@
                     },
                     legend: {
                         x: 1,
-                        y: 1
+                        y: 1,
+                        bgcolor: 'rgba(0,0,0,0)',
+                        orientation: 'v',
+                        xanchor: 'right',
+                        yanchor: 'top',
+                        traceorder: 'normal',
+                        font: {
+                            family: 'Arial',
+                            size: 12,
+                            color: 'black'
+                        }
                     }
                 };
 
@@ -103,7 +116,7 @@
                     mode: 'lines+markers',
                     name: `Lowering Completion (${totalLoweringCompletions})`,
                     marker: {
-                        color: '#FFA500'
+                        color: 'orange'
                     }
                 };
 
@@ -119,7 +132,17 @@
                     },
                     legend: {
                         x: 1,
-                        y: 1
+                        y: 1,
+                        bgcolor: 'rgba(0,0,0,0)',
+                        orientation: 'v',
+                        xanchor: 'right',
+                        yanchor: 'top',
+                        traceorder: 'normal',
+                        font: {
+                            family: 'Arial',
+                            size: 12,
+                            color: 'black'
+                        }
                     }
                 };
 
