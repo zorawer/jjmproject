@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Drilling and Lowering Completion</title>
+    <title>Drilling Completion</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <div id="drilling-chart"></div>
-    <div id="lowering-chart"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -16,7 +15,7 @@
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
 
-                // Group the data by month for drilling completion
+                // Group the data by month
                 const drillingData = parsedData.reduce((accumulator, row) => {
                     if (row['Drilling Status'] === 'Completed' && row['T/W Drill Start Date']) {
                         const dateParts = row['T/W Drill Start Date'].split('/');
@@ -44,36 +43,37 @@
                     return accumulator;
                 }, {});
 
-                // Sort the drilling months in chronological order
-                const drillingMonths = Object.keys(drillingData).sort((a, b) => new Date(a + '-01-01') - new Date(b + '-01-01'));
+                // Define the order of month names
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
                 // Create the drilling chart data
-                const drillingCompletedCounts = drillingMonths.map(month => drillingData[month].completed);
-                const drillingWIPCounts = drillingMonths.map(month => drillingData[month].wip);
-
-                // Calculate total drilling completions and WIP counts
-                const totalDrillingCompletions = drillingCompletedCounts.reduce((total, count) => total + count, 0);
-                const totalDrillingWIP = drillingWIPCounts.reduce((total, count) => total + count, 0);
+                const drillingMonths = monthNames.filter(month => drillingData.hasOwnProperty(month));
+                const drillingCounts = drillingMonths.map(month => drillingData[month].completed);
+                const drillingWIP = drillingMonths.map(month => drillingData[month].wip);
 
                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingMonths,
-                    y: drillingCompletedCounts,
+                    y: drillingCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Drilling Completion (${totalDrillingCompletions})`
+                    name: 'Drilling Completion',
+                    marker: {
+                        color: '#1f77b4'
+                    }
                 };
 
-                const drillingWIPChart = {
+                // Create the WIP marker
+                const wipMarker = {
                     x: drillingMonths,
-                    y: drillingWIPCounts,
+                    y: drillingWIP,
                     type: 'scatter',
                     mode: 'markers',
-                    name: `Drilling WIP (${totalDrillingWIP})`,
+                    name: 'Work in Progress',
                     marker: {
-                        color: 'red',
-                        size: 8,
-                        symbol: 'circle'
+                        symbol: 'circle',
+                        size: 10,
+                        color: '#FFA500'
                     }
                 };
 
@@ -83,91 +83,14 @@
                         title: 'Month'
                     },
                     yaxis: {
-                        title: 'Number of Drilling Schemes',
-                        range: [0, Math.max(...drillingCompletedCounts, ...drillingWIPCounts)],
-                        rangemode: 'normal'
-                    },
-                    legend: {
-                        x: 1,
-                        y: 1
+                        title: 'Number of Drilling Schemes'
                     }
                 };
 
                 // Create the drilling chart
-                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPChart], drillingLayout);
-
-
-                // Group the data by month for lowering completion
-                const loweringData = parsedData.reduce((accumulator, row) => {
-                    if (row['T/W Lowering Status'] === 'Completed' && row['T/W Lowering Date']) {
-                        const dateParts = row['T/W Lowering Date'].split('/');
-                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
-                        if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month].completed += 1;
-                        } else {
-                            accumulator[month] = {
-                                completed: 1,
-                                wip: 0
-                            };
-                        }
-                    } else if (row['T/W Lowering Status'] === 'WIP' && row['T/W Lowering Date']) {
-                        const dateParts = row['T/W Lowering Date'].split('/');
-                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
-                        if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month].wip += 1;
-                        } else {
-                            accumulator[month] = {
-                                completed: 0,
-                                wip: 1
-                            };
-                        }
-                    }
-                    return accumulator;
-                }, {});
-
-                // Sort the lowering months in chronological order
-                const loweringMonths = Object.keys(loweringData).sort((a, b) => new Date(a + '-01-01') - new Date(b + '-01-01'));
-
-                // Create the lowering chart data
-                const loweringCompletedCounts = loweringMonths.map(month => loweringData[month].completed);
-                const loweringWIPCounts = loweringMonths.map(month => loweringData[month].wip);
-
-                // Calculate total lowering completions and WIP counts
-                const totalLoweringCompletions = loweringCompletedCounts.reduce((total, count) => total + count, 0);
-                const totalLoweringWIP = loweringWIPCounts.reduce((total, count) => total + count, 0);
-
-                // Create the lowering chart
-                const loweringChart = {
-                    x: loweringMonths,
-                    y: loweringCompletedCounts,
-                    type: 'scatter',
-                    mode: 'lines+markers',
-                    name: `Lowering Completion (${totalLoweringCompletions})`
-                };
-
-                const loweringWIPChart = {
-                    x: loweringMonths,
-                    y: loweringWIPCounts,
-                    type: 'scatter',
-                    mode: 'markers',
-                    name: `Lowering WIP (${totalLoweringWIP})`,
-                    marker: {
-                        color: 'red',
-                        size: 8,
-                        symbol: 'circle'
-                    }
-                };
-
-                const loweringLayout = {
-                    title: 'Lowering Completion by Month',
-                    xaxis: {
-                        title: 'Month'
-                    },
-                    yaxis: {
-                        title: 'Number of Lowering Schemes',
-                        range: [0, Math.max(...loweringCompletedCounts, ...loweringWIPCounts)],
-                        rangemode: 'normal'
-                    },
-                    legend: {
-                        x: 1,
-                        y: 
+                Plotly.newPlot('drilling-chart', [drillingChart, wipMarker], drillingLayout);
+            })
+            .catch(error => console.error(error));
+    </script>
+</body>
+</html>
