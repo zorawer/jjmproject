@@ -29,7 +29,7 @@
                                 wip: 0
                             };
                         }
-                    } else if (row['Drilling Status'] === 'WIP' && row['T/W Drill Start Date']) {
+                    } else {
                         const dateParts = row['T/W Drill Start Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
@@ -51,7 +51,7 @@
                 const drillingCompletedCounts = drillingMonths.map(month => drillingData[month].completed);
                 const drillingWIPCounts = drillingMonths.map(month => drillingData[month].wip);
 
-                // Calculate total drilling completions and WIP counts
+                // Calculate total drilling completions
                 const totalDrillingCompletions = drillingCompletedCounts.reduce((total, count) => total + count, 0);
                 const totalDrillingWIP = drillingWIPCounts.reduce((total, count) => total + count, 0);
 
@@ -61,20 +61,15 @@
                     y: drillingCompletedCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Drilling Completion (${totalDrillingCompletions})`
+                    name: `Completed (${totalDrillingCompletions})`
                 };
 
                 const drillingWIPChart = {
                     x: drillingMonths,
                     y: drillingWIPCounts,
                     type: 'scatter',
-                    mode: 'markers',
-                    name: `Drilling WIP (${totalDrillingWIP})`,
-                    marker: {
-                        color: 'red',
-                        size: 8,
-                        symbol: 'circle'
-                    }
+                    mode: 'lines+markers',
+                    name: `WIP (${totalDrillingWIP})`
                 };
 
                 const drillingLayout = {
@@ -84,12 +79,21 @@
                     },
                     yaxis: {
                         title: 'Number of Drilling Schemes',
-                        range: [0, Math.max(...drillingCompletedCounts, ...drillingWIPCounts)],
+                        range: [0, Math.max(...drillingCompletedCounts, drillingWIPCounts)], // Set the range from zero to the maximum count
                         rangemode: 'normal'
                     },
                     legend: {
                         x: 1,
-                        y: 1
+                        y: 1,
+                        traceorder: 'normal',
+                        font: {
+                            family: 'sans-serif',
+                            size: 12,
+                            color: '#000'
+                        },
+                        bgcolor: '#E2E2E2',
+                        bordercolor: '#FFFFFF',
+                        borderwidth: 2
                     }
                 };
 
@@ -110,7 +114,7 @@
                                 wip: 0
                             };
                         }
-                    } else if (row['T/W Lowering Status'] === 'WIP' && row['T/W Lowering Date']) {
+                    } else {
                         const dateParts = row['T/W Lowering Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
@@ -132,7 +136,7 @@
                 const loweringCompletedCounts = loweringMonths.map(month => loweringData[month].completed);
                 const loweringWIPCounts = loweringMonths.map(month => loweringData[month].wip);
 
-                // Calculate total lowering completions and WIP counts
+                // Calculate total lowering completions
                 const totalLoweringCompletions = loweringCompletedCounts.reduce((total, count) => total + count, 0);
                 const totalLoweringWIP = loweringWIPCounts.reduce((total, count) => total + count, 0);
 
@@ -142,19 +146,20 @@
                     y: loweringCompletedCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Lowering Completion (${totalLoweringCompletions})`
+                    name: `Completed (${totalLoweringCompletions})`,
+                    marker: {
+                        color: '#FFA500'
+                    }
                 };
 
                 const loweringWIPChart = {
                     x: loweringMonths,
                     y: loweringWIPCounts,
                     type: 'scatter',
-                    mode: 'markers',
-                    name: `Lowering WIP (${totalLoweringWIP})`,
+                    mode: 'lines+markers',
+                    name: `WIP (${totalLoweringWIP})`,
                     marker: {
-                        color: 'red',
-                        size: 8,
-                        symbol: 'circle'
+                        color: '#FFA500'
                     }
                 };
 
@@ -165,9 +170,11 @@
                     },
                     yaxis: {
                         title: 'Number of Lowering Schemes',
-                        range: [0, Math.max(...loweringCompletedCounts, ...loweringWIPCounts)],
+                        range: [0, Math.max(...loweringCompletedCounts, loweringWIPCounts)], // Set the range from zero to the maximum count
                         rangemode: 'normal'
                     },
                     legend: {
                         x: 1,
-                        y: 
+                        y: 1,
+                        traceorder: 'normal',
+                        font:
