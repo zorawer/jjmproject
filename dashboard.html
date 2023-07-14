@@ -59,6 +59,10 @@
                         title: 'Number of Drilling Schemes',
                         range: [0, Math.max(...drillingCounts)], // Set the range from zero to the maximum count
                         rangemode: 'normal'
+                    },
+                    legend: {
+                        x: 1,
+                        y: 1
                     }
                 };
 
@@ -112,6 +116,10 @@
                         title: 'Number of Lowering Schemes',
                         range: [0, Math.max(...loweringCounts)], // Set the range from zero to the maximum count
                         rangemode: 'normal'
+                    },
+                    legend: {
+                        x: 1,
+                        y: 1
                     }
                 };
 
@@ -121,3 +129,4 @@
             .catch(error => console.error(error));
     </script>
 </body>
+</html>
