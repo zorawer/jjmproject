@@ -7,7 +7,7 @@
 <body>
     <div id="drilling-chart"></div>
     <div id="lowering-chart"></div>
-    <div id="pipe-laying-pie-chart"></div>
+    <div id="pipe-laying-chart"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -73,16 +73,20 @@
                     return accumulator;
                 }, {});
 
-                // Define the order of month names
-                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                // Calculate the total number of schemes
+                const totalSchemes = parsedData.length;
+
+                // Calculate the number of WIP and Not Started schemes for D/N Pipe Laying
+                const wipCount = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP').length;
+                const notStartedCount = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'Not Started').length;
 
                 // Create the drilling chart data
-                const drillingMonths = monthNames.filter(month => drillingData.hasOwnProperty(month));
+                const drillingMonths = Object.keys(drillingData);
                 const drillingCounts = drillingMonths.map(month => drillingData[month].completed);
                 const drillingWIP = drillingMonths.map(month => drillingData[month].wip);
 
                 // Create the lowering chart data
-                const loweringMonths = monthNames.filter(month => loweringData.hasOwnProperty(month));
+                const loweringMonths = Object.keys(loweringData);
                 const loweringCounts = loweringMonths.map(month => loweringData[month].completed);
                 const loweringWIP = loweringMonths.map(month => loweringData[month].wip);
 
@@ -210,51 +214,29 @@
                     annotations: loweringAnnotations.concat([loweringTargetAnnotation])
                 };
 
+                // Create the pipe laying pie chart data
+                const pipeLayingData = [
+                    {
+                        labels: ['WIP', 'Not Started'],
+                        values: [wipCount, notStartedCount],
+                        type: 'pie'
+                    }
+                ];
+
+                const pipeLayingLayout = {
+                    title: 'D/N Pipe Laying - WIP vs Not Started',
+                    height: 400,
+                    width: 400
+                };
+
                 // Create the drilling chart
                 Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLayout);
 
                 // Create the lowering chart
                 Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], loweringLayout);
 
-                // Group the data by D/N Pipe Laying Status
-                const pipeLayingStatusData = parsedData.reduce((accumulator, row) => {
-                    const status = row['D/N Pipe Laying Status'];
-                    if (status === 'Not Started' || status === 'WIP') {
-                        if (accumulator.hasOwnProperty(status)) {
-                            accumulator[status]++;
-                        } else {
-                            accumulator[status] = 1;
-                        }
-                    }
-                    return accumulator;
-                }, {});
-
-                // Calculate the percentages
-                const totalCount = drillingCounts.reduce((total, count) => total + count, 0) + loweringCounts.reduce((total, count) => total + count, 0);
-                const notStartedPercentage = ((pipeLayingStatusData['Not Started'] / totalCount) * 100).toFixed(2);
-                const wipPercentage = ((pipeLayingStatusData['WIP'] / totalCount) * 100).toFixed(2);
-
-                // Create the pipe laying pie chart data
-                const pipeLayingPieData = [{
-                    values: [pipeLayingStatusData['WIP'], pipeLayingStatusData['Not Started']],
-                    labels: ['WIP', 'Not Started'],
-                    type: 'pie',
-                    marker: {
-                        colors: ['#FFA500', '#d3d3d3']
-                    },
-                    textinfo: 'label+percent',
-                    hoverinfo: 'text',
-                    text: [`WIP (${wipPercentage}%)`, `Not Started (${notStartedPercentage}%)`]
-                }];
-
-                // Create the pipe laying pie chart layout
-                const pipeLayingPieLayout = {
-                    title: `D/N Pipe Laying Status\nNot Started: ${notStartedPercentage}%\nWIP: ${wipPercentage}%`,
-                    showlegend: true
-                };
-
                 // Create the pipe laying pie chart
-                Plotly.newPlot('pipe-laying-pie-chart', pipeLayingPieData, pipeLayingPieLayout);
+                Plotly.newPlot('pipe-laying-chart', pipeLayingData, pipeLayingLayout);
             })
             .catch(error => console.error(error));
     </script>
