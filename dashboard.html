@@ -30,10 +30,12 @@
                             };
                         }
                     } else {
-                        if (accumulator.hasOwnProperty('WIP')) {
-                            accumulator['WIP'].wip += 1;
+                        const dateParts = row['T/W Drill Start Date'].split('/');
+                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
+                        if (accumulator.hasOwnProperty(month)) {
+                            accumulator[month].wip += 1;
                         } else {
-                            accumulator['WIP'] = {
+                            accumulator[month] = {
                                 completed: 0,
                                 wip: 1
                             };
@@ -46,27 +48,27 @@
                 const drillingMonths = Object.keys(drillingData).sort((a, b) => new Date(a + '-01-01') - new Date(b + '-01-01'));
 
                 // Create the drilling chart data
-                const drillingCounts = drillingMonths.map(month => drillingData[month].completed);
-                const drillingWIP = drillingMonths.map(month => drillingData[month].wip);
+                const drillingCompletedCounts = drillingMonths.map(month => drillingData[month].completed);
+                const drillingWIPCounts = drillingMonths.map(month => drillingData[month].wip);
 
-                // Calculate total drilling completions and WIP
-                const totalDrillingCompletions = drillingCounts.reduce((total, count) => total + count, 0);
-                const totalDrillingWIP = drillingWIP.reduce((total, count) => total + count, 0);
+                // Calculate total drilling completions
+                const totalDrillingCompletions = drillingCompletedCounts.reduce((total, count) => total + count, 0);
+                const totalDrillingWIP = drillingWIPCounts.reduce((total, count) => total + count, 0);
 
                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingMonths,
-                    y: drillingCounts,
+                    y: drillingCompletedCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Drilling Completion (${totalDrillingCompletions})`
+                    name: `Completed (${totalDrillingCompletions})`
                 };
 
-                const drillingWIPLine = {
+                const drillingWIPChart = {
                     x: drillingMonths,
-                    y: drillingWIP,
+                    y: drillingWIPCounts,
                     type: 'scatter',
-                    mode: 'lines',
+                    mode: 'lines+markers',
                     name: `WIP (${totalDrillingWIP})`
                 };
 
@@ -77,19 +79,26 @@
                     },
                     yaxis: {
                         title: 'Number of Drilling Schemes',
-                        range: [0, Math.max(...drillingCounts, ...drillingWIP)], // Set the range from zero to the maximum count
+                        range: [0, Math.max(...drillingCompletedCounts, drillingWIPCounts)], // Set the range from zero to the maximum count
                         rangemode: 'normal'
                     },
                     legend: {
-                        orientation: 'h',
-                        y: -0.25,
-                        x: 0.5,
-                        xanchor: 'center'
+                        x: 1,
+                        y: 1,
+                        traceorder: 'normal',
+                        font: {
+                            family: 'sans-serif',
+                            size: 12,
+                            color: '#000'
+                        },
+                        bgcolor: '#E2E2E2',
+                        bordercolor: '#FFFFFF',
+                        borderwidth: 2
                     }
                 };
 
                 // Create the drilling chart
-                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPLine], drillingLayout);
+                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPChart], drillingLayout);
 
 
                 // Group the data by month for lowering completion
@@ -105,18 +114,4 @@
                                 wip: 0
                             };
                         }
-                    } else {
-                        if (accumulator.hasOwnProperty('WIP')) {
-                            accumulator['WIP'].wip += 1;
-                        } else {
-                            accumulator['WIP'] = {
-                                completed: 0,
-                                wip: 1
-                            };
-                        }
-                    }
-                    return accumulator;
-                }, {});
-
-                // Sort the lowering months in chronological order
-                const loweringMonths = Object.keys(loweringData).sort((a, b) => new Date(a + '-
+                    } else
