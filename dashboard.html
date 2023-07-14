@@ -230,21 +230,21 @@
                 }, {});
 
                 // Calculate the percentages
-                const totalCount = Object.values(pipeLayingStatusData).reduce((total, count) => total + count, 0);
+                const totalCount = drillingCounts.reduce((total, count) => total + count, 0) + loweringCounts.reduce((total, count) => total + count, 0);
                 const notStartedPercentage = ((pipeLayingStatusData['Not Started'] / totalCount) * 100).toFixed(2);
                 const wipPercentage = ((pipeLayingStatusData['WIP'] / totalCount) * 100).toFixed(2);
 
                 // Create the pipe laying pie chart data
                 const pipeLayingPieData = [{
-                    values: Object.values(pipeLayingStatusData),
-                    labels: Object.keys(pipeLayingStatusData),
+                    values: [pipeLayingStatusData['WIP'], pipeLayingStatusData['Not Started']],
+                    labels: ['WIP', 'Not Started'],
                     type: 'pie',
                     marker: {
                         colors: ['#FFA500', '#d3d3d3']
                     },
                     textinfo: 'label+percent',
                     hoverinfo: 'text',
-                    text: Object.entries(pipeLayingStatusData).map(([status, count]) => `${status} (${((count / totalCount) * 100).toFixed(2)}%)`)
+                    text: [`WIP (${wipPercentage}%)`, `Not Started (${notStartedPercentage}%)`]
                 }];
 
                 // Create the pipe laying pie chart layout
