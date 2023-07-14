@@ -34,10 +34,22 @@
             var layout = {
                 title: 'Drilling Completion by Date',
                 xaxis: {
-                    title: 'Date'
+                    title: 'Date',
+                    range: ['2023-01-01', '2023-12-31'],
+                    zeroline: true
                 },
                 yaxis: {
-                    title: 'Number of Drilling Schemes'
+                    title: 'Number of Drilling Schemes',
+                    range: [0, drillingCounts.length + 1],
+                    zeroline: true
+                },
+                legend: {
+                    x: 1,
+                    xanchor: 'right',
+                    y: 1,
+                    bgcolor: '#E2E2E2',
+                    bordercolor: '#CCCCCC',
+                    borderwidth: 1
                 }
             };
 
