@@ -55,21 +55,29 @@
                 const totalDrillingCompletions = drillingCompletedCounts.reduce((total, count) => total + count, 0);
                 const totalDrillingWIP = drillingWIPCounts.reduce((total, count) => total + count, 0);
 
-                // Create the drilling chart
-                const drillingChart = {
+                // Create the drilling chart traces
+                const drillingCompletedTrace = {
                     x: drillingMonths,
                     y: drillingCompletedCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Completed (${totalDrillingCompletions})`
+                    name: `Completed (${totalDrillingCompletions})`,
+                    marker: {
+                        color: 'blue'
+                    }
                 };
 
-                const drillingWIPChart = {
+                const drillingWIPTrace = {
                     x: drillingMonths,
                     y: drillingWIPCounts,
                     type: 'scatter',
-                    mode: 'lines+markers',
-                    name: `WIP (${totalDrillingWIP})`
+                    mode: 'markers',
+                    name: `WIP (${totalDrillingWIP})`,
+                    marker: {
+                        color: 'red',
+                        symbol: 'circle',
+                        size: 10
+                    }
                 };
 
                 const drillingLayout = {
@@ -98,7 +106,7 @@
                 };
 
                 // Create the drilling chart
-                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPChart], drillingLayout);
+                Plotly.newPlot('drilling-chart', [drillingCompletedTrace, drillingWIPTrace], drillingLayout);
 
 
                 // Group the data by month for lowering completion
@@ -140,26 +148,28 @@
                 const totalLoweringCompletions = loweringCompletedCounts.reduce((total, count) => total + count, 0);
                 const totalLoweringWIP = loweringWIPCounts.reduce((total, count) => total + count, 0);
 
-                // Create the lowering chart
-                const loweringChart = {
+                // Create the lowering chart traces
+                const loweringCompletedTrace = {
                     x: loweringMonths,
                     y: loweringCompletedCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
                     name: `Completed (${totalLoweringCompletions})`,
                     marker: {
-                        color: '#FFA500'
+                        color: 'blue'
                     }
                 };
 
-                const loweringWIPChart = {
+                const loweringWIPTrace = {
                     x: loweringMonths,
                     y: loweringWIPCounts,
                     type: 'scatter',
-                    mode: 'lines+markers',
+                    mode: 'markers',
                     name: `WIP (${totalLoweringWIP})`,
                     marker: {
-                        color: '#FFA500'
+                        color: 'red',
+                        symbol: 'circle',
+                        size: 10
                     }
                 };
 
@@ -170,11 +180,4 @@
                     },
                     yaxis: {
                         title: 'Number of Lowering Schemes',
-                        range: [0, Math.max(...loweringCompletedCounts, loweringWIPCounts)], // Set the range from zero to the maximum count
-                        rangemode: 'normal'
-                    },
-                    legend: {
-                        x: 1,
-                        y: 1,
-                        traceorder: 'normal',
-                        font:
+                        range: [0, Math.max(...
