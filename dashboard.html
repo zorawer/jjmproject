@@ -57,7 +57,8 @@
                     },
                     yaxis: {
                         title: 'Number of Drilling Schemes',
-                        rangemode: 'tozero' // Start Y-axis from zero
+                        range: [0, Math.max(...drillingCounts)], // Set the range from zero to the maximum count
+                        rangemode: 'normal'
                     }
                 };
 
@@ -109,7 +110,8 @@
                     },
                     yaxis: {
                         title: 'Number of Lowering Schemes',
-                        rangemode: 'tozero' // Start Y-axis from zero
+                        range: [0, Math.max(...loweringCounts)], // Set the range from zero to the maximum count
+                        rangemode: 'normal'
                     }
                 };
 
@@ -119,4 +121,3 @@
             .catch(error => console.error(error));
     </script>
 </body>
-</html>
