@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Drilling and Lowering Completion</title>
+    <title>JJM Drilling and Lowering Completion</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
@@ -121,19 +121,22 @@
                 }));
 
                 const drillingTargetAnnotation = {
-                    x: 'July',
-                    y: 60,
-                    text: 'Target: 60',
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: true,
-                    arrowhead: 4,
-                    arrowsize: 1,
-                    arrowwidth: 2,
-                    arrowcolor: '#FF0000',
-                    ax: -40,
-                    ay: -30
-                };
+                     x: 'July',
+    y: 60,
+    text: 'Target: 60',
+    xanchor: 'left',
+    yanchor: 'middle',
+    showarrow: false,
+    font: {
+        color: '#FF0000',
+        size: 12
+    },
+    marker: {
+        symbol: 'diamond',
+        size: 10,
+        color: '#FF0000'
+    }
+};
 
                 const drillingLayout = {
                     title: 'Drilling Completion by Month',
