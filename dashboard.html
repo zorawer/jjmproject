@@ -71,7 +71,10 @@
                     y: drillingWIPCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `WIP`
+                    name: `WIP`,
+                    marker: {
+                        color: 'red'
+                    }
                 };
 
                 const drillingLayout = {
@@ -136,25 +139,4 @@
                 const loweringMonths = Object.keys(loweringData).sort((a, b) => new Date(a + '-01-01') - new Date(b + '-01-01'));
 
                 // Create the lowering chart data
-                const loweringCompletedCounts = loweringMonths.map(month => loweringData[month].completed);
-                const loweringWIPCounts = loweringMonths.map(month => loweringData[month].wip);
-
-                // Calculate total lowering completions
-                const totalLoweringCompletions = loweringCompletedCounts.reduce((total, count) => total + count, 0);
-
-                // Create the lowering chart
-                const loweringChart = {
-                    x: loweringMonths,
-                    y: loweringCompletedCounts,
-                    type: 'scatter',
-                    mode: 'lines+markers',
-                    name: `Lowering Completion (${totalLoweringCompletions})`,
-                    marker: {
-                        color: 'orange'
-                    }
-                };
-
-                const loweringWIPChart = {
-                    x: loweringMonths,
-                    y: loweringWIPCounts,
-                    type
+                const loweringCompleted
