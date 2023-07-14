@@ -222,5 +222,70 @@
             })
             .catch(error => console.error(error));
     </script>
+
+// Filter the data for "Distribution System Length" and "D/N Excavation (m)"
+const pieChartData = parsedData.map(row => ({
+    distributionSystemLength: row['Distribition System Length'],
+    dnExcavation: row['D/N Excavation (m)']
+}));
+
+// Count the occurrences of each value
+const countDistributionSystemLength = {};
+const countDnExcavation = {};
+
+pieChartData.forEach(row => {
+    countDistributionSystemLength[row.distributionSystemLength] = (countDistributionSystemLength[row.distributionSystemLength] || 0) + 1;
+    countDnExcavation[row.dnExcavation] = (countDnExcavation[row.dnExcavation] || 0) + 1;
+});
+
+// Extract the unique values and their counts
+const distributionSystemLengthValues = Object.keys(countDistributionSystemLength);
+const distributionSystemLengthCounts = Object.values(countDistributionSystemLength);
+const dnExcavationValues = Object.keys(countDnExcavation);
+const dnExcavationCounts = Object.values(countDnExcavation);
+
+// Create the pie chart data for "Distribution System Length"
+const distributionSystemLengthPieData = [{
+    labels: distributionSystemLengthValues,
+    values: distributionSystemLengthCounts,
+    type: 'pie',
+    name: 'Distribution System Length',
+    textinfo: 'label+percent',
+    hoverinfo: 'text',
+    text: distributionSystemLengthValues.map((value, index) => `${value}: ${distributionSystemLengthCounts[index]} schemes`)
+}];
+
+// Create the pie chart data for "D/N Excavation (m)"
+const dnExcavationPieData = [{
+    labels: dnExcavationValues,
+    values: dnExcavationCounts,
+    type: 'pie',
+    name: 'D/N Excavation (m)',
+    textinfo: 'label+percent',
+    hoverinfo: 'text',
+    text: dnExcavationValues.map((value, index) => `${value}: ${dnExcavationCounts[index]} schemes`)
+}];
+
+// Create the pie chart layout
+const pieLayout = {
+    title: 'Distribution System Length and D/N Excavation',
+    showlegend: true,
+    legend: {
+        x: 0.5,
+        y: 1.1,
+        orientation: 'h',
+        traceorder: 'normal'
+    },
+    grid: {
+        rows: 1,
+        columns: 2
+    }
+};
+
+// Plot the pie charts
+Plotly.newPlot('distribution-system-length-chart', distributionSystemLengthPieData, pieLayout);
+Plotly.newPlot('dn-excavation-chart', dnExcavationPieData, pieLayout);
+
+
 </body>
 </html>
