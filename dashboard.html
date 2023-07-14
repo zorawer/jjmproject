@@ -8,6 +8,7 @@
     <div id="drilling-chart"></div>
     <div id="lowering-chart"></div>
     <div id="excavation-pie-chart"></div>
+    <div id="pipe-laying-pie-chart"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -160,6 +161,32 @@
                     }
                 };
 
+                // Calculate the count of D/N Pipe Laying Status
+                const pipeLayingStatusData = parsedData.reduce((accumulator, row) => {
+                    const status = row['D/N Pipe Laying Status'];
+                    if (status === 'Not Started' || status === 'WIP') {
+                        if (accumulator.hasOwnProperty(status)) {
+                            accumulator[status]++;
+                        } else {
+                            accumulator[status] = 1;
+                        }
+                    }
+                    return accumulator;
+                }, {});
+
+                // Create the pipe laying pie chart data
+                const pipeLayingPieData = [{
+                    values: Object.values(pipeLayingStatusData),
+                    labels: Object.keys(pipeLayingStatusData),
+                    type: 'pie',
+                    marker: {
+                        colors: ['#FFA500', '#d3d3d3']
+                    },
+                    textinfo: 'label+percent',
+                    hoverinfo: 'text',
+                    text: Object.entries(pipeLayingStatusData).map(([status, count]) => `${status} (${((count / distributionSum) * 100).toFixed(2)}%)`)
+                }];
+
                 // Create the layout for drilling and lowering charts
                 const drillingLayout = {
                     title: 'Drilling and Lowering Progress',
@@ -204,12 +231,17 @@
                     showlegend: false
                 };
 
+                // Create the pipe laying pie chart layout
+                const pipeLayingPieLayout = {
+                    title: 'D/N Pipe Laying Status',
+                    showlegend: true
+                };
+
                 // Plot the charts
                 Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLayout);
                 Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], drillingLayout);
-
-                // Create the excavation pie chart
                 Plotly.newPlot('excavation-pie-chart', excavationPieData, excavationPieLayout);
+                Plotly.newPlot('pipe-laying-pie-chart', pipeLayingPieData, pipeLayingPieLayout);
             })
             .catch(error => console.error(error));
     </script>
