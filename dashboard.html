@@ -47,10 +47,7 @@
                     y: drillingCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Drilling Completion (${totalDrillingCompletions})`,
-                    marker: {
-                        color: 'blue'
-                    }
+                    name: `Drilling Completion (${totalDrillingCompletions})`
                 };
 
                 const drillingLayout = {
@@ -62,20 +59,6 @@
                         title: 'Number of Drilling Schemes',
                         range: [0, Math.max(...drillingCounts)], // Set the range from zero to the maximum count
                         rangemode: 'normal'
-                    },
-                    legend: {
-                        x: 1,
-                        y: 1,
-                        bgcolor: 'rgba(0,0,0,0)',
-                        orientation: 'v',
-                        xanchor: 'right',
-                        yanchor: 'top',
-                        traceorder: 'normal',
-                        font: {
-                            family: 'Arial',
-                            size: 12,
-                            color: 'black'
-                        }
                     }
                 };
 
@@ -116,7 +99,7 @@
                     mode: 'lines+markers',
                     name: `Lowering Completion (${totalLoweringCompletions})`,
                     marker: {
-                        color: 'orange'
+                        color: '#FFA500'
                     }
                 };
 
@@ -129,20 +112,6 @@
                         title: 'Number of Lowering Schemes',
                         range: [0, Math.max(...loweringCounts)], // Set the range from zero to the maximum count
                         rangemode: 'normal'
-                    },
-                    legend: {
-                        x: 1,
-                        y: 1,
-                        bgcolor: 'rgba(0,0,0,0)',
-                        orientation: 'v',
-                        xanchor: 'right',
-                        yanchor: 'top',
-                        traceorder: 'normal',
-                        font: {
-                            family: 'Arial',
-                            size: 12,
-                            color: 'black'
-                        }
                     }
                 };
 
@@ -152,4 +121,3 @@
             .catch(error => console.error(error));
     </script>
 </body>
-</html>
