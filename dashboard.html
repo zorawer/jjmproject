@@ -24,19 +24,7 @@
                             accumulator[month].completed += 1;
                         } else {
                             accumulator[month] = {
-                                completed: 1,
-                                wip: 0
-                            };
-                        }
-                    } else if (row['Drilling Status'] === 'WIP' && row['T/W Drill Start Date']) {
-                        const dateParts = row['T/W Drill Start Date'].split('/');
-                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
-                        if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month].wip += 1;
-                        } else {
-                            accumulator[month] = {
-                                completed: 0,
-                                wip: 1
+                                completed: 1
                             };
                         }
                     }
@@ -49,7 +37,6 @@
                 // Create the drilling chart data
                 const drillingMonths = monthNames.filter(month => drillingData.hasOwnProperty(month));
                 const drillingCounts = drillingMonths.map(month => drillingData[month].completed);
-                const drillingWIP = drillingMonths.map(month => drillingData[month].wip);
 
                 // Calculate total drilling completions
                 const totalDrillingCompletions = drillingCounts.reduce((total, count) => total + count, 0);
@@ -66,20 +53,6 @@
                     }
                 };
 
-                // Create the WIP marker
-                const wipMarker = {
-                    x: drillingMonths,
-                    y: drillingWIP,
-                    type: 'scatter',
-                    mode: 'markers',
-                    name: 'Work in Progress',
-                    marker: {
-                        symbol: 'circle',
-                        size: 10,
-                        color: '#FFA500'
-                    }
-                };
-
                 const drillingLayout = {
                     title: 'Drilling Completion by Month',
                     xaxis: {
@@ -91,7 +64,7 @@
                 };
 
                 // Create the drilling chart
-                Plotly.newPlot('drilling-chart', [drillingChart, wipMarker], drillingLayout);
+                Plotly.newPlot('drilling-chart', [drillingChart], drillingLayout);
             })
             .catch(error => console.error(error));
     </script>
