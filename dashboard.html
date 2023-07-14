@@ -29,7 +29,7 @@
                                 wip: 0
                             };
                         }
-                    } else {
+                    } else if (row['Drilling Status'] === 'WIP' && row['T/W Drill Start Date']) {
                         const dateParts = row['T/W Drill Start Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
@@ -51,32 +51,29 @@
                 const drillingCompletedCounts = drillingMonths.map(month => drillingData[month].completed);
                 const drillingWIPCounts = drillingMonths.map(month => drillingData[month].wip);
 
-                // Calculate total drilling completions
+                // Calculate total drilling completions and WIP counts
                 const totalDrillingCompletions = drillingCompletedCounts.reduce((total, count) => total + count, 0);
                 const totalDrillingWIP = drillingWIPCounts.reduce((total, count) => total + count, 0);
 
-                // Create the drilling chart traces
-                const drillingCompletedTrace = {
+                // Create the drilling chart
+                const drillingChart = {
                     x: drillingMonths,
                     y: drillingCompletedCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Completed (${totalDrillingCompletions})`,
-                    marker: {
-                        color: 'blue'
-                    }
+                    name: `Drilling Completion (${totalDrillingCompletions})`
                 };
 
-                const drillingWIPTrace = {
+                const drillingWIPChart = {
                     x: drillingMonths,
                     y: drillingWIPCounts,
                     type: 'scatter',
                     mode: 'markers',
-                    name: `WIP (${totalDrillingWIP})`,
+                    name: `Drilling WIP (${totalDrillingWIP})`,
                     marker: {
                         color: 'red',
-                        symbol: 'circle',
-                        size: 10
+                        size: 8,
+                        symbol: 'circle'
                     }
                 };
 
@@ -87,26 +84,17 @@
                     },
                     yaxis: {
                         title: 'Number of Drilling Schemes',
-                        range: [0, Math.max(...drillingCompletedCounts, drillingWIPCounts)], // Set the range from zero to the maximum count
+                        range: [0, Math.max(...drillingCompletedCounts, ...drillingWIPCounts)],
                         rangemode: 'normal'
                     },
                     legend: {
                         x: 1,
-                        y: 1,
-                        traceorder: 'normal',
-                        font: {
-                            family: 'sans-serif',
-                            size: 12,
-                            color: '#000'
-                        },
-                        bgcolor: '#E2E2E2',
-                        bordercolor: '#FFFFFF',
-                        borderwidth: 2
+                        y: 1
                     }
                 };
 
                 // Create the drilling chart
-                Plotly.newPlot('drilling-chart', [drillingCompletedTrace, drillingWIPTrace], drillingLayout);
+                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPChart], drillingLayout);
 
 
                 // Group the data by month for lowering completion
@@ -122,7 +110,7 @@
                                 wip: 0
                             };
                         }
-                    } else {
+                    } else if (row['T/W Lowering Status'] === 'WIP' && row['T/W Lowering Date']) {
                         const dateParts = row['T/W Lowering Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
@@ -144,32 +132,29 @@
                 const loweringCompletedCounts = loweringMonths.map(month => loweringData[month].completed);
                 const loweringWIPCounts = loweringMonths.map(month => loweringData[month].wip);
 
-                // Calculate total lowering completions
+                // Calculate total lowering completions and WIP counts
                 const totalLoweringCompletions = loweringCompletedCounts.reduce((total, count) => total + count, 0);
                 const totalLoweringWIP = loweringWIPCounts.reduce((total, count) => total + count, 0);
 
-                // Create the lowering chart traces
-                const loweringCompletedTrace = {
+                // Create the lowering chart
+                const loweringChart = {
                     x: loweringMonths,
                     y: loweringCompletedCounts,
                     type: 'scatter',
                     mode: 'lines+markers',
-                    name: `Completed (${totalLoweringCompletions})`,
-                    marker: {
-                        color: 'blue'
-                    }
+                    name: `Lowering Completion (${totalLoweringCompletions})`
                 };
 
-                const loweringWIPTrace = {
+                const loweringWIPChart = {
                     x: loweringMonths,
                     y: loweringWIPCounts,
                     type: 'scatter',
                     mode: 'markers',
-                    name: `WIP (${totalLoweringWIP})`,
+                    name: `Lowering WIP (${totalLoweringWIP})`,
                     marker: {
                         color: 'red',
-                        symbol: 'circle',
-                        size: 10
+                        size: 8,
+                        symbol: 'circle'
                     }
                 };
 
@@ -180,4 +165,9 @@
                     },
                     yaxis: {
                         title: 'Number of Lowering Schemes',
-                        range: [0, Math.max(...
+                        range: [0, Math.max(...loweringCompletedCounts, ...loweringWIPCounts)],
+                        rangemode: 'normal'
+                    },
+                    legend: {
+                        x: 1,
+                        y: 
