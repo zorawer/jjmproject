@@ -1,51 +1,67 @@
-import plotly.graph_objects as go
-import pandas as pd
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drilling Completion Chart</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="drilling-chart"></div>
 
-# Read the data from 'testfetch.csv' file
-df = pd.read_csv('C:/Users/Zorawer/Desktop/testfetch.csv')
+    <script>
+        // Read the data from the CSV file
+        Plotly.d3.csv('testfetch.csv', function(data) {
+            // Process the data
+            var drillingDates = [];
+            var drillingCounts = [];
 
-# Filter the data for completed and work-in-progress schemes
-completed_data = df[df['Drilling Status'] == 'Completed']
-wip_data = df[df['Drilling Status'] == 'WIP']
+            data.forEach(function(row) {
+                if (row['Drilling Status'] === 'Completed') {
+                    drillingDates.push(new Date(row['T/W Drill Start Date']));
+                    drillingCounts.push(1);
+                }
+            });
 
-# Calculate the number of completions and WIP schemes by month
-completed_counts = completed_data['T/W Drill Start Date'].dt.month.value_counts().sort_index()
-wip_counts = wip_data['T/W Drill Start Date'].dt.month.value_counts().sort_index()
+            // Create the drilling chart
+            var drillingChart = {
+                x: drillingDates,
+                y: drillingCounts,
+                type: 'scatter',
+                mode: 'lines+markers',
+                name: 'Drilling Completion',
+                marker: {
+                    color: 'blue',
+                    symbol: 'circle'
+                },
+                text: drillingCounts.map(count => 'Completed: ' + count),
+                hovertemplate: '%{xaxis.title.text}: %{x}<br>%{text}'
+            };
 
-# Create the drilling chart
-drilling_chart = go.Figure()
+            // Define the layout
+            var layout = {
+                title: 'Drilling Completion by Month',
+                xaxis: {
+                    title: 'Month',
+                    tickmode: 'linear',
+                    tick0: 1,
+                    dtick: 1
+                },
+                yaxis: {
+                    title: 'Number of Schemes'
+                },
+                legend: {
+                    title: 'Legend',
+                    x: 1.05,
+                    y: 0.5,
+                    bgcolor: 'rgba(255, 255, 255, 0.7)',
+                    orientation: 'v',
+                    traceorder: 'normal'
+                },
+                showlegend: true
+            };
 
-# Add line chart for completions
-drilling_chart.add_trace(go.Scatter(
-    x=completed_counts.index,
-    y=completed_counts.values,
-    mode='lines+markers',
-    name='Completed',
-    line=dict(color='blue'),
-    marker=dict(color='blue', symbol='circle'),
-    text='Completed: ' + completed_counts.astype(str),
-    hovertemplate='%{xaxis.title.text}: %{x}<br>%{text}'
-))
-
-# Add markers for WIP schemes
-drilling_chart.add_trace(go.Scatter(
-    x=wip_counts.index,
-    y=wip_counts.values,
-    mode='markers',
-    name='WIP',
-    marker=dict(color='red', symbol='circle-open'),
-    text='WIP: ' + wip_counts.astype(str),
-    hovertemplate='%{xaxis.title.text}: %{x}<br>%{text}'
-))
-
-# Update layout
-drilling_chart.update_layout(
-    title='Drilling Completion by Month',
-    xaxis=dict(title='Month', tickmode='linear', tick0=1, dtick=1),
-    yaxis=dict(title='Number of Schemes'),
-    legend=dict(title='Legend', x=1.05, y=0.5, bgcolor='rgba(255, 255, 255, 0.7)', orientation='v', traceorder='normal'),
-    showlegend=True
-)
-
-# Show the chart
-drilling_chart.show()
+            // Create the chart
+            Plotly.newPlot('drilling-chart', [drillingChart], layout);
+        });
+    </script>
+</body>
+</html>
