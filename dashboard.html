@@ -185,21 +185,23 @@
                     showarrow: false
                 }));
 
-                const loweringTargetAnnotation = {
-                    x: 'July',
-                    y: 60,
-                    text: 'Target: 60',
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: true,
-                    arrowhead: 4,
-                    arrowsize: 1,
-                    arrowwidth: 2,
-                    arrowcolor: '#FF0000',
-                    ax: -40,
-                    ay: -30
-                };
-
+             const loweringTargetAnnotation = {
+    x: 'July',
+    y: 60,
+    text: 'Target: 60',
+    xanchor: 'left',
+    yanchor: 'middle',
+    showarrow: false,
+    font: {
+        color: '#FF0000',
+        size: 12
+    },
+    marker: {
+        symbol: 'square',
+        size: 10,
+        color: '#FF0000'
+    }
+};
                 const loweringLayout = {
                     title: 'Lowering Completion by Month',
                     xaxis: {
