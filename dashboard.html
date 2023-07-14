@@ -111,26 +111,29 @@
                     }
                 };
 
-                const drillingTargetLine = {
-                    x: drillingMonths,
-                    y: Array(drillingMonths.length).fill(60),
-                    type: 'scatter',
-                    mode: 'lines',
-                    name: 'Drilling Target',
-                    line: {
-                        color: '#FF0000',
-                        dash: 'dash'
-                    }
-                };
-
                 const drillingAnnotations = drillingMonths.map((month, index) => ({
                     x: month,
-                    y: 60,
-                    text: 'Target: 60',
+                    y: drillingCounts[index],
+                    text: drillingCounts[index].toString(),
                     xanchor: 'left',
                     yanchor: 'middle',
                     showarrow: false
                 }));
+
+                const drillingTargetAnnotation = {
+                    x: 'July',
+                    y: 60,
+                    text: 'Target: 60',
+                    xanchor: 'left',
+                    yanchor: 'middle',
+                    showarrow: true,
+                    arrowhead: 4,
+                    arrowsize: 1,
+                    arrowwidth: 2,
+                    arrowcolor: '#FF0000',
+                    ax: -40,
+                    ay: -30
+                };
 
                 const drillingLayout = {
                     title: 'Drilling Completion by Month',
@@ -141,7 +144,7 @@
                         title: 'Number of Drilling Schemes',
                         range: [0, Math.max(...drillingCounts, ...drillingWIP, 60)]
                     },
-                    annotations: drillingAnnotations
+                    annotations: drillingAnnotations.concat([drillingTargetAnnotation])
                 };
 
                 // Create the lowering chart
@@ -170,26 +173,29 @@
                     }
                 };
 
-                const loweringTargetLine = {
-                    x: loweringMonths,
-                    y: Array(loweringMonths.length).fill(60),
-                    type: 'scatter',
-                    mode: 'lines',
-                    name: 'Lowering Target',
-                    line: {
-                        color: '#FF0000',
-                        dash: 'dash'
-                    }
-                };
-
                 const loweringAnnotations = loweringMonths.map((month, index) => ({
                     x: month,
-                    y: 60,
-                    text: 'Target: 60',
+                    y: loweringCounts[index],
+                    text: loweringCounts[index].toString(),
                     xanchor: 'left',
                     yanchor: 'middle',
                     showarrow: false
                 }));
+
+                const loweringTargetAnnotation = {
+                    x: 'July',
+                    y: 60,
+                    text: 'Target: 60',
+                    xanchor: 'left',
+                    yanchor: 'middle',
+                    showarrow: true,
+                    arrowhead: 4,
+                    arrowsize: 1,
+                    arrowwidth: 2,
+                    arrowcolor: '#FF0000',
+                    ax: -40,
+                    ay: -30
+                };
 
                 const loweringLayout = {
                     title: 'Lowering Completion by Month',
@@ -200,14 +206,14 @@
                         title: 'Number of Lowering Schemes',
                         range: [0, Math.max(...loweringCounts, ...loweringWIP, 60)]
                     },
-                    annotations: loweringAnnotations
+                    annotations: loweringAnnotations.concat([loweringTargetAnnotation])
                 };
 
                 // Create the drilling chart
-                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker, drillingTargetLine], drillingLayout);
+                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLayout);
 
                 // Create the lowering chart
-                Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker, loweringTargetLine], loweringLayout);
+                Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], loweringLayout);
             })
             .catch(error => console.error(error));
     </script>
