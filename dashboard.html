@@ -8,7 +8,6 @@
     <div id="drilling-chart"></div>
     <div id="lowering-chart"></div>
     <div id="pipe-laying-pie-chart"></div>
-    <div id="excavation-pie-chart"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -230,6 +229,11 @@
                     return accumulator;
                 }, {});
 
+                // Calculate the percentages
+                const totalCount = Object.values(pipeLayingStatusData).reduce((total, count) => total + count, 0);
+                const notStartedPercentage = ((pipeLayingStatusData['Not Started'] / totalCount) * 100).toFixed(2);
+                const wipPercentage = ((pipeLayingStatusData['WIP'] / totalCount) * 100).toFixed(2);
+
                 // Create the pipe laying pie chart data
                 const pipeLayingPieData = [{
                     values: Object.values(pipeLayingStatusData),
@@ -240,43 +244,17 @@
                     },
                     textinfo: 'label+percent',
                     hoverinfo: 'text',
-                    text: Object.entries(pipeLayingStatusData).map(([status, count]) => `${status} (${((count / parsedData.length) * 100).toFixed(2)}%)`)
+                    text: Object.entries(pipeLayingStatusData).map(([status, count]) => `${status} (${((count / totalCount) * 100).toFixed(2)}%)`)
                 }];
 
                 // Create the pipe laying pie chart layout
                 const pipeLayingPieLayout = {
-                    title: 'D/N Pipe Laying Status',
+                    title: `D/N Pipe Laying Status\nNot Started: ${notStartedPercentage}%\nWIP: ${wipPercentage}%`,
                     showlegend: true
-                };
-
-                // Calculate the percentage of work completed
-                const workCompleted = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'Completed').length;
-                const workPercentage = ((workCompleted / parsedData.length) * 100).toFixed(2);
-
-                // Create the excavation pie chart data
-                const excavationPieData = [{
-                    values: [workCompleted, parsedData.length - workCompleted],
-                    labels: ['Completed', 'Scope'],
-                    type: 'pie',
-                    marker: {
-                        colors: ['#1f77b4', '#FFA500']
-                    },
-                    textinfo: 'label+percent',
-                    hoverinfo: 'text',
-                    text: [`Completed (${workCompleted})`, `Scope (${parsedData.length})`]
-                }];
-
-                // Create the excavation pie chart layout
-                const excavationPieLayout = {
-                    title: `Percentage of Work Completed vs Scope (D/N Excavation) - ${workPercentage}%`,
-                    showlegend: false
                 };
 
                 // Create the pipe laying pie chart
                 Plotly.newPlot('pipe-laying-pie-chart', pipeLayingPieData, pipeLayingPieLayout);
-
-                // Create the excavation pie chart
-                Plotly.newPlot('excavation-pie-chart', excavationPieData, excavationPieLayout);
             })
             .catch(error => console.error(error));
     </script>
