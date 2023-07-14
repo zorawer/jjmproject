@@ -16,7 +16,7 @@
 
             data.forEach(function(row) {
                 if (row['Drilling Status'] === 'Completed') {
-                    drillingDates.push(new Date(row['T/W Drill Start Date']));
+                    drillingDates.push(row['T/W Drill Start Date']);
                     drillingCounts.push(1);
                 }
             });
@@ -27,36 +27,18 @@
                 y: drillingCounts,
                 type: 'scatter',
                 mode: 'lines+markers',
-                name: 'Drilling Completion',
-                marker: {
-                    color: 'blue',
-                    symbol: 'circle'
-                },
-                text: drillingCounts.map(count => 'Completed: ' + count),
-                hovertemplate: '%{xaxis.title.text}: %{x}<br>%{text}'
+                name: 'Drilling Completion'
             };
 
             // Define the layout
             var layout = {
-                title: 'Drilling Completion by Month',
+                title: 'Drilling Completion by Date',
                 xaxis: {
-                    title: 'Month',
-                    tickmode: 'linear',
-                    tick0: 1,
-                    dtick: 1
+                    title: 'Date'
                 },
                 yaxis: {
-                    title: 'Number of Schemes'
-                },
-                legend: {
-                    title: 'Legend',
-                    x: 1.05,
-                    y: 0.5,
-                    bgcolor: 'rgba(255, 255, 255, 0.7)',
-                    orientation: 'v',
-                    traceorder: 'normal'
-                },
-                showlegend: true
+                    title: 'Number of Drilling Schemes'
+                }
             };
 
             // Create the chart
