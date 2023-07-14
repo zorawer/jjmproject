@@ -207,14 +207,9 @@
                     return accumulator;
                 }, {});
 
-                // Calculate the percentages
-                const totalCount = drillingCompleted.reduce((total, count) => total + count, 0) + loweringCompleted.reduce((total, count) => total + count, 0);
-                const notStartedPercentage = ((pipeLayingStatusData['Not Started'] / totalCount) * 100).toFixed(2);
-                const wipPercentage = ((pipeLayingStatusData['WIP'] / totalCount) * 100).toFixed(2);
-
                 // Create the pipe laying pie chart data
                 const pipeLayingLabels = ['Not Started', 'WIP'];
-                const pipeLayingValues = [notStartedPercentage, wipPercentage];
+                const pipeLayingValues = [pipeLayingStatusData['Not Started'] || 0, pipeLayingStatusData['WIP'] || 0];
 
                 // Create the pipe laying pie chart
                 const pipeLayingPieChart = {
