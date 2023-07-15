@@ -8,6 +8,7 @@
     <div id="drilling-chart"></div>
     <div id="lowering-chart"></div>
     <div id="pipe-laying-pie-chart"></div>
+    <div id="completion-status-pie-chart"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -224,6 +225,28 @@
 
                 // Create the pipe laying pie chart
                 Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingPieChart], pipeLayingPieLayout);
+
+                // Calculate the number of schemes where D/N Pipe Laying Status is WIP
+                const totalSchemes = parsedData.length;
+                const wipSchemes = pipeLayingStatusData['WIP'] || 0;
+
+                // Create the completion status pie chart data
+                const completionStatusLabels = ['Completed', 'WIP'];
+                const completionStatusValues = [totalSchemes - wipSchemes, wipSchemes];
+
+                // Create the completion status pie chart
+                const completionStatusPieChart = {
+                    labels: completionStatusLabels,
+                    values: completionStatusValues,
+                    type: 'pie'
+                };
+
+                const completionStatusPieLayout = {
+                    title: 'Completion Status',
+                };
+
+                // Create the completion status pie chart
+                Plotly.newPlot('completion-status-pie-chart', [completionStatusPieChart], completionStatusPieLayout);
             })
             .catch(error => console.error(error));
     </script>
