@@ -5,10 +5,8 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <div id="drilling-chart"></div>
-    <div id="lowering-chart"></div>
-    <div id="pipe-laying-pie-chart"></div>
-    <div id="pipe-laying-progress-pie-chart"></div>
+    <div id="dn-pipe-laying-status-chart"></div>
+    <div id="dn-pipe-laying-progress-chart"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -18,51 +16,60 @@
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
 
+                // Calculate the total number of schemes
+                const totalSchemes = parsedData.length;
+
                 // Group the data by D/N Pipe Laying Status
                 const pipeLayingStatusData = parsedData.reduce((accumulator, row) => {
                     const status = row['D/N Pipe Laying Status'];
-                    if (status === 'WIP') {
-                        if (accumulator.hasOwnProperty(status)) {
-                            accumulator[status]++;
-                        } else {
-                            accumulator[status] = 1;
-                        }
+                    if (accumulator.hasOwnProperty(status)) {
+                        accumulator[status]++;
+                    } else {
+                        accumulator[status] = 1;
                     }
                     return accumulator;
                 }, {});
 
-                // Create the pipe laying pie chart data
-                const pipeLayingLabels = ['WIP'];
-                const pipeLayingValues = [pipeLayingStatusData['WIP'] || 0];
+                // Extract the required values for the pie charts
+                const dnPipeLayingStarted = pipeLayingStatusData['Started'] || 0;
+                const dnPipeLayingWIP = pipeLayingStatusData['WIP'] || 0;
+                const dnPipeLayingCompleted = pipeLayingStatusData['Completed'] || 0;
+                const dnPipeLayingNotStarted = totalSchemes - (dnPipeLayingStarted + dnPipeLayingWIP + dnPipeLayingCompleted);
 
-                // Create the pipe laying pie chart
-                const pipeLayingPieChart = {
-                    labels: pipeLayingLabels,
-                    values: pipeLayingValues,
+                // Create the D/N Pipe Laying Status pie chart data
+                const statusLabels = ['Started', 'WIP', 'Completed', 'Not Started'];
+                const statusValues = [dnPipeLayingStarted, dnPipeLayingWIP, dnPipeLayingCompleted, dnPipeLayingNotStarted];
+
+                // Create the D/N Pipe Laying Status pie chart
+                const statusPieChart = {
+                    labels: statusLabels,
+                    values: statusValues,
                     type: 'pie'
                 };
 
-                const pipeLayingPieLayout = {
-                    title: 'D/N Pipe Laying Status',
+                const statusPieLayout = {
+                    title: `D/N Pipe Laying Status (${totalSchemes} Schemes)`,
                 };
 
-                // Create the pipe laying pie chart
-                Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingPieChart], pipeLayingPieLayout);
+                // Create the D/N Pipe Laying Status pie chart
+                Plotly.newPlot('dn-pipe-laying-status-chart', [statusPieChart], statusPieLayout);
 
 
-                // Calculate the progress in the WIP schemes for pipe laying
+                // Filter the WIP schemes for pipe laying
                 const wipSchemes = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
-                const totalWipSchemes = wipSchemes.length;
-                const completedLength = wipSchemes.reduce((total, row) => total + parseInt(row['D/N Pipe Laying (m)']), 0);
 
-                // Calculate the remaining length in the WIP schemes
-                const remainingLength = wipSchemes.reduce((total, row) => total + parseInt(row['Distribution System Length']) - parseInt(row['D/N Pipe Laying (m)']), 0);
+                // Calculate the total scope and work completed for the WIP schemes
+                const wipScope = wipSchemes.reduce((total, row) => total + parseInt(row['Distribution System Length']), 0);
+                const wipWorkCompleted = wipSchemes.reduce((total, row) => total + parseInt(row['D/N Excavation (m)']), 0);
 
-                // Create the pipe laying progress pie chart data
+                // Calculate the remaining work for the WIP schemes
+                const wipRemainingWork = wipScope - wipWorkCompleted;
+
+                // Create the D/N Pipe Laying Progress pie chart data
                 const progressLabels = ['Completed', 'Remaining'];
-                const progressValues = [completedLength, remainingLength];
+                const progressValues = [wipWorkCompleted, wipRemainingWork];
 
-                // Create the pipe laying progress pie chart
+                // Create the D/N Pipe Laying Progress pie chart
                 const progressPieChart = {
                     labels: progressLabels,
                     values: progressValues,
@@ -70,11 +77,11 @@
                 };
 
                 const progressPieLayout = {
-                    title: `Pipe Laying Progress (${totalWipSchemes} WIP Schemes)`,
+                    title: `D/N Pipe Laying Progress (${wipSchemes.length} WIP Schemes)`,
                 };
 
-                // Create the pipe laying progress pie chart
-                Plotly.newPlot('pipe-laying-progress-pie-chart', [progressPieChart], progressPieLayout);
+                // Create the D/N Pipe Laying Progress pie chart
+                Plotly.newPlot('dn-pipe-laying-progress-chart', [progressPieChart], progressPieLayout);
             })
             .catch(error => console.error(error));
     </script>
