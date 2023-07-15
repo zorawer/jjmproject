@@ -5,6 +5,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
+    <div id="pipe-laying-status-chart"></div>
     <div id="wip-pipe-laying-chart"></div>
 
     <script>
@@ -15,6 +16,37 @@
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
 
+                // Group the data by D/N Pipe Laying Status
+                const pipeLayingStatusData = parsedData.reduce((accumulator, row) => {
+                    const status = row['D/N Pipe Laying Status'];
+                    if (status === 'Not Started' || status === 'WIP') {
+                        if (accumulator.hasOwnProperty(status)) {
+                            accumulator[status]++;
+                        } else {
+                            accumulator[status] = 1;
+                        }
+                    }
+                    return accumulator;
+                }, {});
+
+                // Create the pipe laying status pie chart data
+                const statusLabels = Object.keys(pipeLayingStatusData);
+                const statusValues = Object.values(pipeLayingStatusData);
+
+                // Create the pipe laying status pie chart
+                const statusPieChart = {
+                    labels: statusLabels,
+                    values: statusValues,
+                    type: 'pie'
+                };
+
+                const statusPieLayout = {
+                    title: 'D/N Pipe Laying Status',
+                };
+
+                // Create the pipe laying status pie chart
+                Plotly.newPlot('pipe-laying-status-chart', [statusPieChart], statusPieLayout);
+
                 // Filter the schemes with D/N Pipe Laying Status as 'WIP'
                 const wipSchemes = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
 
@@ -23,22 +55,22 @@
                 const workDone = wipSchemes.reduce((total, row) => total + parseInt(row['D/N Excavation (m)']), 0);
 
                 // Create the WIP Pipe Laying pie chart data
-                const labels = ['Scope', 'Work Done'];
-                const values = [scope, workDone];
+                const wipLabels = ['Scope', 'Work Done'];
+                const wipValues = [scope, workDone];
 
                 // Create the WIP Pipe Laying pie chart
-                const pieChart = {
-                    labels: labels,
-                    values: values,
+                const wipPieChart = {
+                    labels: wipLabels,
+                    values: wipValues,
                     type: 'pie'
                 };
 
-                const pieLayout = {
+                const wipPieLayout = {
                     title: 'Work Progress (WIP)',
                 };
 
                 // Create the WIP Pipe Laying pie chart
-                Plotly.newPlot('wip-pipe-laying-chart', [pieChart], pieLayout);
+                Plotly.newPlot('wip-pipe-laying-chart', [wipPieChart], wipPieLayout);
             })
             .catch(error => console.error(error));
     </script>
