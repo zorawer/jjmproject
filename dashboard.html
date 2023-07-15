@@ -33,15 +33,19 @@
                 const statusLabels = Object.keys(pipeLayingStatusData);
                 const statusValues = Object.values(pipeLayingStatusData);
 
+                // Create the pipe laying status pie chart labels with numbers in brackets
+                const statusPieLabels = statusLabels.map((label, index) => `${label} (${statusValues[index]})`);
+
                 // Create the pipe laying status pie chart
                 const statusPieChart = {
-                    labels: statusLabels,
+                    labels: statusPieLabels,
                     values: statusValues,
                     type: 'pie'
                 };
 
                 const statusPieLayout = {
                     title: 'D/N Pipe Laying Status',
+                    showlegend: true
                 };
 
                 // Create the pipe laying status pie chart
@@ -67,6 +71,7 @@
 
                 const wipPieLayout = {
                     title: 'Work Progress (WIP)',
+                    showlegend: true
                 };
 
                 // Create the WIP Pipe Laying pie chart
