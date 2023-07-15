@@ -189,12 +189,6 @@
                     annotations: loweringAnnotations.concat([loweringTargetAnnotation])
                 };
 
-                // Create the drilling chart
-                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLayout);
-
-                // Create the lowering chart
-                Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], loweringLayout);
-
                 // Group the data by D/N Pipe Laying Status
                 const pipeLayingStatusData = parsedData.reduce((accumulator, row) => {
                     const status = row['D/N Pipe Laying Status'];
@@ -228,8 +222,14 @@
                     title: 'D/N Pipe Laying Status',
                 };
 
-                // Create the pipe laying status pie chart
-                Plotly.newPlot('pipe-laying-status-pie-chart', [pipeLayingStatusChart], pipeLayingStatusLayout);
+                // Create the drilling chart
+                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLayout);
+
+                // Create the lowering chart
+                Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], loweringLayout);
+
+                // Create the pipe laying pie chart
+                Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusChart], pipeLayingStatusLayout);
             })
             .catch(error => console.error(error));
     </script>
