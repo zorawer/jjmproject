@@ -13,8 +13,8 @@
 <body>
     <div id="drilling-chart"></div>
     <div id="lowering-chart"></div>
-    <div id="pipe-laying-pie-chart"></div>
-    <div id="work-progress-pie-chart"></div>
+    <div id="pipe-laying-pie-chart" class="chart-container"></div>
+    <div id="work-progress-pie-chart" class="chart-container"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -239,7 +239,7 @@
                     width: 400,
                 };
 
-                // Create the pipe laying status and work progress pie charts
+                // Create the pie charts
                 Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusData], pipeLayingStatusLayout);
                 Plotly.newPlot('work-progress-pie-chart', [workProgressData], workProgressLayout);
             })
