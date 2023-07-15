@@ -5,8 +5,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <div id="dn-pipe-laying-started-chart"></div>
-    <div id="dn-pipe-laying-progress-chart"></div>
+    <div id="dn-pipe-laying-chart"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -16,62 +15,31 @@
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
 
-                // Calculate the total number of schemes
-                const totalSchemes = parsedData.length;
-
-                // Filter the schemes with D/N Pipe Laying Status as 'Started'
-                const startedSchemes = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'Started');
-                const startedCount = startedSchemes.length;
-
                 // Filter the schemes with D/N Pipe Laying Status as 'WIP'
                 const wipSchemes = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
                 const wipCount = wipSchemes.length;
 
-                // Calculate the total scope for WIP schemes
-                const wipScope = wipSchemes.reduce((total, row) => total + parseInt(row['Distribution System Length']), 0);
+                // Filter the schemes with D/N Pipe Laying Status as 'Not Started'
+                const notStartedSchemes = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'Not Started');
+                const notStartedCount = notStartedSchemes.length;
 
-                // Calculate the total work completed for WIP schemes
-                const wipWorkCompleted = wipSchemes.reduce((total, row) => total + parseInt(row['D/N Excavation (m)']), 0);
+                // Create the D/N Pipe Laying pie chart data
+                const labels = ['WIP', 'Not Started'];
+                const values = [wipCount, notStartedCount];
 
-                // Create the D/N Pipe Laying Started pie chart data
-                const startedLabels = ['Started', 'Remaining'];
-                const startedValues = [startedCount, totalSchemes - startedCount];
-
-                // Create the D/N Pipe Laying Started pie chart
-                const startedPieChart = {
-                    labels: startedLabels,
-                    values: startedValues,
+                // Create the D/N Pipe Laying pie chart
+                const pieChart = {
+                    labels: labels,
+                    values: values,
                     type: 'pie'
                 };
 
-                const startedPieLayout = {
-                    title: `D/N Pipe Laying Started (${totalSchemes} Schemes)`,
+                const pieLayout = {
+                    title: 'D/N Pipe Laying Status',
                 };
 
-                // Create the D/N Pipe Laying Started pie chart
-                Plotly.newPlot('dn-pipe-laying-started-chart', [startedPieChart], startedPieLayout);
-
-
-                // Calculate the remaining work for WIP schemes
-                const wipRemainingWork = wipScope - wipWorkCompleted;
-
-                // Create the D/N Pipe Laying Progress pie chart data
-                const progressLabels = ['Work Completed', 'Remaining'];
-                const progressValues = [wipWorkCompleted, wipRemainingWork];
-
-                // Create the D/N Pipe Laying Progress pie chart
-                const progressPieChart = {
-                    labels: progressLabels,
-                    values: progressValues,
-                    type: 'pie'
-                };
-
-                const progressPieLayout = {
-                    title: `D/N Pipe Laying Progress (${wipCount} WIP Schemes)`,
-                };
-
-                // Create the D/N Pipe Laying Progress pie chart
-                Plotly.newPlot('dn-pipe-laying-progress-chart', [progressPieChart], progressPieLayout);
+                // Create the D/N Pipe Laying pie chart
+                Plotly.newPlot('dn-pipe-laying-chart', [pieChart], pieLayout);
             })
             .catch(error => console.error(error));
     </script>
