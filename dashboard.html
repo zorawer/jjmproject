@@ -236,9 +236,9 @@
                 wipPieChartElement.on('plotly_click', event => {
                     const label = event.points[0].label;
                     if (label === 'WIP') {
-                        const wipSchemes = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
                         const wipSchemeList = document.getElementById('wip-scheme-list');
-                        wipSchemeList.innerHTML = ''; // Clear previous list
+                        wipSchemeList.innerHTML = '';
+                        const wipSchemes = wipData;
                         wipSchemes.forEach(row => {
                             const schemeID = row['Scheme ID'];
                             const schemeName = row['Scheme Name'];
