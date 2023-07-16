@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Drilling and Lowering Completion</title>
+    <title> Drilling and Lowering Completion</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         .chart-container {
@@ -12,6 +12,7 @@
     </style>
 </head>
 <body>
+<h1>JJM - HFCL Project Dashboard</h1>
     <div class="chart-container">
         <div id="drilling-chart"></div>
         <div id="lowering-chart"></div>
@@ -231,7 +232,7 @@
                     type: 'pie',
                     textposition: 'inside',
                     hoverinfo: 'label+value',
-                    textinfo: 'label+percent',
+                    textinfo: 'label+percent+value',
                     marker: {
                         colors: ['#808080', '#FFA500']
                     }
@@ -259,9 +260,10 @@
                     type: 'pie',
                     textposition: 'inside',
                     hoverinfo: 'label+value',
-                    textinfo: 'label+percent',
+                    textinfo: 'label+percent+(Value)',
                     marker: {
-                        colors: ['#808080', '#FFA500']
+                        colors: ['#D3D3D3
+808080', '#FFA500']
                     }
                 };
 
