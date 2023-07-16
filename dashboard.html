@@ -22,7 +22,6 @@
         <div id="pipe-laying-pie-chart"></div>
         <div id="wip-pie-chart"></div>
     </div>
-    <button id="wip-button">View WIP Schemes</button>
     <ul id="wip-scheme-list"></ul>
 
     <script>
@@ -98,17 +97,20 @@
                 // Create the WIP pie chart
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
-                // Attach click event handler to WIP button
-                const wipButton = document.getElementById('wip-button');
-                const wipSchemeList = document.getElementById('wip-scheme-list');
-                wipButton.addEventListener('click', () => {
-                    wipSchemeList.innerHTML = ''; // Clear previous list
-                    const wipSchemes = wipData.map(row => `${row['Scheme ID']} - ${row['Scheme Name']}`);
-                    wipSchemes.forEach(scheme => {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = scheme;
-                        wipSchemeList.appendChild(listItem);
-                    });
+                // Attach click event handler to WIP pie chart
+                const wipPieChartElement = document.getElementById('wip-pie-chart');
+                wipPieChartElement.on('plotly_click', function(event) {
+                    const label = event.points[0].label;
+                    if (label === 'Scope') {
+                        const wipSchemeList = document.getElementById('wip-scheme-list');
+                        wipSchemeList.innerHTML = ''; // Clear previous list
+                        const wipSchemes = wipData.map(row => `${row['Scheme ID']} - ${row['Scheme Name']}`);
+                        wipSchemes.forEach(scheme => {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = scheme;
+                            wipSchemeList.appendChild(listItem);
+                        });
+                    }
                 });
             })
             .catch(error => console.error(error));
