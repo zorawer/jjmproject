@@ -242,11 +242,8 @@
                         wipSchemes.forEach(row => {
                             const schemeID = row['Scheme ID'];
                             const schemeName = row['Scheme Name'];
-                            const district = row['District'];
-                            const block = row['Block'];
-                            const twVendor = row['T/W Vendor'];
                             const listItem = document.createElement('li');
-                            listItem.innerHTML = `<a href="#" onclick="openSchemeDetails('${schemeID}')">${schemeID} - ${schemeName}</a> (${district}, ${block}, ${twVendor})`;
+                            listItem.innerHTML = `<a href="#" onclick="openSchemeDetails('${schemeID}')">${schemeID} - ${schemeName}</a>`;
                             wipSchemeList.appendChild(listItem);
                         });
                     }
@@ -254,14 +251,12 @@
 
                 // Function to open new tab with scheme details
                 function openSchemeDetails(id) {
-                    if (parsedData) {
-                        const scheme = parsedData.find(row => row['Scheme ID'] === id);
-                        if (scheme) {
-                            const schemeDetails = `Scheme ID: ${scheme['Scheme ID']}\nScheme Name: ${scheme['Scheme Name']}\nDistrict: ${scheme['District']}\nBlock: ${scheme['Block']}\nT/W Vendor: ${scheme['T/W Vendor']}`;
-                            const schemeDetailsWindow = window.open();
-                            schemeDetailsWindow.document.write(`<pre>${schemeDetails}</pre>`);
-                            schemeDetailsWindow.document.close();
-                        }
+                    const scheme = parsedData.find(row => row['Scheme ID'] === id);
+                    if (scheme) {
+                        const schemeDetails = `Scheme ID: ${scheme['Scheme ID']}\nScheme Name: ${scheme['Scheme Name']}\nDistrict: ${scheme['District']}\nBlock: ${scheme['Block']}\nT/W Vendor: ${scheme['T/W Vendor']}`;
+                        const schemeDetailsWindow = window.open();
+                        schemeDetailsWindow.document.write(`<pre>${schemeDetails}</pre>`);
+                        schemeDetailsWindow.document.close();
                     }
                 }
             })
