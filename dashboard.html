@@ -236,9 +236,10 @@
                 wipPieChartElement.on('plotly_click', event => {
                     const label = event.points[0].label;
                     if (label === 'WIP') {
+                        const wipSchemes = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
                         const wipSchemeList = document.getElementById('wip-scheme-list');
                         wipSchemeList.innerHTML = '';
-                        wipData.forEach(row => {
+                        wipSchemes.forEach(row => {
                             const schemeID = row['Scheme ID'];
                             const schemeName = row['Scheme Name'];
                             const listItem = document.createElement('li');
@@ -248,7 +249,7 @@
                     }
                 });
 
-                // Function to open new tab with scheme details
+                // Function to open new window with scheme details
                 function openSchemeDetails(id) {
                     if (parsedData) {
                         const scheme = parsedData.find(row => row['Scheme ID'] === id);
@@ -260,6 +261,7 @@
                         }
                     }
                 }
+
             })
             .catch(error => console.error(error));
     </script>
