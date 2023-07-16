@@ -185,4 +185,87 @@
                     }
                 };
 
-                Plotly.newPlot('pipe-laying-pie-chart', [pipeL
+                Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusData], pipeLayingStatusLayout);
+
+                // Filter the data for WIP schemes in D/N pipe laying
+                const wipData = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
+
+                // Calculate the total scope for D/N pipe laying
+                const totalScope = wipData.reduce((sum, row) => sum + parseInt(row['Distribition System Length']), 0);
+
+                // Calculate the total work done for WIP schemes in D/N pipe laying
+                const workDone = wipData.reduce((sum, row) => sum + parseInt(row['D/N Excavation (m)']), 0);
+
+                // Create the pie chart for WIP schemes in D/N pipe laying
+                const wipPieChart = {
+                    labels: ['Scope', 'Work Done'],
+                    values: [totalScope, workDone],
+                    type: 'pie',
+                    textposition: 'inside',
+                    hoverinfo: 'label+value',
+                    textinfo: 'label+percent',
+                    marker: {
+                        colors: ['#808080', '#FFA500']
+                    }
+                };
+
+                const wipPieLayout = {
+                    title: 'WIP Schemes for D/N Pipe Laying',
+                    showlegend: true,
+                    legend: {
+                        x: 0.5,
+                        y: -0.1,
+                        bgcolor: 'rgba(255, 255, 255, 0.7)',
+                        bordercolor: '#000',
+                        borderwidth: 1,
+                        orientation: 'h',
+                        traceorder: 'normal',
+                        font: {
+                            family: 'Arial, sans-serif',
+                            size: 12,
+                            color: '#000'
+                        }
+                    }
+                };
+
+                // Create the WIP pie chart
+                Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
+
+                // Attach click event handler to WIP pie chart
+                const wipPieChartElement = document.getElementById('wip-pie-chart');
+                wipPieChartElement.on('plotly_click', event => {
+                    const label = event.points[0].label;
+                    if (label === 'WIP') {
+                        const wipSchemes = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
+                        const wipSchemeList = document.getElementById('wip-scheme-list');
+                        wipSchemeList.innerHTML = ''; // Clear previous list
+                        wipSchemes.forEach(row => {
+                            const schemeID = row['Scheme ID'];
+                            const schemeName = row['Scheme Name'];
+                            const district = row['District'];
+                            const block = row['Block'];
+                            const twVendor = row['T/W Vendor'];
+                            const listItem = document.createElement('li');
+                            listItem.innerHTML = `<a href="#" onclick="openSchemeDetails('${schemeID}')">${schemeID} - ${schemeName}</a> (${district}, ${block}, ${twVendor})`;
+                            wipSchemeList.appendChild(listItem);
+                        });
+                    }
+                });
+
+                // Function to open new tab with scheme details
+                function openSchemeDetails(id) {
+                    if (parsedData) {
+                        const scheme = parsedData.find(row => row['Scheme ID'] === id);
+                        if (scheme) {
+                            const schemeDetails = `Scheme ID: ${scheme['Scheme ID']}\nScheme Name: ${scheme['Scheme Name']}\nDistrict: ${scheme['District']}\nBlock: ${scheme['Block']}\nT/W Vendor: ${scheme['T/W Vendor']}`;
+                            const schemeDetailsWindow = window.open();
+                            schemeDetailsWindow.document.write(`<pre>${schemeDetails}</pre>`);
+                            schemeDetailsWindow.document.close();
+                        }
+                    }
+                }
+            })
+            .catch(error => console.error(error));
+    </script>
+</body>
+</html>
