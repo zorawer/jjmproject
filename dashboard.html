@@ -7,6 +7,7 @@
         .chart-container {
             display: flex;
             justify-content: space-between;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -31,9 +32,70 @@
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
 
-                // Group the data, create charts, and handle click events
+                // Group the data by D/N Pipe Laying Status
+                const pipeLayingStatusData = parsedData.reduce((accumulator, row) => {
+                    const status = row['D/N Pipe Laying Status'];
+                    if (status === 'Not Started' || status === 'WIP') {
+                        if (accumulator.hasOwnProperty(status)) {
+                            accumulator[status]++;
+                        } else {
+                            accumulator[status] = 1;
+                        }
+                    }
+                    return accumulator;
+                }, {});
 
-                // ... (code for grouping, creating charts, and handling click events)
+                // Create the pipe laying status pie chart
+                const pipeLayingLabels = ['Not Started', 'WIP'];
+                const pipeLayingValues = [pipeLayingStatusData['Not Started'] || 0, pipeLayingStatusData['WIP'] || 0];
+
+                const pipeLayingStatusPieChart = {
+                    labels: pipeLayingLabels,
+                    values: pipeLayingValues,
+                    type: 'pie',
+                    textposition: 'inside',
+                    hoverinfo: 'label+value',
+                    textinfo: 'label+percent',
+                    marker: {
+                        colors: ['#808080', '#FFA500']
+                    }
+                };
+
+                const pipeLayingStatusPieLayout = {
+                    title: 'D/N Pipe Laying Status',
+                };
+
+                // Create the pipe laying status pie chart
+                Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
+
+                // Filter the data for WIP schemes in D/N pipe laying
+                const wipData = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
+
+                // Calculate the total scope for D/N pipe laying
+                const totalScope = wipData.reduce((sum, row) => sum + parseInt(row['Distribition System Length']), 0);
+
+                // Calculate the total work done for WIP schemes in D/N pipe laying
+                const workDone = wipData.reduce((sum, row) => sum + parseInt(row['D/N Excavation (m)']), 0);
+
+                // Create the pie chart for WIP schemes in D/N pipe laying
+                const wipPieChart = {
+                    labels: ['Scope', 'Work Done'],
+                    values: [totalScope, workDone],
+                    type: 'pie',
+                    textposition: 'inside',
+                    hoverinfo: 'label+value',
+                    textinfo: 'label+percent',
+                    marker: {
+                        colors: ['#808080', '#FFA500']
+                    }
+                };
+
+                const wipPieLayout = {
+                    title: 'WIP Schemes for D/N Pipe Laying',
+                };
+
+                // Create the WIP pie chart
+                Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
                 // Attach click event handler to WIP pie chart
                 const wipPieChartElement = document.getElementById('wip-pie-chart');
