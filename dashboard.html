@@ -274,6 +274,26 @@
 
             })
             .catch(error => console.error(error));
+
+          // Attach click event handler to WIP pie chart
+                const wipSchemeList = document.getElementById('wip-scheme-list');
+                document.getElementById('wip-pie-chart').on('plotly_restyle', function(eventData) {
+                    const isActiveWIP = eventData[0].visible[1];
+                    if (isActiveWIP) {
+                        const wipSchemes = wipData.map(row => `${row['Scheme ID']} - ${row['Scheme Name']}`);
+                        wipSchemeList.innerHTML = ''; // Clear previous list
+                        wipSchemes.forEach(scheme => {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = scheme;
+                            wipSchemeList.appendChild(listItem);
+                        });
+                    }
+                });
+            })
+            .catch(error => console.error(error));
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
