@@ -7,12 +7,12 @@
         .chart-container {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <h1>JJM - HFCL Project Dashboard</h1>
+
     <div class="chart-container">
         <div id="drilling-chart"></div>
         <div id="lowering-chart"></div>
@@ -21,10 +21,11 @@
         <div id="pipe-laying-pie-chart"></div>
         <div id="wip-pie-chart"></div>
     </div>
+    <ul id="wip-scheme-list"></ul>
 
     <script>
         // Fetch data from the CSV file
-        fetch('https://zorawer.github.io/jjmproject/testfetch.csv')
+        fetch('https://raw.githubusercontent.com/zorawer/jjmproject/main/testfetch.csv')
             .then(response => response.text())
             .then(data => {
                 // Process the data
@@ -32,25 +33,21 @@
 
                 // Group the data by month for drilling completion
                 const drillingData = parsedData.reduce((accumulator, row) => {
-                    if (row['T/W Drill Start Date'] && (row['Drilling Status'] === 'Completed' || row['Drilling Status'] === 'WIP')) {
-                        const dateParts = row['T/W Drill Start Date'].split('/');
-                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
-                        if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month][row['Drilling Status']] += 1;
-                        } else {
-                            accumulator[month] = {
-                                'Completed': row['Drilling Status'] === 'Completed' ? 1 : 0,
-                                'WIP': row['Drilling Status'] === 'WIP' ? 1 : 0
-                            };
-                        }
+                    const dateParts = row['T/W Drill Start Date'].split('/');
+                    const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
+                    if (accumulator.hasOwnProperty(month)) {
+                        accumulator[month][row['Drilling Status']] += 1;
+                    } else {
+                        accumulator[month] = {
+                            'Completed': row['Drilling Status'] === 'Completed' ? 1 : 0,
+                            'WIP': row['Drilling Status'] === 'WIP' ? 1 : 0
+                        };
                     }
                     return accumulator;
                 }, {});
 
                 // Sort drilling months in chronological order
-                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                const drillingMonths = monthNames.filter(month => drillingData.hasOwnProperty(month));
-                drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
+                const drillingMonths = Object.keys(drillingData).sort((a, b) => new Date(a) - new Date(b));
 
                 // Create the drilling chart data
                 const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed']);
@@ -81,30 +78,6 @@
                     }
                 };
 
-                const drillingAnnotations = drillingMonths.map((month, index) => ({
-                    x: month,
-                    y: drillingCompleted[index],
-                    text: drillingCompleted[index].toString(),
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: false
-                }));
-
-                const drillingTargetAnnotation = {
-                    x: 'July',
-                    y: 60,
-                    text: 'Target: 60',
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: true,
-                    arrowhead: 4,
-                    arrowsize: 1,
-                    arrowwidth: 2,
-                    arrowcolor: '#FF0000',
-                    ax: -40,
-                    ay: -30
-                };
-
                 const drillingLayout = {
                     title: 'Drilling Completion by Month',
                     xaxis: {
@@ -112,34 +85,30 @@
                     },
                     yaxis: {
                         title: 'Number of Drilling Schemes',
-                        range: [0, Math.max(...drillingCompleted, ...drillingWIP, 60)]
+                        range: [0, Math.max(...drillingCompleted, ...drillingWIP)]
                     },
-                    annotations: drillingAnnotations.concat([drillingTargetAnnotation])
+                    annotations: []
                 };
 
-                // Create the drilling chart
                 Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLayout);
 
                 // Group the data by month for lowering completion
                 const loweringData = parsedData.reduce((accumulator, row) => {
-                    if (row['T/W Lowering Date'] && (row['T/W Lowering Status'] === 'Completed' || row['T/W Lowering Status'] === 'WIP')) {
-                        const dateParts = row['T/W Lowering Date'].split('/');
-                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
-                        if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month][row['T/W Lowering Status']] += 1;
-                        } else {
-                            accumulator[month] = {
-                                'Completed': row['T/W Lowering Status'] === 'Completed' ? 1 : 0,
-                                'WIP': row['T/W Lowering Status'] === 'WIP' ? 1 : 0
-                            };
-                        }
+                    const dateParts = row['T/W Lowering Date'].split('/');
+                    const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
+                    if (accumulator.hasOwnProperty(month)) {
+                        accumulator[month][row['T/W Lowering Status']] += 1;
+                    } else {
+                        accumulator[month] = {
+                            'Completed': row['T/W Lowering Status'] === 'Completed' ? 1 : 0,
+                            'WIP': row['T/W Lowering Status'] === 'WIP' ? 1 : 0
+                        };
                     }
                     return accumulator;
                 }, {});
 
                 // Sort lowering months in chronological order
-                const loweringMonths = monthNames.filter(month => loweringData.hasOwnProperty(month));
-                loweringMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
+                const loweringMonths = Object.keys(loweringData).sort((a, b) => new Date(a) - new Date(b));
 
                 // Create the lowering chart data
                 const loweringCompleted = loweringMonths.map(month => loweringData[month]['Completed']);
@@ -170,30 +139,6 @@
                     }
                 };
 
-                const loweringAnnotations = loweringMonths.map((month, index) => ({
-                    x: month,
-                    y: loweringCompleted[index],
-                    text: loweringCompleted[index].toString(),
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: false
-                }));
-
-                const loweringTargetAnnotation = {
-                    x: 'July',
-                    y: 60,
-                    text: 'Target: 60',
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: true,
-                    arrowhead: 4,
-                    arrowsize: 1,
-                    arrowwidth: 2,
-                    arrowcolor: '#FF0000',
-                    ax: -40,
-                    ay: -30
-                };
-
                 const loweringLayout = {
                     title: 'Lowering Completion by Month',
                     xaxis: {
@@ -201,58 +146,46 @@
                     },
                     yaxis: {
                         title: 'Number of Lowering Schemes',
-                        range: [0, Math.max(...loweringCompleted, ...loweringWIP, 60)]
+                        range: [0, Math.max(...loweringCompleted, ...loweringWIP)]
                     },
-                    annotations: loweringAnnotations.concat([loweringTargetAnnotation])
+                    annotations: []
                 };
 
-                // Create the lowering chart
                 Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], loweringLayout);
 
                 // Group the data by D/N Pipe Laying Status
-                const pipeLayingStatusData = parsedData.reduce((accumulator, row) => {
-                    const status = row['D/N Pipe Laying Status'];
-                    if (status === 'Not Started' || status === 'WIP') {
-                        if (accumulator.hasOwnProperty(status)) {
-                            accumulator[status]++;
-                        } else {
-                            accumulator[status] = 1;
-                        }
-                    }
-                    return accumulator;
-                }, {});
-
-                // Create the pipe laying status pie chart
-                const pipeLayingLabels = ['Not Started', 'WIP'];
-                const pipeLayingValues = [pipeLayingStatusData['Not Started'] || 0, pipeLayingStatusData['WIP'] || 0];
-
-                const pipeLayingStatusPieChart = {
-                    labels: pipeLayingLabels,
-                    values: pipeLayingValues,
+                const pipeLayingStatusData = {
+                    labels: ['Not Started', 'WIP'],
+                    values: [464, 30],
                     type: 'pie',
                     textposition: 'inside',
                     hoverinfo: 'label+value',
-                    textinfo: 'label+percent+"value"',
+                    textinfo: 'label+percent',
                     marker: {
                         colors: ['#808080', '#FFA500']
                     }
                 };
 
-                const pipeLayingStatusPieLayout = {
+                const pipeLayingStatusLayout = {
                     title: 'D/N Pipe Laying Status',
                     showlegend: true,
-    legend: {
-        title: {
-            text: 'Status',
-        },
-        itemclick: false,
-        itemdoubleclick: false,
-        itemhoverformat: '%{value}',
-    },
-};
-                
+                    legend: {
+                        x: 0.5,
+                        y: -0.1,
+                        bgcolor: 'rgba(255, 255, 255, 0.7)',
+                        bordercolor: '#000',
+                        borderwidth: 1,
+                        orientation: 'h',
+                        traceorder: 'normal',
+                        font: {
+                            family: 'Arial, sans-serif',
+                            size: 12,
+                            color: '#000'
+                        }
+                    }
+                };
 
-                Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
+                Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusData], pipeLayingStatusLayout);
 
                 // Filter the data for WIP schemes in D/N pipe laying
                 const wipData = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
@@ -270,63 +203,60 @@
                     type: 'pie',
                     textposition: 'inside',
                     hoverinfo: 'label+value',
-                    textinfo: 'label+percent+Value',
+                    textinfo: 'label+percent',
                     marker: {
                         colors: ['#808080', '#FFA500']
                     }
                 };
 
                 const wipPieLayout = {
-                    title: 'WIP Schemes Status - D/N (Mtr)',
+                    title: 'WIP Schemes for D/N Pipe Laying',
                     showlegend: true,
-    legend: {
-        title: {
-            text: 'Category',
-        },
-        itemclick: false,
-        itemdoubleclick: false,
-        itemhoverformat: '%{value}',
-    },
-};
-                
+                    legend: {
+                        x: 0.5,
+                        y: -0.1,
+                        bgcolor: 'rgba(255, 255, 255, 0.7)',
+                        bordercolor: '#000',
+                        borderwidth: 1,
+                        orientation: 'h',
+                        traceorder: 'normal',
+                        font: {
+                            family: 'Arial, sans-serif',
+                            size: 12,
+                            color: '#000'
+                        }
+                    }
+                };
 
+                // Create the WIP pie chart
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
+                // Attach click event handler to WIP pie chart
+                const wipPieChartElement = document.getElementById('wip-pie-chart');
+                wipPieChartElement.on('plotly_click', event => {
+                    const label = event.points[0].label;
+                    if (label === 'WIP') {
+                        const wipSchemes = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
+                        wipSchemes.forEach(row => {
+                            const schemeID = row['Scheme ID'];
+                            const schemeName = row['Scheme Name'];
+                            const listItem = document.createElement('li');
+                            listItem.innerHTML = `<a href="#" onclick="openSchemeDetails('${schemeID}')">${schemeID} - ${schemeName}</a>`;
+                            document.getElementById('wip-scheme-list').appendChild(listItem);
+                        });
+                    }
+                });
+
+                // Function to open new tab with scheme details
+                function openSchemeDetails(id) {
+                    const scheme = parsedData.find(row => row['Scheme ID'] === id);
+                    if (scheme) {
+                        const schemeDetails = `Scheme ID: ${scheme['Scheme ID']}\nScheme Name: ${scheme['Scheme Name']}\nDistrict: ${scheme['District']}\nBlock: ${scheme['Block']}\nT/W Vendor: ${scheme['T/W Vendor']}`;
+                        window.open().document.write(`<pre>${schemeDetails}</pre>`);
+                    }
+                }
             })
             .catch(error => console.error(error));
-
-// Fetch data from the CSV file
-fetch('https://raw.githubusercontent.com/zorawer/jjmproject/main/testfetch.csv')
-    .then(response => response.text())
-    .then(data => {
-        // Process the data
-        const parsedData = Plotly.d3.csv.parse(data);
-        
-                // Function to open new tab with scheme details
-        function openSchemeDetails(id) {
-            const scheme = parsedData.find(row => row['Scheme ID'] === id);
-            if (scheme) {
-                const schemeDetails = `Scheme ID: ${scheme['Scheme ID']}\nScheme Name: ${scheme['Scheme Name']}\nDistrict: ${scheme['District']}\nBlock: ${scheme['Block']}\nT/W Vendor: ${scheme['T/W Vendor']}`;
-                window.open().document.write(`<pre>${schemeDetails}</pre>`);
-            }
-        }
-
-             const wipPieChartElement = document.getElementById('wip-pie-chart');
-        wipPieChartElement.on('plotly_click', event => {
-            const label = event.points[0].label;
-            if (label === 'WIP') {
-                const wipSchemes = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
-                wipSchemes.forEach(row => {
-                    const schemeID = row['Scheme ID'];
-                    const schemeName = row['Scheme Name'];
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `<a href="#" onclick="openSchemeDetails('${schemeID}')">${schemeID} - ${schemeName}</a>`;
-                    document.getElementById('wip-scheme-list').appendChild(listItem);
-                });
-            }
-        });
-    })
-    .catch(error => console.error(error));
     </script>
 </body>
 </html>
