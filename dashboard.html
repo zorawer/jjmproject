@@ -52,6 +52,9 @@
                 const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed']);
                 const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP']);
 
+                // Sort drilling months in chronological order
+drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
+
                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingMonths,
