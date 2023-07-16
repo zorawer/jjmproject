@@ -99,9 +99,9 @@
 
                 // Attach click event handler to WIP pie chart
                 const wipSchemeList = document.getElementById('wip-scheme-list');
-                Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout).on('plotly_click', function(event) {
-                    const label = event.points[0].label;
-                    if (label === 'WIP') {
+                document.getElementById('wip-pie-chart').on('plotly_restyle', function(eventData) {
+                    const isActiveWIP = eventData[0].visible[1];
+                    if (isActiveWIP) {
                         const wipSchemes = wipData.map(row => `${row['Scheme ID']} - ${row['Scheme Name']}`);
                         wipSchemeList.innerHTML = ''; // Clear previous list
                         wipSchemes.forEach(scheme => {
