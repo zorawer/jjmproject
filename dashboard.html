@@ -249,18 +249,18 @@
                     }
                 });
 
-                // Function to open new window with scheme details
-                function openSchemeDetails(id) {
-                    if (parsedData) {
-                        const scheme = parsedData.find(row => row['Scheme ID'] === id);
-                        if (scheme) {
-                            const schemeDetails = `Scheme ID: ${scheme['Scheme ID']}\nScheme Name: ${scheme['Scheme Name']}\nDistrict: ${scheme['District']}\nBlock: ${scheme['Block']}\nT/W Vendor: ${scheme['T/W Vendor']}`;
-                            const schemeDetailsWindow = window.open('', '_blank');
-                            schemeDetailsWindow.document.write(`<pre>${schemeDetails}</pre>`);
-                            schemeDetailsWindow.document.close();
-                        }
-                    }
-                }
+     // Function to open new tab with scheme details
+function openSchemeDetails(id) {
+  if (parsedData) {
+    const scheme = parsedData.find(row => row['Scheme ID'] === id);
+    if (scheme) {
+      const schemeDetails = `Scheme ID: ${scheme['Scheme ID']}\nScheme Name: ${scheme['Scheme Name']}\nDistrict: ${scheme['District']}\nBlock: ${scheme['Block']}\nT/W Vendor: ${scheme['T/W Vendor']}`;
+      const schemeDetailsWindow = window.open();
+      schemeDetailsWindow.document.write(`<pre>${schemeDetails}</pre>`);
+      schemeDetailsWindow.document.close();
+    }
+  }
+}
 
             })
             .catch(error => console.error(error));
