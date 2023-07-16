@@ -45,6 +45,8 @@
                     return accumulator;
                 }, {});
 
+                // Define the order of month names
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
                 // Create the drilling chart data
                 const drillingMonths = Object.keys(drillingData);
                 const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed']);
