@@ -7,6 +7,7 @@
         .chart-container {
             display: flex;
             justify-content: space-between;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -45,15 +46,14 @@
                     return accumulator;
                 }, {});
 
-                // Define the order of month names
+                // Sort drilling months in chronological order
                 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                const drillingMonths = monthNames.filter(month => drillingData.hasOwnProperty(month));
+                drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
+
                 // Create the drilling chart data
-                const drillingMonths = Object.keys(drillingData);
                 const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed']);
                 const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP']);
-
-                // Sort drilling months in chronological order
-drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
 
                 // Create the drilling chart
                 const drillingChart = {
@@ -136,8 +136,11 @@ drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
                     return accumulator;
                 }, {});
 
+                // Sort lowering months in chronological order
+                const loweringMonths = monthNames.filter(month => loweringData.hasOwnProperty(month));
+                loweringMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
+
                 // Create the lowering chart data
-                const loweringMonths = Object.keys(loweringData);
                 const loweringCompleted = loweringMonths.map(month => loweringData[month]['Completed']);
                 const loweringWIP = loweringMonths.map(month => loweringData[month]['WIP']);
 
@@ -219,9 +222,12 @@ drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
                 }, {});
 
                 // Create the pipe laying status pie chart
+                const pipeLayingLabels = ['Not Started', 'WIP'];
+                const pipeLayingValues = [pipeLayingStatusData['Not Started'] || 0, pipeLayingStatusData['WIP'] || 0];
+
                 const pipeLayingStatusPieChart = {
-                    labels: Object.keys(pipeLayingStatusData),
-                    values: Object.values(pipeLayingStatusData),
+                    labels: pipeLayingLabels,
+                    values: pipeLayingValues,
                     type: 'pie',
                     textposition: 'inside',
                     hoverinfo: 'label+value',
@@ -235,7 +241,6 @@ drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
                     title: 'D/N Pipe Laying Status',
                 };
 
-                // Create the pipe laying status pie chart
                 Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
 
                 // Filter the data for WIP schemes in D/N pipe laying
@@ -247,7 +252,7 @@ drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
                 // Calculate the total work done for WIP schemes in D/N pipe laying
                 const workDone = wipData.reduce((sum, row) => sum + parseInt(row['D/N Excavation (m)']), 0);
 
-                // Create the WIP schemes pie chart for D/N pipe laying
+                // Create the pie chart for WIP schemes in D/N pipe laying
                 const wipPieChart = {
                     labels: ['Scope', 'Work Done'],
                     values: [totalScope, workDone],
@@ -264,7 +269,6 @@ drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
                     title: 'WIP Schemes for D/N Pipe Laying',
                 };
 
-                // Create the WIP schemes pie chart for D/N pipe laying
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
             })
