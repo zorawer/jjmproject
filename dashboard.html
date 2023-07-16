@@ -232,7 +232,7 @@
                     type: 'pie',
                     textposition: 'inside',
                     hoverinfo: 'label+value',
-                    textinfo: 'label+percent+(value)',
+                    textinfo: 'label+percent+"value"',
                     marker: {
                         colors: ['#808080', '#FFA500']
                     }
@@ -240,7 +240,17 @@
 
                 const pipeLayingStatusPieLayout = {
                     title: 'D/N Pipe Laying Status',
-                };
+                    showlegend: true,
+    legend: {
+        title: {
+            text: 'Status',
+        },
+        itemclick: false,
+        itemdoubleclick: false,
+        itemhoverformat: '%{value}',
+    },
+};
+                
 
                 Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
 
