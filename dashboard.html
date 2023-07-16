@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Drilling and Lowering Completion</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         .chart-container {
             display: flex;
@@ -64,7 +64,7 @@
 
                 // Create the pipe laying status pie chart
                 const pipeLayingPieChartElement = document.getElementById('pipe-laying-pie-chart');
-                pipeLayingPieChartElement.innerHTML = JSON.stringify(pipeLayingStatusPieChart);
+                Plotly.newPlot(pipeLayingPieChartElement, [pipeLayingStatusPieChart]);
 
                 // Filter the data for WIP schemes in D/N pipe laying
                 const wipData = parsedData.filter(row => row[19] === 'WIP'); // Filter by D/N Pipe Laying Status
@@ -90,10 +90,10 @@
 
                 // Create the WIP pie chart
                 const wipPieChartElement = document.getElementById('wip-pie-chart');
-                wipPieChartElement.innerHTML = JSON.stringify(wipPieChart);
+                Plotly.newPlot(wipPieChartElement, [wipPieChart]);
 
                 // Attach click event handler to WIP pie chart
-                wipPieChartElement.addEventListener('click', function() {
+                wipPieChartElement.addEventListener('plotly_click', function(event) {
                     const wipSchemeList = document.getElementById('wip-scheme-list');
                     wipSchemeList.innerHTML = ''; // Clear previous list
                     wipData.forEach(row => {
