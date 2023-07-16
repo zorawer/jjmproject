@@ -270,7 +270,7 @@
                     type: 'pie',
                     textposition: 'inside',
                     hoverinfo: 'label+value',
-                    textinfo: 'label+percent+(Value)',
+                    textinfo: 'label+percent+Value',
                     marker: {
                         colors: ['#808080', '#FFA500']
                     }
@@ -278,7 +278,17 @@
 
                 const wipPieLayout = {
                     title: 'WIP Schemes for D/N Pipe Laying',
-                };
+                    showlegend: true,
+    legend: {
+        title: {
+            text: 'Category',
+        },
+        itemclick: false,
+        itemdoubleclick: false,
+        itemhoverformat: '%{value}',
+    },
+};
+                
 
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
