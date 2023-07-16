@@ -294,6 +294,39 @@
 
             })
             .catch(error => console.error(error));
+
+// Fetch data from the CSV file
+fetch('https://raw.githubusercontent.com/zorawer/jjmproject/main/testfetch.csv')
+    .then(response => response.text())
+    .then(data => {
+        // Process the data
+        const parsedData = Plotly.d3.csv.parse(data);
+        
+                // Function to open new tab with scheme details
+        function openSchemeDetails(id) {
+            const scheme = parsedData.find(row => row['Scheme ID'] === id);
+            if (scheme) {
+                const schemeDetails = `Scheme ID: ${scheme['Scheme ID']}\nScheme Name: ${scheme['Scheme Name']}\nDistrict: ${scheme['District']}\nBlock: ${scheme['Block']}\nT/W Vendor: ${scheme['T/W Vendor']}`;
+                window.open().document.write(`<pre>${schemeDetails}</pre>`);
+            }
+        }
+
+             const wipPieChartElement = document.getElementById('wip-pie-chart');
+        wipPieChartElement.on('plotly_click', event => {
+            const label = event.points[0].label;
+            if (label === 'WIP') {
+                const wipSchemes = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
+                wipSchemes.forEach(row => {
+                    const schemeID = row['Scheme ID'];
+                    const schemeName = row['Scheme Name'];
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<a href="#" onclick="openSchemeDetails('${schemeID}')">${schemeID} - ${schemeName}</a>`;
+                    document.getElementById('wip-scheme-list').appendChild(listItem);
+                });
+            }
+        });
+    })
+    .catch(error => console.error(error));
     </script>
 </body>
 </html>
