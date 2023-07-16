@@ -236,12 +236,13 @@
                 wipPieChartElement.on('plotly_click', event => {
                     const label = event.points[0].label;
                     if (label === 'WIP') {
-                        const wipSchemes = wipData.map(row => `${row['Scheme ID']} - ${row['Scheme Name']}`);
                         const wipSchemeList = document.getElementById('wip-scheme-list');
                         wipSchemeList.innerHTML = '';
-                        wipSchemes.forEach(scheme => {
+                        wipData.forEach(row => {
+                            const schemeID = row['Scheme ID'];
+                            const schemeName = row['Scheme Name'];
                             const listItem = document.createElement('li');
-                            listItem.textContent = scheme;
+                            listItem.innerHTML = `<a href="#" onclick="openSchemeDetails('${schemeID}')">${schemeID} - ${schemeName}</a>`;
                             wipSchemeList.appendChild(listItem);
                         });
                     }
@@ -249,12 +250,14 @@
 
                 // Function to open new tab with scheme details
                 function openSchemeDetails(id) {
-                    const scheme = parsedData.find(row => row['Scheme ID'] === id);
-                    if (scheme) {
-                        const schemeDetails = `Scheme ID: ${scheme['Scheme ID']}\nScheme Name: ${scheme['Scheme Name']}\nDistrict: ${scheme['District']}\nBlock: ${scheme['Block']}\nT/W Vendor: ${scheme['T/W Vendor']}`;
-                        const schemeDetailsWindow = window.open();
-                        schemeDetailsWindow.document.write(`<pre>${schemeDetails}</pre>`);
-                        schemeDetailsWindow.document.close();
+                    if (parsedData) {
+                        const scheme = parsedData.find(row => row['Scheme ID'] === id);
+                        if (scheme) {
+                            const schemeDetails = `Scheme ID: ${scheme['Scheme ID']}\nScheme Name: ${scheme['Scheme Name']}\nDistrict: ${scheme['District']}\nBlock: ${scheme['Block']}\nT/W Vendor: ${scheme['T/W Vendor']}`;
+                            const schemeDetailsWindow = window.open('', '_blank');
+                            schemeDetailsWindow.document.write(`<pre>${schemeDetails}</pre>`);
+                            schemeDetailsWindow.document.close();
+                        }
                     }
                 }
             })
