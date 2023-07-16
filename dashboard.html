@@ -1,8 +1,8 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Drilling and Lowering Completion</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         .chart-container {
             display: flex;
@@ -30,11 +30,12 @@
             .then(response => response.text())
             .then(data => {
                 // Process the data
-                const parsedData = Plotly.d3.csv.parse(data);
+                const rows = data.split('\n').slice(1); // Remove header row
+                const parsedData = rows.map(row => row.split(','));
 
                 // Group the data by D/N Pipe Laying Status
                 const pipeLayingStatusData = parsedData.reduce((accumulator, row) => {
-                    const status = row['D/N Pipe Laying Status'];
+                    const status = row[19]; // D/N Pipe Laying Status column
                     if (status === 'Not Started' || status === 'WIP') {
                         if (accumulator.hasOwnProperty(status)) {
                             accumulator[status]++;
@@ -61,21 +62,18 @@
                     }
                 };
 
-                const pipeLayingStatusPieLayout = {
-                    title: 'D/N Pipe Laying Status',
-                };
-
                 // Create the pipe laying status pie chart
-                Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
+                const pipeLayingPieChartElement = document.getElementById('pipe-laying-pie-chart');
+                pipeLayingPieChartElement.innerHTML = JSON.stringify(pipeLayingStatusPieChart);
 
                 // Filter the data for WIP schemes in D/N pipe laying
-                const wipData = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
+                const wipData = parsedData.filter(row => row[19] === 'WIP'); // Filter by D/N Pipe Laying Status
 
                 // Calculate the total scope for D/N pipe laying
-                const totalScope = wipData.reduce((sum, row) => sum + parseInt(row['Distribition System Length']), 0);
+                const totalScope = wipData.reduce((sum, row) => sum + parseInt(row[54]), 0); // Distribition System Length column
 
                 // Calculate the total work done for WIP schemes in D/N pipe laying
-                const workDone = wipData.reduce((sum, row) => sum + parseInt(row['D/N Excavation (m)']), 0);
+                const workDone = wipData.reduce((sum, row) => sum + parseInt(row[57]), 0); // D/N Excavation (m) column
 
                 // Create the pie chart for WIP schemes in D/N pipe laying
                 const wipPieChart = {
@@ -90,27 +88,19 @@
                     }
                 };
 
-                const wipPieLayout = {
-                    title: 'WIP Schemes for D/N Pipe Laying',
-                };
-
                 // Create the WIP pie chart
-                Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
+                const wipPieChartElement = document.getElementById('wip-pie-chart');
+                wipPieChartElement.innerHTML = JSON.stringify(wipPieChart);
 
                 // Attach click event handler to WIP pie chart
-                const wipPieChartElement = document.getElementById('wip-pie-chart');
-                wipPieChartElement.on('plotly_click', function(event) {
-                    const label = event.points[0].label;
-                    if (label === 'Scope') {
-                        const wipSchemeList = document.getElementById('wip-scheme-list');
-                        wipSchemeList.innerHTML = ''; // Clear previous list
-                        const wipSchemes = wipData.map(row => `${row['Scheme ID']} - ${row['Scheme Name']}`);
-                        wipSchemes.forEach(scheme => {
-                            const listItem = document.createElement('li');
-                            listItem.textContent = scheme;
-                            wipSchemeList.appendChild(listItem);
-                        });
-                    }
+                wipPieChartElement.addEventListener('click', function() {
+                    const wipSchemeList = document.getElementById('wip-scheme-list');
+                    wipSchemeList.innerHTML = ''; // Clear previous list
+                    wipData.forEach(row => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `${row[1]} - ${row[2]}`; // Scheme ID and Scheme Name columns
+                        wipSchemeList.appendChild(listItem);
+                    });
                 });
             })
             .catch(error => console.error(error));
