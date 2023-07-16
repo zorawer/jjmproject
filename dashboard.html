@@ -31,6 +31,22 @@
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
 
+                // Group the data by month for drilling completion
+                const drillingData = parsedData.reduce((accumulator, row) => {
+                    // ... (code for grouping by month for drilling completion)
+                }, {});
+
+                // Create the drilling chart
+                // ... (code for drilling completion chart)
+
+                // Group the data by month for lowering completion
+                const loweringData = parsedData.reduce((accumulator, row) => {
+                    // ... (code for grouping by month for lowering completion)
+                }, {});
+
+                // Create the lowering chart
+                // ... (code for lowering completion chart)
+
                 // Group the data by D/N Pipe Laying Status
                 const pipeLayingStatusData = {
                     labels: ['Not Started', 'WIP'],
@@ -117,7 +133,8 @@
                     if (label === 'WIP') {
                         const wipSchemes = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
                         const wipSchemeList = document.getElementById('wip-scheme-list');
-                        wipSchemeList.innerHTML = '';
+                        wipSchemeList.innerHTML = ''; // Clear existing scheme list
+
                         wipSchemes.forEach(row => {
                             const schemeID = row['Scheme ID'];
                             const schemeName = row['Scheme Name'];
@@ -130,10 +147,15 @@
 
                 // Function to open new tab with scheme details
                 function openSchemeDetails(schemeID, schemeName) {
-                    const schemeDetails = `Scheme ID: ${schemeID}\nScheme Name: ${schemeName}`;
-                    const schemeDetailsWindow = window.open('', '_blank');
-                    schemeDetailsWindow.document.write('<pre>' + schemeDetails + '</pre>');
-                    schemeDetailsWindow.document.close();
+                    if (parsedData) {
+                        const scheme = parsedData.find(row => row['Scheme ID'] === schemeID && row['Scheme Name'] === schemeName);
+                        if (scheme) {
+                            const schemeDetails = `Scheme ID: ${scheme['Scheme ID']}\nScheme Name: ${scheme['Scheme Name']}\nDistrict: ${scheme['District']}\nBlock: ${scheme['Block']}\nT/W Vendor: ${scheme['T/W Vendor']}`;
+                            const schemeDetailsWindow = window.open();
+                            schemeDetailsWindow.document.write(`<pre>${schemeDetails}</pre>`);
+                            schemeDetailsWindow.document.close();
+                        }
+                    }
                 }
             })
             .catch(error => console.error(error));
