@@ -306,6 +306,13 @@
                     }
                 });
 
+                // Add double click event to the WIP slice of the pipe laying pie chart
+                document.getElementById('wip-pie-chart').on('plotly_doubleclick', function () {
+                    const wipSchemes = wipData.map(row => row['Scheme Name']);
+                    if (wipSchemes.length > 0) {
+                        alert(`WIP Schemes for D/N Pipe Laying:\n\n${wipSchemes.join('\n')}`);
+                    }
+                });
             })
             .catch(error => console.error(error));
     </script>
