@@ -76,20 +76,22 @@
                 Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
 
                 // Add click event listener to the first pie chart
-                const wipSlice = document.querySelector('.piechart > .trace:first-child path');
-                wipSlice.addEventListener('click', () => {
-                    const wipData = pipeLayingStatusData['WIP']?.data || [];
+                const pieChart = document.getElementById('pipe-laying-pie-chart');
+                pieChart.on('plotly_click', (eventData) => {
+                    if (eventData.points[0].label === 'WIP') {
+                        const wipData = pipeLayingStatusData['WIP']?.data || [];
 
-                    const wipSchemesList = document.getElementById('wip-schemes');
-                    wipSchemesList.innerHTML = '';
-                    wipData.forEach(row => {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = `Scheme Name: ${row['Scheme Name']}, District: ${row['District']}, Block: ${row['Block']}`;
-                        wipSchemesList.appendChild(listItem);
-                    });
+                        const wipSchemesList = document.getElementById('wip-schemes');
+                        wipSchemesList.innerHTML = '';
+                        wipData.forEach(row => {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = `Scheme Name: ${row['Scheme Name']}, District: ${row['District']}, Block: ${row['Block']}`;
+                            wipSchemesList.appendChild(listItem);
+                        });
 
-                    const wipListSection = document.getElementById('wip-list');
-                    wipListSection.style.display = 'block';
+                        const wipListSection = document.getElementById('wip-list');
+                        wipListSection.style.display = 'block';
+                    }
                 });
 
                 // Filter the data for WIP schemes in D/N pipe laying
