@@ -76,7 +76,7 @@
                 Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
 
                 // Add click event listener to the first pie chart
-                const wipSlice = document.querySelector('.piechart > g > .trace:first-child .point:first-child');
+                const wipSlice = document.querySelector('.piechart > .trace:first-child path');
                 wipSlice.addEventListener('click', () => {
                     const wipData = pipeLayingStatusData['WIP']?.data || [];
 
