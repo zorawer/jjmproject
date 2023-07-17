@@ -256,20 +256,16 @@
                     title: 'D/N Pipe Laying Status',
                 };
 
-                // Add double click event for the WIP slice of the pipe laying pie chart
-                const wipPieChartElement = document.getElementById('wip-pie-chart');
-                wipPieChartElement.on('plotly_click', function (data) {
-                    const wipSchemes = drillingData[data.points[0].label]['WIP'];
-                    if (wipSchemes.length > 0) {
-                        alert(`WIP Schemes for Drilling:\n\n${wipSchemes.join('\n')}`);
-                    }
-                });
-
-                // Create the drilling and lowering charts
                 Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
 
                 // Filter the data for WIP schemes in D/N pipe laying
                 const wipData = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
+
+                // Calculate the total scope for D/N pipe laying
+                const totalScope = wipData.reduce((sum, row) => sum + parseInt(row['Distribition System Length']), 0);
+
+                // Calculate the total work done for WIP schemes in D/N pipe laying
+                const workDone = wipData.reduce((sum, row) => sum + parseInt(row['D/N Excavation (m)']), 0);
 
                 // Create the pie chart for WIP schemes in D/N pipe laying
                 const wipPieChart = {
@@ -288,16 +284,27 @@
                     title: 'WIP Schemes for D/N Pipe Laying',
                 };
 
-                // Add double click event for the WIP slice of the pipe laying pie chart
-                wipPieChartElement.on('plotly_doubleclick', function () {
-                    const wipSchemes = wipData.map(row => row['Scheme Name']);
+                Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
+
+                // Add click event to the drilling WIP markers
+                drillingWIPMarker.on('click', function (data) {
+                    const monthIndex = data.points[0].pointIndex;
+                    const month = drillingMonths[monthIndex];
+                    const wipSchemes = drillingData[month]['WIP'];
                     if (wipSchemes.length > 0) {
-                        alert(`WIP Schemes for D/N Pipe Laying:\n\n${wipSchemes.join('\n')}`);
+                        alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
                     }
                 });
 
-                // Create the drilling and lowering charts
-                Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
+                // Add click event to the lowering WIP markers
+                loweringWIPMarker.on('click', function (data) {
+                    const monthIndex = data.points[0].pointIndex;
+                    const month = loweringMonths[monthIndex];
+                    const wipSchemes = loweringData[month]['WIP'];
+                    if (wipSchemes.length > 0) {
+                        alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
+                    }
+                });
 
             })
             .catch(error => console.error(error));
