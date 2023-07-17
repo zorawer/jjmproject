@@ -12,7 +12,8 @@
     </style>
 </head>
 <body>
-<h1>JJM - HFCL Project Dashboard</h1>
+    <h1>JJM - HFCL Project Dashboard</h1>
+
     <div class="chart-container">
         <div id="drilling-chart"></div>
         <div id="lowering-chart"></div>
@@ -21,6 +22,7 @@
         <div id="pipe-laying-pie-chart"></div>
         <div id="wip-pie-chart"></div>
     </div>
+    <ul id="wip-scheme-list"></ul>
 
     <script>
         // Fetch data from the CSV file
@@ -29,185 +31,6 @@
             .then(data => {
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
-
-                // Group the data by month for drilling completion
-                const drillingData = parsedData.reduce((accumulator, row) => {
-                    if (row['T/W Drill Start Date'] && (row['Drilling Status'] === 'Completed' || row['Drilling Status'] === 'WIP')) {
-                        const dateParts = row['T/W Drill Start Date'].split('/');
-                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
-                        if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month][row['Drilling Status']] += 1;
-                        } else {
-                            accumulator[month] = {
-                                'Completed': row['Drilling Status'] === 'Completed' ? 1 : 0,
-                                'WIP': row['Drilling Status'] === 'WIP' ? 1 : 0
-                            };
-                        }
-                    }
-                    return accumulator;
-                }, {});
-
-                // Sort drilling months in chronological order
-                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                const drillingMonths = monthNames.filter(month => drillingData.hasOwnProperty(month));
-                drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
-
-                // Create the drilling chart data
-                const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed']);
-                const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP']);
-
-                // Create the drilling chart
-                const drillingChart = {
-                    x: drillingMonths,
-                    y: drillingCompleted,
-                    type: 'scatter',
-                    mode: 'lines+markers',
-                    name: `Drilling Completion (${drillingCompleted.reduce((total, count) => total + count, 0)})`,
-                    marker: {
-                        color: '#1f77b4'
-                    }
-                };
-
-                const drillingWIPMarker = {
-                    x: drillingMonths,
-                    y: drillingWIP,
-                    type: 'scatter',
-                    mode: 'markers',
-                    name: `Drilling WIP (${drillingWIP.reduce((total, count) => total + count, 0)})`,
-                    marker: {
-                        symbol: 'circle',
-                        size: 10,
-                        color: '#FFA500'
-                    }
-                };
-
-                const drillingAnnotations = drillingMonths.map((month, index) => ({
-                    x: month,
-                    y: drillingCompleted[index],
-                    text: drillingCompleted[index].toString(),
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: false
-                }));
-
-                const drillingTargetAnnotation = {
-                    x: 'July',
-                    y: 60,
-                    text: 'Target: 60',
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: true,
-                    arrowhead: 4,
-                    arrowsize: 1,
-                    arrowwidth: 2,
-                    arrowcolor: '#FF0000',
-                    ax: -40,
-                    ay: -30
-                };
-
-                const drillingLayout = {
-                    title: 'Drilling Completion by Month',
-                    xaxis: {
-                        title: 'Month'
-                    },
-                    yaxis: {
-                        title: 'Number of Drilling Schemes',
-                        range: [0, Math.max(...drillingCompleted, ...drillingWIP, 60)]
-                    },
-                    annotations: drillingAnnotations.concat([drillingTargetAnnotation])
-                };
-
-                // Create the drilling chart
-                Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLayout);
-
-                // Group the data by month for lowering completion
-                const loweringData = parsedData.reduce((accumulator, row) => {
-                    if (row['T/W Lowering Date'] && (row['T/W Lowering Status'] === 'Completed' || row['T/W Lowering Status'] === 'WIP')) {
-                        const dateParts = row['T/W Lowering Date'].split('/');
-                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
-                        if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month][row['T/W Lowering Status']] += 1;
-                        } else {
-                            accumulator[month] = {
-                                'Completed': row['T/W Lowering Status'] === 'Completed' ? 1 : 0,
-                                'WIP': row['T/W Lowering Status'] === 'WIP' ? 1 : 0
-                            };
-                        }
-                    }
-                    return accumulator;
-                }, {});
-
-                // Sort lowering months in chronological order
-                const loweringMonths = monthNames.filter(month => loweringData.hasOwnProperty(month));
-                loweringMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
-
-                // Create the lowering chart data
-                const loweringCompleted = loweringMonths.map(month => loweringData[month]['Completed']);
-                const loweringWIP = loweringMonths.map(month => loweringData[month]['WIP']);
-
-                // Create the lowering chart
-                const loweringChart = {
-                    x: loweringMonths,
-                    y: loweringCompleted,
-                    type: 'scatter',
-                    mode: 'lines+markers',
-                    name: `Lowering Completion (${loweringCompleted.reduce((total, count) => total + count, 0)})`,
-                    marker: {
-                        color: '#1f77b4'
-                    }
-                };
-
-                const loweringWIPMarker = {
-                    x: loweringMonths,
-                    y: loweringWIP,
-                    type: 'scatter',
-                    mode: 'markers',
-                    name: `Lowering WIP (${loweringWIP.reduce((total, count) => total + count, 0)})`,
-                    marker: {
-                        symbol: 'circle',
-                        size: 10,
-                        color: '#FFA500'
-                    }
-                };
-
-                const loweringAnnotations = loweringMonths.map((month, index) => ({
-                    x: month,
-                    y: loweringCompleted[index],
-                    text: loweringCompleted[index].toString(),
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: false
-                }));
-
-                const loweringTargetAnnotation = {
-                    x: 'July',
-                    y: 60,
-                    text: 'Target: 60',
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: true,
-                    arrowhead: 4,
-                    arrowsize: 1,
-                    arrowwidth: 2,
-                    arrowcolor: '#FF0000',
-                    ax: -40,
-                    ay: -30
-                };
-
-                const loweringLayout = {
-                    title: 'Lowering Completion by Month',
-                    xaxis: {
-                        title: 'Month'
-                    },
-                    yaxis: {
-                        title: 'Number of Lowering Schemes',
-                        range: [0, Math.max(...loweringCompleted, ...loweringWIP, 60)]
-                    },
-                    annotations: loweringAnnotations.concat([loweringTargetAnnotation])
-                };
-
-                // Create the lowering chart
-                Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], loweringLayout);
 
                 // Group the data by D/N Pipe Laying Status
                 const pipeLayingStatusData = parsedData.reduce((accumulator, row) => {
@@ -242,6 +65,7 @@
                     title: 'D/N Pipe Laying Status',
                 };
 
+                // Create the pipe laying status pie chart
                 Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
 
                 // Filter the data for WIP schemes in D/N pipe laying
@@ -270,8 +94,113 @@
                     title: 'WIP Schemes for D/N Pipe Laying',
                 };
 
+                // Create the WIP pie chart
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
+                // Attach click event handler to WIP pie chart
+                const wipPieChartElement = document.getElementById('wip-pie-chart');
+                wipPieChartElement.on('plotly_click', function(event) {
+                    const label = event.points[0].label;
+                    if (label === 'WIP') {
+                        const wipSchemes = wipData.map(row => `${row['Scheme ID']} - ${row['Scheme Name']}`);
+                        const wipSchemeList = document.getElementById('wip-scheme-list');
+                        wipSchemeList.innerHTML = ''; // Clear previous list
+                        wipSchemes.forEach(scheme => {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = scheme;
+                            wipSchemeList.appendChild(listItem);
+                        });
+                    }
+                });
+
+                // Filter the data for drilling completion
+                const drillingCompleted = parsedData.filter(row => row['Drilling Status'] === 'Completed');
+                const drillingWIP = parsedData.filter(row => row['Drilling Status'] === 'WIP');
+
+                const drillingData = drillingCompleted.map(row => {
+                  return {
+                    schemeID: row['Scheme ID'],
+                    schemeName: row['Scheme Name'],
+                    drillStartDate: row['T/W Drill Start Date'],
+                    drillEndDate: row['T/W Drill End Date'],
+                  };
+                });
+
+                // Create the drilling completion chart
+                const drillingChart = drillingData.map(data => {
+                  return {
+                    x: [data.schemeName],
+                    y: [data.drillEndDate ? 1 : 0],
+                    type: 'bar',
+                    marker: {
+                      color: data.drillEndDate ? '#1f77b4' : '#FFA500',
+                    },
+                    name: `Scheme ${data.schemeID}`,
+                  };
+                });
+
+                const drillingLayout = {
+                  title: 'Drilling Completion',
+                  xaxis: {
+                    title: 'Scheme Name',
+                    tickangle: -45,
+                  },
+                  yaxis: {
+                    title: 'Completion',
+                    range: [0, 1],
+                    tickvals: [0, 1],
+                    ticktext: ['Incomplete', 'Complete'],
+                  },
+                  legend: {
+                    traceorder: 'reversed',
+                  },
+                };
+
+                Plotly.newPlot('drilling-chart', drillingChart, drillingLayout);
+
+                // Create the lowering completion chart
+                const loweringCompleted = parsedData.filter(row => row['T/W Lowering Status'] === 'Completed');
+                const loweringWIP = parsedData.filter(row => row['T/W Lowering Status'] === 'WIP');
+
+                const loweringData = loweringCompleted.map(row => {
+                  return {
+                    schemeID: row['Scheme ID'],
+                    schemeName: row['Scheme Name'],
+                    loweringStartDate: row['T/W Lowering Date'],
+                  };
+                });
+
+                // Create the lowering completion chart
+                const loweringChart = loweringData.map(data => {
+                  return {
+                    x: [data.schemeName],
+                    y: [1],
+                    type: 'bar',
+                    marker: {
+                      color: '#1f77b4',
+                    },
+                    name: `Scheme ${data.schemeID}`,
+                  };
+                });
+
+                const loweringLayout = {
+                  title: 'Lowering Completion',
+                  xaxis: {
+                    title: 'Scheme Name',
+                    tickangle: -45,
+                  },
+                  yaxis: {
+                    title: 'Completion',
+                    range: [0, 1],
+                    tickvals: [0, 1],
+                    ticktext: ['Incomplete', 'Complete'],
+                  },
+                  legend: {
+                    traceorder: 'reversed',
+                  },
+                };
+
+                Plotly.newPlot('lowering-chart', loweringChart, loweringLayout);
             })
             .catch(error => console.error(error));
     </script>
