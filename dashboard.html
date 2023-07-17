@@ -114,58 +114,21 @@
                 });
 
                 // Create the drilling completion chart
-const drillingCompleted = parsedData.filter(row => row['Drilling Status'] === 'Completed');
-const drillingWIP = parsedData.filter(row => row['Drilling Status'] === 'WIP');
+                const drillingCompleted = parsedData.filter(row => row['Drilling Status'] === 'Completed');
+                const drillingWIP = parsedData.filter(row => row['Drilling Status'] === 'WIP');
 
-const drillingMonths = [...new Set(parsedData.map(row => row['Pin-Point Date'].split('-')[1]))];
-drillingMonths.sort((a, b) => parseInt(a) - parseInt(b));
+                const drillingMonths = [...new Set(parsedData.map(row => row['Pin-Point Date'].split('-')[1]))];
+                drillingMonths.sort((a, b) => parseInt(a) - parseInt(b));
 
-const drillingData = drillingMonths.map(month => {
-    const monthDrillingCompleted = drillingCompleted.filter(row => row['Pin-Point Date'].split('-')[1] === month).length;
-    const monthDrillingWIP = drillingWIP.filter(row => row['Pin-Point Date'].split('-')[1] === month).length;
-    return {
-        month,
-        drillingCompleted: monthDrillingCompleted,
-        drillingWIP: monthDrillingWIP
-    };
-});
-
-const drillingChart = {
-    x: drillingData.map(data => data.month),
-    y: drillingData.map(data => data.drillingCompleted),
-    type: 'scatter',
-    mode: 'lines+markers',
-    name: 'Drilling Completion',
-    marker: {
-        color: '#1f77b4'
-    }
-};
-
-const drillingWIPMarker = {
-    x: drillingData.map(data => data.month),
-    y: drillingData.map(data => data.drillingWIP),
-    type: 'scatter',
-    mode: 'markers',
-    name: 'Drilling WIP',
-    marker: {
-        symbol: 'circle',
-        size: 10,
-        color: '#FFA500'
-    }
-};
-
-const drillingLayout = {
-    title: 'Drilling Completion by Month',
-    xaxis: {
-        title: 'Month'
-    },
-    yaxis: {
-        title: 'Number of Drilling Schemes'
-    }
-};
-
-Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLayout);
-
+                const drillingData = drillingMonths.map(month => {
+                    const monthDrillingCompleted = drillingCompleted.filter(row => row['Pin-Point Date'].split('-')[1] === month).length;
+                    const monthDrillingWIP = drillingWIP.filter(row => row['Pin-Point Date'].split('-')[1] === month).length;
+                    return {
+                        month,
+                        drillingCompleted: monthDrillingCompleted,
+                        drillingWIP: monthDrillingWIP
+                    };
+                });
 
                 const drillingChart = {
                     x: drillingData.map(data => data.month),
@@ -207,12 +170,12 @@ Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLay
                 const loweringCompleted = parsedData.filter(row => row['T/W Lowering Status'] === 'Completed');
                 const loweringWIP = parsedData.filter(row => row['T/W Lowering Status'] === 'WIP');
 
-                const loweringMonths = [...new Set(parsedData.map(row => row['T/W Lowering Date'].split('/')[1]))];
+                const loweringMonths = [...new Set(parsedData.map(row => row['T/W Lowering Date'].split('-')[1]))];
                 loweringMonths.sort((a, b) => parseInt(a) - parseInt(b));
 
                 const loweringData = loweringMonths.map(month => {
-                    const monthLoweringCompleted = loweringCompleted.filter(row => row['T/W Lowering Date'].split('/')[1] === month).length;
-                    const monthLoweringWIP = loweringWIP.filter(row => row['T/W Lowering Date'].split('/')[1] === month).length;
+                    const monthLoweringCompleted = loweringCompleted.filter(row => row['T/W Lowering Date'].split('-')[1] === month).length;
+                    const monthLoweringWIP = loweringWIP.filter(row => row['T/W Lowering Date'].split('-')[1] === month).length;
                     return {
                         month,
                         loweringCompleted: monthLoweringCompleted,
