@@ -117,12 +117,12 @@
                 const drillingCompleted = parsedData.filter(row => row['Drilling Status'] === 'Completed');
                 const drillingWIP = parsedData.filter(row => row['Drilling Status'] === 'WIP');
 
-                const drillingMonths = [...new Set(parsedData.map(row => row['Pin-Point Date'].split('-')[1]))];
+                const drillingMonths = [...new Set(parsedData.map(row => row['T/W Drill Start Date'].split('/')[1]))];
                 drillingMonths.sort((a, b) => parseInt(a) - parseInt(b));
 
                 const drillingData = drillingMonths.map(month => {
-                    const monthDrillingCompleted = drillingCompleted.filter(row => row['Pin-Point Date'].split('-')[1] === month).length;
-                    const monthDrillingWIP = drillingWIP.filter(row => row['Pin-Point Date'].split('-')[1] === month).length;
+                    const monthDrillingCompleted = drillingCompleted.filter(row => row['T/W Drill Start Date'].split('/')[1] === month).length;
+                    const monthDrillingWIP = drillingWIP.filter(row => row['T/W Drill Start Date'].split('/')[1] === month).length;
                     return {
                         month,
                         drillingCompleted: monthDrillingCompleted,
@@ -170,12 +170,12 @@
                 const loweringCompleted = parsedData.filter(row => row['T/W Lowering Status'] === 'Completed');
                 const loweringWIP = parsedData.filter(row => row['T/W Lowering Status'] === 'WIP');
 
-                const loweringMonths = [...new Set(parsedData.map(row => row['T/W Lowering Date'].split('-')[1]))];
+                const loweringMonths = [...new Set(parsedData.map(row => row['T/W Lowering Date'].split('/')[1]))];
                 loweringMonths.sort((a, b) => parseInt(a) - parseInt(b));
 
                 const loweringData = loweringMonths.map(month => {
-                    const monthLoweringCompleted = loweringCompleted.filter(row => row['T/W Lowering Date'].split('-')[1] === month).length;
-                    const monthLoweringWIP = loweringWIP.filter(row => row['T/W Lowering Date'].split('-')[1] === month).length;
+                    const monthLoweringCompleted = loweringCompleted.filter(row => row['T/W Lowering Date'].split('/')[1] === month).length;
+                    const monthLoweringWIP = loweringWIP.filter(row => row['T/W Lowering Date'].split('/')[1] === month).length;
                     return {
                         month,
                         loweringCompleted: monthLoweringCompleted,
