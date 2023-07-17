@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+#<!DOCTYPE html>
 <html>
 <head>
     <title>Drilling and Lowering Completion</title>
@@ -92,6 +92,12 @@
                         const wipListSection = document.getElementById('wip-list');
                         wipListSection.style.display = 'block';
                     }
+                });
+
+                // Add double-click event listener to the WIP pie chart
+                pieChart.on('plotly_doubleclick', () => {
+                    const wipListSection = document.getElementById('wip-list');
+                    wipListSection.style.display = 'none';
                 });
 
                 // Filter the data for WIP schemes in D/N pipe laying
