@@ -117,7 +117,7 @@
                 const drillingCompleted = parsedData.filter(row => row['Drilling Status'] === 'Completed');
                 const drillingWIP = parsedData.filter(row => row['Drilling Status'] === 'WIP');
 
-                const drillingMonths = [...new Set(parsedData.map(row => row['T/W Drill Start Date'].split('/')[1]))];
+                const drillingMonths = [...new Set(drillingCompleted.map(row => row['T/W Drill Start Date'].split('/')[1]))];
                 drillingMonths.sort((a, b) => parseInt(a) - parseInt(b));
 
                 const drillingData = drillingMonths.map(month => {
@@ -170,7 +170,7 @@
                 const loweringCompleted = parsedData.filter(row => row['T/W Lowering Status'] === 'Completed');
                 const loweringWIP = parsedData.filter(row => row['T/W Lowering Status'] === 'WIP');
 
-                const loweringMonths = [...new Set(parsedData.map(row => row['T/W Lowering Date'].split('/')[1]))];
+                const loweringMonths = [...new Set(loweringCompleted.map(row => row['T/W Lowering Date'].split('/')[1]))];
                 loweringMonths.sort((a, b) => parseInt(a) - parseInt(b));
 
                 const loweringData = loweringMonths.map(month => {
