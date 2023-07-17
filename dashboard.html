@@ -22,7 +22,6 @@
         <div id="pipe-laying-pie-chart"></div>
         <div id="wip-pie-chart"></div>
     </div>
-    <ul id="wip-scheme-list"></ul>
 
     <script>
         // Fetch data from the CSV file
@@ -31,6 +30,78 @@
             .then(data => {
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
+
+                // Group the data by drilling status
+                const drillingStatusData = parsedData.reduce((accumulator, row) => {
+                    const status = row['Drilling Status'];
+                    if (status === 'Completed' || status === 'WIP') {
+                        if (accumulator.hasOwnProperty(status)) {
+                            accumulator[status]++;
+                        } else {
+                            accumulator[status] = 1;
+                        }
+                    }
+                    return accumulator;
+                }, {});
+
+                // Create the drilling completion chart
+                const drillingLabels = ['Completed', 'WIP'];
+                const drillingValues = [drillingStatusData['Completed'] || 0, drillingStatusData['WIP'] || 0];
+
+                const drillingCompletionPieChart = {
+                    labels: drillingLabels,
+                    values: drillingValues,
+                    type: 'pie',
+                    textposition: 'inside',
+                    hoverinfo: 'label+value',
+                    textinfo: 'label+percent',
+                    marker: {
+                        colors: ['#1f77b4', '#FFA500']
+                    }
+                };
+
+                const drillingCompletionPieLayout = {
+                    title: 'Drilling Completion',
+                };
+
+                // Create the drilling completion chart
+                Plotly.newPlot('drilling-chart', [drillingCompletionPieChart], drillingCompletionPieLayout);
+
+                // Group the data by lowering status
+                const loweringStatusData = parsedData.reduce((accumulator, row) => {
+                    const status = row['T/W Lowering Status'];
+                    if (status === 'Completed' || status === 'WIP') {
+                        if (accumulator.hasOwnProperty(status)) {
+                            accumulator[status]++;
+                        } else {
+                            accumulator[status] = 1;
+                        }
+                    }
+                    return accumulator;
+                }, {});
+
+                // Create the lowering completion chart
+                const loweringLabels = ['Completed', 'WIP'];
+                const loweringValues = [loweringStatusData['Completed'] || 0, loweringStatusData['WIP'] || 0];
+
+                const loweringCompletionPieChart = {
+                    labels: loweringLabels,
+                    values: loweringValues,
+                    type: 'pie',
+                    textposition: 'inside',
+                    hoverinfo: 'label+value',
+                    textinfo: 'label+percent',
+                    marker: {
+                        colors: ['#1f77b4', '#FFA500']
+                    }
+                };
+
+                const loweringCompletionPieLayout = {
+                    title: 'Lowering Completion',
+                };
+
+                // Create the lowering completion chart
+                Plotly.newPlot('lowering-chart', [loweringCompletionPieChart], loweringCompletionPieLayout);
 
                 // Group the data by D/N Pipe Laying Status
                 const pipeLayingStatusData = parsedData.reduce((accumulator, row) => {
@@ -65,7 +136,6 @@
                     title: 'D/N Pipe Laying Status',
                 };
 
-                // Create the pipe laying status pie chart
                 Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
 
                 // Filter the data for WIP schemes in D/N pipe laying
@@ -94,113 +164,8 @@
                     title: 'WIP Schemes for D/N Pipe Laying',
                 };
 
-                // Create the WIP pie chart
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
-                // Attach click event handler to WIP pie chart
-                const wipPieChartElement = document.getElementById('wip-pie-chart');
-                wipPieChartElement.on('plotly_click', function(event) {
-                    const label = event.points[0].label;
-                    if (label === 'WIP') {
-                        const wipSchemes = wipData.map(row => `${row['Scheme ID']} - ${row['Scheme Name']}`);
-                        const wipSchemeList = document.getElementById('wip-scheme-list');
-                        wipSchemeList.innerHTML = ''; // Clear previous list
-                        wipSchemes.forEach(scheme => {
-                            const listItem = document.createElement('li');
-                            listItem.textContent = scheme;
-                            wipSchemeList.appendChild(listItem);
-                        });
-                    }
-                });
-
-                // Filter the data for drilling completion
-                const drillingCompleted = parsedData.filter(row => row['Drilling Status'] === 'Completed');
-                const drillingWIP = parsedData.filter(row => row['Drilling Status'] === 'WIP');
-
-                const drillingData = drillingCompleted.map(row => {
-                  return {
-                    schemeID: row['Scheme ID'],
-                    schemeName: row['Scheme Name'],
-                    drillStartDate: row['T/W Drill Start Date'],
-                    drillEndDate: row['T/W Drill End Date'],
-                  };
-                });
-
-                // Create the drilling completion chart
-                const drillingChart = drillingData.map(data => {
-                  return {
-                    x: [data.schemeName],
-                    y: [data.drillEndDate ? 1 : 0],
-                    type: 'bar',
-                    marker: {
-                      color: data.drillEndDate ? '#1f77b4' : '#FFA500',
-                    },
-                    name: `Scheme ${data.schemeID}`,
-                  };
-                });
-
-                const drillingLayout = {
-                  title: 'Drilling Completion',
-                  xaxis: {
-                    title: 'Scheme Name',
-                    tickangle: -45,
-                  },
-                  yaxis: {
-                    title: 'Completion',
-                    range: [0, 1],
-                    tickvals: [0, 1],
-                    ticktext: ['Incomplete', 'Complete'],
-                  },
-                  legend: {
-                    traceorder: 'reversed',
-                  },
-                };
-
-                Plotly.newPlot('drilling-chart', drillingChart, drillingLayout);
-
-                // Create the lowering completion chart
-                const loweringCompleted = parsedData.filter(row => row['T/W Lowering Status'] === 'Completed');
-                const loweringWIP = parsedData.filter(row => row['T/W Lowering Status'] === 'WIP');
-
-                const loweringData = loweringCompleted.map(row => {
-                  return {
-                    schemeID: row['Scheme ID'],
-                    schemeName: row['Scheme Name'],
-                    loweringStartDate: row['T/W Lowering Date'],
-                  };
-                });
-
-                // Create the lowering completion chart
-                const loweringChart = loweringData.map(data => {
-                  return {
-                    x: [data.schemeName],
-                    y: [1],
-                    type: 'bar',
-                    marker: {
-                      color: '#1f77b4',
-                    },
-                    name: `Scheme ${data.schemeID}`,
-                  };
-                });
-
-                const loweringLayout = {
-                  title: 'Lowering Completion',
-                  xaxis: {
-                    title: 'Scheme Name',
-                    tickangle: -45,
-                  },
-                  yaxis: {
-                    title: 'Completion',
-                    range: [0, 1],
-                    tickvals: [0, 1],
-                    ticktext: ['Incomplete', 'Complete'],
-                  },
-                  legend: {
-                    traceorder: 'reversed',
-                  },
-                };
-
-                Plotly.newPlot('lowering-chart', loweringChart, loweringLayout);
             })
             .catch(error => console.error(error));
     </script>
