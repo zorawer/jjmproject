@@ -256,35 +256,7 @@
                     title: 'D/N Pipe Laying Status',
                 };
 
-        // Add click event listener to the first pie chart
-                const pieChart = document.getElementById('pipe-laying-pie-chart');
-                pieChart.on('plotly_click', (eventData) => {
-                    if (eventData.points[0].label === 'WIP') {
-                        const wipData = pipeLayingStatusData['WIP']?.data || [];
-
-                        const wipSchemesList = document.getElementById('wip-schemes');
-                        wipSchemesList.innerHTML = '';
-                        wipData.forEach(row => {
-                            const listItem = document.createElement('li');
-                            listItem.textContent = `Scheme Name: ${row['Scheme Name']}, District: ${row['District']}, Block: ${row['Block']}`;
-                            wipSchemesList.appendChild(listItem);
-                        });
-
-                        const wipListSection = document.getElementById('wip-list');
-                        wipListSection.style.display = 'block';
-                    }
-                });
-
-                // Add double-click event listener to the WIP pie chart
-                pieChart.on('plotly_doubleclick', () => {
-                    const wipListSection = document.getElementById('wip-list');
-                    wipListSection.style.display = 'none';
-                });
-
-                
-
-
-                // Create the drilling and lowering charts
+                // Create the pipe laying status pie chart
                 Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
 
                 // Filter the data for WIP schemes in D/N pipe laying
@@ -308,6 +280,7 @@
                 };
 
                 // Add double click event for the WIP slice of the pipe laying pie chart
+                const wipPieChartElement = document.getElementById('wip-pie-chart');
                 wipPieChartElement.on('plotly_doubleclick', function () {
                     const wipSchemes = wipData.map(row => row['Scheme Name']);
                     if (wipSchemes.length > 0) {
@@ -315,7 +288,7 @@
                     }
                 });
 
-                // Create the drilling and lowering charts
+                // Create the WIP pie chart for D/N pipe laying
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
             })
