@@ -45,12 +45,14 @@
                         const dateParts = row['T/W Drill Start Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month][row['Drilling Status']] += 1;
+                            accumulator[month][row['Drilling Status']].count += 1;
+                            accumulator[month][row['Drilling Status']].data.push(row);
                         } else {
                             accumulator[month] = {
-                                'Completed': row['Drilling Status'] === 'Completed' ? 1 : 0,
-                                'WIP': row['Drilling Status'] === 'WIP' ? 1 : 0
+                                'Completed': { count: row['Drilling Status'] === 'Completed' ? 1 : 0, data: [] },
+                                'WIP': { count: row['Drilling Status'] === 'WIP' ? 1 : 0, data: [] }
                             };
+                            accumulator[month][row['Drilling Status']].data.push(row);
                         }
                     }
                     return accumulator;
@@ -62,8 +64,8 @@
                 drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
 
                 // Create the drilling chart data
-                const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed']);
-                const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP']);
+                const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed'].count);
+                const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP'].count);
 
                 // Create the drilling chart
                 const drillingChart = {
@@ -87,7 +89,9 @@
                         symbol: 'circle',
                         size: 10,
                         color: '#FFA500'
-                    }
+                    },
+                    text: drillingMonths.map(month => drillingData[month]['WIP'].data.map(row => row['Scheme Name'])),
+                    hovertemplate: '%{text}<extra></extra>'
                 };
 
                 const drillingAnnotations = drillingMonths.map((month, index) => ({
@@ -135,12 +139,14 @@
                         const dateParts = row['T/W Lowering Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month][row['T/W Lowering Status']] += 1;
+                            accumulator[month][row['T/W Lowering Status']].count += 1;
+                            accumulator[month][row['T/W Lowering Status']].data.push(row);
                         } else {
                             accumulator[month] = {
-                                'Completed': row['T/W Lowering Status'] === 'Completed' ? 1 : 0,
-                                'WIP': row['T/W Lowering Status'] === 'WIP' ? 1 : 0
+                                'Completed': { count: row['T/W Lowering Status'] === 'Completed' ? 1 : 0, data: [] },
+                                'WIP': { count: row['T/W Lowering Status'] === 'WIP' ? 1 : 0, data: [] }
                             };
+                            accumulator[month][row['T/W Lowering Status']].data.push(row);
                         }
                     }
                     return accumulator;
@@ -151,8 +157,8 @@
                 loweringMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
 
                 // Create the lowering chart data
-                const loweringCompleted = loweringMonths.map(month => loweringData[month]['Completed']);
-                const loweringWIP = loweringMonths.map(month => loweringData[month]['WIP']);
+                const loweringCompleted = loweringMonths.map(month => loweringData[month]['Completed'].count);
+                const loweringWIP = loweringMonths.map(month => loweringData[month]['WIP'].count);
 
                 // Create the lowering chart
                 const loweringChart = {
@@ -176,7 +182,9 @@
                         symbol: 'circle',
                         size: 10,
                         color: '#FFA500'
-                    }
+                    },
+                    text: loweringMonths.map(month => loweringData[month]['WIP'].data.map(row => row['Scheme Name'])),
+                    hovertemplate: '%{text}<extra></extra>'
                 };
 
                 const loweringAnnotations = loweringMonths.map((month, index) => ({
