@@ -256,7 +256,16 @@
                     title: 'D/N Pipe Laying Status',
                 };
 
-                // Create the pipe laying status pie chart
+                // Add double click event for the WIP slice of the pipe laying pie chart
+                const wipPieChartElement = document.getElementById('wip-pie-chart');
+                wipPieChartElement.on('plotly_click', function (data) {
+                    const wipSchemes = drillingData[data.points[0].label]['WIP'];
+                    if (wipSchemes.length > 0) {
+                        alert(`WIP Schemes for Drilling:\n\n${wipSchemes.join('\n')}`);
+                    }
+                });
+
+                // Create the drilling and lowering charts
                 Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
 
                 // Filter the data for WIP schemes in D/N pipe laying
@@ -280,7 +289,6 @@
                 };
 
                 // Add double click event for the WIP slice of the pipe laying pie chart
-                const wipPieChartElement = document.getElementById('wip-pie-chart');
                 wipPieChartElement.on('plotly_doubleclick', function () {
                     const wipSchemes = wipData.map(row => row['Scheme Name']);
                     if (wipSchemes.length > 0) {
@@ -288,7 +296,7 @@
                     }
                 });
 
-                // Create the WIP pie chart for D/N pipe laying
+                // Create the drilling and lowering charts
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
             })
