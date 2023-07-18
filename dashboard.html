@@ -36,27 +36,16 @@
                         const dateParts = row['T/W Drill Start Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
-
-                    
-                            accumulator[month][row['Drilling Status']].push({
-                                schemeName: row['Scheme Name'],
-                                district: row['District']
-                            });
+                            accumulator[month][row['Drilling Status']].push({ 'Scheme Name': row['Scheme Name'], 'District': row['District'] });
                         } else {
                             accumulator[month] = {
                                 'Completed': [],
                                 'WIP': []
                             };
                             if (row['Drilling Status'] === 'Completed') {
-                                accumulator[month]['Completed'].push({
-                                    schemeName: row['Scheme Name'],
-                                    district: row['District']
-                                });
+                                accumulator[month]['Completed'].push({ 'Scheme Name': row['Scheme Name'], 'District': row['District'] });
                             } else if (row['Drilling Status'] === 'WIP') {
-                                accumulator[month]['WIP'].push({
-                                    schemeName: row['Scheme Name'],
-                                    district: row['District']
-                                });
+                                accumulator[month]['WIP'].push({ 'Scheme Name': row['Scheme Name'], 'District': row['District'] });
                             }
                         }
                     }
@@ -95,7 +84,7 @@
                         size: 10,
                         color: '#FFA500'
                     },
-                   text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>')),
+                    text: drillingMonths.map(month => drillingData[month]['WIP'].map(scheme => `${scheme['Scheme Name']} (${scheme['District']})`).join('<br>')),
                     hovertemplate: 'WIP Schemes: <br>%{text}<extra></extra>'
                 };
 
@@ -110,8 +99,8 @@
 
                 const drillingTargetAnnotation = {
                     x: 'July',
-                    y: 45,
-                    text: 'Target: 45',
+                    y: 60,
+                    text: 'Target: 60',
                     xanchor: 'left',
                     yanchor: 'middle',
                     showarrow: true,
@@ -144,25 +133,16 @@
                         const dateParts = row['T/W Lowering Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month][row['T/W Lowering Status']].push({
-                                schemeName: row['Scheme Name'],
-                                district: row['District']
-                            });
+                            accumulator[month][row['T/W Lowering Status']].push({ 'Scheme Name': row['Scheme Name'], 'District': row['District'] });
                         } else {
                             accumulator[month] = {
                                 'Completed': [],
                                 'WIP': []
                             };
                             if (row['T/W Lowering Status'] === 'Completed') {
-                                accumulator[month]['Completed'].push({
-                                    schemeName: row['Scheme Name'],
-                                    district: row['District']
-                                });
+                                accumulator[month]['Completed'].push({ 'Scheme Name': row['Scheme Name'], 'District': row['District'] });
                             } else if (row['T/W Lowering Status'] === 'WIP') {
-                                accumulator[month]['WIP'].push({
-                                    schemeName: row['Scheme Name'],
-                                    district: row['District']
-                                });
+                                accumulator[month]['WIP'].push({ 'Scheme Name': row['Scheme Name'], 'District': row['District'] });
                             }
                         }
                     }
@@ -200,7 +180,7 @@
                         size: 10,
                         color: '#FFA500'
                     },
-                    text: loweringMonths.map(month => loweringData[month]['WIP'].map(scheme => `${scheme.schemeName}<br>District: ${scheme.district}`).join('<br><br>')),
+                    text: loweringMonths.map(month => loweringData[month]['WIP'].map(scheme => `${scheme['Scheme Name']} (${scheme['District']})`).join('<br>')),
                     hovertemplate: 'WIP Schemes: <br>%{text}<extra></extra>'
                 };
 
@@ -276,7 +256,6 @@
                     title: 'D/N Pipe Laying Status',
                 };
 
-                // Create the pipe laying status pie chart
                 Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
 
                 // Filter the data for WIP schemes in D/N pipe laying
@@ -305,40 +284,29 @@
                     title: 'WIP Schemes for D/N Pipe Laying',
                 };
 
-                // Create the pie chart for WIP schemes in D/N pipe laying
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
-                // Add click event for the WIP slice of the pipe laying pie chart
-                const pipeLayingPieChartElement = document.getElementById('pipe-laying-pie-chart');
-                pipeLayingPieChartElement.on('plotly_click', function (data) {
-                    const label = data.points[0].label;
-                    if (label === 'WIP') {
-                        const wipSchemes = wipData.map(row => `${row['Scheme Name']} (District: ${row['District']})`);
-                        if (wipSchemes.length > 0) {
-                            alert(`WIP Schemes for D/N Pipe Laying:\n\n${wipSchemes.join('\n')}`);
-                        }
+                // Add click event to the drilling WIP markers
+                drillingWIPMarker.on('click', function (data) {
+                    const monthIndex = data.points[0].pointIndex;
+                    const month = drillingMonths[monthIndex];
+                    const wipSchemes = drillingData[month]['WIP'];
+                    if (wipSchemes.length > 0) {
+                        const schemeNames = wipSchemes.map(scheme => `${scheme['Scheme Name']} (${scheme['District']})`);
+                        alert(`WIP Schemes for ${month}:\n\n${schemeNames.join('\n')}`);
                     }
                 });
 
-       // Add click event to the drilling WIP markers
-drillingWIPMarker.on('plotly_click', function (data) {
-    const monthIndex = data.points[0].pointIndex;
-    const month = drillingMonths[monthIndex];
-    const wipSchemes = drillingData[month]['WIP'];
-    if (wipSchemes.length > 0) {
-        alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
-    }
-});
-
-            // Add click event to the lowering WIP markers
-loweringWIPMarker.on('plotly_click', function (data) {
-    const monthIndex = data.points[0].pointIndex;
-    const month = loweringMonths[monthIndex];
-    const wipSchemes = loweringData[month]['WIP'];
-    if (wipSchemes.length > 0) {
-        alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
-    }
-});
+                // Add click event to the lowering WIP markers
+                loweringWIPMarker.on('click', function (data) {
+                    const monthIndex = data.points[0].pointIndex;
+                    const month = loweringMonths[monthIndex];
+                    const wipSchemes = loweringData[month]['WIP'];
+                    if (wipSchemes.length > 0) {
+                        const schemeNames = wipSchemes.map(scheme => `${scheme['Scheme Name']} (${scheme['District']})`);
+                        alert(`WIP Schemes for ${month}:\n\n${schemeNames.join('\n')}`);
+                    }
+                });
 
             })
             .catch(error => console.error(error));
