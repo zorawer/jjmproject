@@ -6,20 +6,28 @@
     <style>
         .chart-container {
             display: flex;
-            justify-content: space-between;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-bottom: 20px;
         }
+        
+        .chart {
+            width: 100%;
+            max-width: 600px;
+            margin: 10px;
+        }
     </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h1>JJM - HFCL Project Dashboard</h1>
+    <h1 style="text-align: center;">JJM - HFCL Project Dashboard</h1>
     <div class="chart-container">
-        <div id="drilling-chart"></div>
-        <div id="lowering-chart"></div>
+        <div id="drilling-chart" class="chart"></div>
+        <div id="lowering-chart" class="chart"></div>
     </div>
     <div class="chart-container">
-        <div id="pipe-laying-pie-chart"></div>
-        <div id="wip-pie-chart"></div>
+        <div id="pipe-laying-pie-chart" class="chart"></div>
+        <div id="wip-pie-chart" class="chart"></div>
     </div>
 
     <script>
