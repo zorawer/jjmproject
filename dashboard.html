@@ -7,20 +7,20 @@
         .chart-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: space-between;
             margin-bottom: 20px;
         }
-        
+
         .chart {
             width: 100%;
-            max-width: 600px;
-            margin: 10px;
+            max-width: 500px;
+            margin-bottom: 20px;
         }
     </style>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h1 style="text-align: center;">JJM - HFCL Project Dashboard</h1>
+<h1>JJM - HFCL Project Dashboard</h1>
     <div class="chart-container">
         <div id="drilling-chart" class="chart"></div>
         <div id="lowering-chart" class="chart"></div>
@@ -129,7 +129,11 @@
                         title: 'Number of Drilling Schemes',
                         range: [0, Math.max(...drillingCompleted, ...drillingWIP, 60)]
                     },
-                    annotations: drillingAnnotations.concat([drillingTargetAnnotation])
+                    annotations: drillingAnnotations.concat([drillingTargetAnnotation]),
+                    legend: {
+                        orientation: 'h',
+                        y: -0.3
+                    }
                 };
 
                 // Create the drilling chart
@@ -225,7 +229,11 @@
                         title: 'Number of Lowering Schemes',
                         range: [0, Math.max(...loweringCompleted, ...loweringWIP, 60)]
                     },
-                    annotations: loweringAnnotations.concat([loweringTargetAnnotation])
+                    annotations: loweringAnnotations.concat([loweringTargetAnnotation]),
+                    legend: {
+                        orientation: 'h',
+                        y: -0.3
+                    }
                 };
 
                 // Create the lowering chart
@@ -262,6 +270,10 @@
 
                 const pipeLayingStatusPieLayout = {
                     title: 'D/N Pipe Laying Status',
+                    legend: {
+                        orientation: 'h',
+                        y: -0.3
+                    }
                 };
 
                 // Create the pipe laying status pie chart
@@ -291,6 +303,10 @@
 
                 const wipPieLayout = {
                     title: 'WIP Schemes for D/N Pipe Laying',
+                    legend: {
+                        orientation: 'h',
+                        y: -0.3
+                    }
                 };
 
                 // Create the pie chart for WIP schemes in D/N pipe laying
