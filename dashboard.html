@@ -256,11 +256,8 @@
                     title: 'D/N Pipe Laying Status',
                 };
 
-                const pipeLayingStatusPieConfig = {
-                    responsive: true
-                };
-
-                Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout, pipeLayingStatusPieConfig);
+                // Create the pipe laying status pie chart
+                Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
 
                 // Filter the data for WIP schemes in D/N pipe laying
                 const wipData = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
@@ -288,22 +285,38 @@
                     title: 'WIP Schemes for D/N Pipe Laying',
                 };
 
-                const wipPieConfig = {
-                    responsive: true
-                };
+                // Create the pie chart for WIP schemes in D/N pipe laying
+                Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
-                Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout, wipPieConfig);
-
-                // Add double click event for the WIP slice of the pipe laying pie chart
-                const wipPieChartElement = document.getElementById('wip-pie-chart');
-                const pieChartElement = document.getElementById('pipe-laying-pie-chart');
-
-                pieChartElement.on('plotly_doubleclick', function (data) {
-                    if (data.points[0].label === 'WIP') {
+                // Add click event for the WIP slice of the pipe laying pie chart
+                const pipeLayingPieChartElement = document.getElementById('pipe-laying-pie-chart');
+                pipeLayingPieChartElement.on('plotly_click', function (data) {
+                    const label = data.points[0].label;
+                    if (label === 'WIP') {
                         const wipSchemes = wipData.map(row => row['Scheme Name']);
                         if (wipSchemes.length > 0) {
                             alert(`WIP Schemes for D/N Pipe Laying:\n\n${wipSchemes.join('\n')}`);
                         }
+                    }
+                });
+
+                // Add click event to the drilling WIP markers
+                drillingWIPMarker.on('plotly_click', function (data) {
+                    const monthIndex = data.points[0].pointIndex;
+                    const month = drillingMonths[monthIndex];
+                    const wipSchemes = drillingData[month]['WIP'];
+                    if (wipSchemes.length > 0) {
+                        alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
+                    }
+                });
+
+                // Add click event to the lowering WIP markers
+                loweringWIPMarker.on('plotly_click', function (data) {
+                    const monthIndex = data.points[0].pointIndex;
+                    const month = loweringMonths[monthIndex];
+                    const wipSchemes = loweringData[month]['WIP'];
+                    if (wipSchemes.length > 0) {
+                        alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
                     }
                 });
 
