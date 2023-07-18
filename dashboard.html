@@ -286,8 +286,18 @@
 
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
+                // Add click event for the WIP slice of the pipe laying pie chart
+                const wipPieChartElement = document.getElementById('wip-pie-chart');
+                wipPieChartElement.on('plotly_click', function (data) {
+                    if (data.points[0].label === 'Work Done') {
+                        alert(`Work Done: ${workDone}`);
+                    } else if (data.points[0].label === 'Scope') {
+                        alert(`Total Scope: ${totalScope}`);
+                    }
+                });
+
                 // Add click event to the drilling WIP markers
-                drillingWIPMarker.on('click', function (data) {
+                drillingWIPMarker.on('plotly_click', function (data) {
                     const monthIndex = data.points[0].pointIndex;
                     const month = drillingMonths[monthIndex];
                     const wipSchemes = drillingData[month]['WIP'];
@@ -297,7 +307,7 @@
                 });
 
                 // Add click event to the lowering WIP markers
-                loweringWIPMarker.on('click', function (data) {
+                loweringWIPMarker.on('plotly_click', function (data) {
                     const monthIndex = data.points[0].pointIndex;
                     const month = loweringMonths[monthIndex];
                     const wipSchemes = loweringData[month]['WIP'];
