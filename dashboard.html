@@ -293,7 +293,7 @@
                 pipeLayingPieChartElement.on('plotly_click', function (data) {
                     const label = data.points[0].label;
                     if (label === 'WIP') {
-                        const wipSchemes = wipData.map(row => row['Scheme Name']);
+                        cconst wipSchemes = wipData.map(row => `${row['Scheme Name']} (District: ${row['District']})`);
                         if (wipSchemes.length > 0) {
                             alert(`WIP Schemes for D/N Pipe Laying:\n\n${wipSchemes.join('\n')}`);
                         }
