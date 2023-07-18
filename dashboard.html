@@ -36,16 +36,16 @@
                         const dateParts = row['T/W Drill Start Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month][row['Drilling Status']].push({ 'Scheme Name': row['Scheme Name'], 'District': row['District'] });
+                            accumulator[month][row['Drilling Status']].push(row['Scheme Name']);
                         } else {
                             accumulator[month] = {
                                 'Completed': [],
                                 'WIP': []
                             };
                             if (row['Drilling Status'] === 'Completed') {
-                                accumulator[month]['Completed'].push({ 'Scheme Name': row['Scheme Name'], 'District': row['District'] });
+                                accumulator[month]['Completed'].push(row['Scheme Name']);
                             } else if (row['Drilling Status'] === 'WIP') {
-                                accumulator[month]['WIP'].push({ 'Scheme Name': row['Scheme Name'], 'District': row['District'] });
+                                accumulator[month]['WIP'].push(row['Scheme Name']);
                             }
                         }
                     }
@@ -84,7 +84,7 @@
                         size: 10,
                         color: '#FFA500'
                     },
-                    text: drillingMonths.map(month => drillingData[month]['WIP'].map(scheme => `${scheme['Scheme Name']} (${scheme['District']})`).join('<br>')),
+                    text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>')),
                     hovertemplate: 'WIP Schemes: <br>%{text}<extra></extra>'
                 };
 
@@ -133,16 +133,16 @@
                         const dateParts = row['T/W Lowering Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month][row['T/W Lowering Status']].push({ 'Scheme Name': row['Scheme Name'], 'District': row['District'] });
+                            accumulator[month][row['T/W Lowering Status']].push(row['Scheme Name']);
                         } else {
                             accumulator[month] = {
                                 'Completed': [],
                                 'WIP': []
                             };
                             if (row['T/W Lowering Status'] === 'Completed') {
-                                accumulator[month]['Completed'].push({ 'Scheme Name': row['Scheme Name'], 'District': row['District'] });
+                                accumulator[month]['Completed'].push(row['Scheme Name']);
                             } else if (row['T/W Lowering Status'] === 'WIP') {
-                                accumulator[month]['WIP'].push({ 'Scheme Name': row['Scheme Name'], 'District': row['District'] });
+                                accumulator[month]['WIP'].push(row['Scheme Name']);
                             }
                         }
                     }
@@ -180,7 +180,7 @@
                         size: 10,
                         color: '#FFA500'
                     },
-                    text: loweringMonths.map(month => loweringData[month]['WIP'].map(scheme => `${scheme['Scheme Name']} (${scheme['District']})`).join('<br>')),
+                    text: loweringMonths.map(month => loweringData[month]['WIP'].join('<br>')),
                     hovertemplate: 'WIP Schemes: <br>%{text}<extra></extra>'
                 };
 
@@ -256,7 +256,11 @@
                     title: 'D/N Pipe Laying Status',
                 };
 
-                Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout);
+                const pipeLayingStatusPieConfig = {
+                    responsive: true
+                };
+
+                Plotly.newPlot('pipe-laying-pie-chart', [pipeLayingStatusPieChart], pipeLayingStatusPieLayout, pipeLayingStatusPieConfig);
 
                 // Filter the data for WIP schemes in D/N pipe laying
                 const wipData = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
@@ -284,27 +288,22 @@
                     title: 'WIP Schemes for D/N Pipe Laying',
                 };
 
-                Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
+                const wipPieConfig = {
+                    responsive: true
+                };
 
-                // Add click event to the drilling WIP markers
-                drillingWIPMarker.on('click', function (data) {
-                    const monthIndex = data.points[0].pointIndex;
-                    const month = drillingMonths[monthIndex];
-                    const wipSchemes = drillingData[month]['WIP'];
-                    if (wipSchemes.length > 0) {
-                        const schemeNames = wipSchemes.map(scheme => `${scheme['Scheme Name']} (${scheme['District']})`);
-                        alert(`WIP Schemes for ${month}:\n\n${schemeNames.join('\n')}`);
-                    }
-                });
+                Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout, wipPieConfig);
 
-                // Add click event to the lowering WIP markers
-                loweringWIPMarker.on('click', function (data) {
-                    const monthIndex = data.points[0].pointIndex;
-                    const month = loweringMonths[monthIndex];
-                    const wipSchemes = loweringData[month]['WIP'];
-                    if (wipSchemes.length > 0) {
-                        const schemeNames = wipSchemes.map(scheme => `${scheme['Scheme Name']} (${scheme['District']})`);
-                        alert(`WIP Schemes for ${month}:\n\n${schemeNames.join('\n')}`);
+                // Add double click event for the WIP slice of the pipe laying pie chart
+                const wipPieChartElement = document.getElementById('wip-pie-chart');
+                const pieChartElement = document.getElementById('pipe-laying-pie-chart');
+
+                pieChartElement.on('plotly_doubleclick', function (data) {
+                    if (data.points[0].label === 'WIP') {
+                        const wipSchemes = wipData.map(row => row['Scheme Name']);
+                        if (wipSchemes.length > 0) {
+                            alert(`WIP Schemes for D/N Pipe Laying:\n\n${wipSchemes.join('\n')}`);
+                        }
                     }
                 });
 
