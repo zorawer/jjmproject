@@ -93,7 +93,7 @@
                         size: 10,
                         color: '#FFA500'
                     },
-                    text: drillingMonths.map(month => drillingData[month]['WIP'].map(scheme => `${scheme.schemeName}<br>District: ${scheme.district}`).join('<br><br>')),
+                   text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>')),
                     hovertemplate: 'WIP Schemes: <br>%{text}<extra></extra>'
                 };
 
