@@ -320,25 +320,25 @@
                     }
                 });
 
-                // Add click event to the drilling WIP markers
-                drillingWIPMarker.on('plotly_click', function (data) {
-                    const monthIndex = data.points[0].pointIndex;
-                    const month = drillingMonths[monthIndex];
-                    const wipSchemes = drillingData[month]['WIP'].map(scheme => `${scheme.schemeName} (District: ${scheme.district})`);
-                    if (wipSchemes.length > 0) {
-                        alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
-                    }
-                });
+       // Add click event to the drilling WIP markers
+drillingWIPMarker.on('plotly_click', function (data) {
+    const monthIndex = data.points[0].pointIndex;
+    const month = drillingMonths[monthIndex];
+    const wipSchemes = drillingData[month]['WIP'];
+    if (wipSchemes.length > 0) {
+        alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
+    }
+});
 
-                // Add click event to the lowering WIP markers
-                loweringWIPMarker.on('plotly_click', function (data) {
-                    const monthIndex = data.points[0].pointIndex;
-                    const month = loweringMonths[monthIndex];
-                    const wipSchemes = loweringData[month]['WIP'].map(scheme => `${scheme.schemeName} (District: ${scheme.district})`);
-                    if (wipSchemes.length > 0) {
-                        alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
-                    }
-                });
+            // Add click event to the lowering WIP markers
+loweringWIPMarker.on('plotly_click', function (data) {
+    const monthIndex = data.points[0].pointIndex;
+    const month = loweringMonths[monthIndex];
+    const wipSchemes = loweringData[month]['WIP'];
+    if (wipSchemes.length > 0) {
+        alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
+    }
+});
 
             })
             .catch(error => console.error(error));
