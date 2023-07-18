@@ -36,6 +36,8 @@
                         const dateParts = row['T/W Drill Start Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
+
+                    
                             accumulator[month][row['Drilling Status']].push({
                                 schemeName: row['Scheme Name'],
                                 district: row['District']
@@ -108,8 +110,8 @@
 
                 const drillingTargetAnnotation = {
                     x: 'July',
-                    y: 60,
-                    text: 'Target: 60',
+                    y: 45,
+                    text: 'Target: 45',
                     xanchor: 'left',
                     yanchor: 'middle',
                     showarrow: true,
