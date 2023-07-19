@@ -291,38 +291,6 @@
                 // Create the pie chart for WIP schemes in D/N pipe laying
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
-                // Add click event for the WIP slice of the pipe laying pie chart
-                const pipeLayingPieChartElement = document.getElementById('pipe-laying-pie-chart');
-                pipeLayingPieChartElement.on('plotly_click', function (data) {
-                    const label = data.points[0].label;
-                    if (label === 'WIP') {
-                        const wipSchemes = wipData.map(row => row['Scheme Name']);
-                        if (wipSchemes.length > 0) {
-                            alert(`WIP Schemes for D/N Pipe Laying:\n\n${wipSchemes.join('\n')}`);
-                        }
-                    }
-                });
-
-                // Add click event to the drilling WIP markers
-                drillingWIPMarker.on('plotly_click', function (data) {
-                    const monthIndex = data.points[0].pointIndex;
-                    const month = drillingMonths[monthIndex];
-                    const wipSchemes = drillingData[month]['WIP'];
-                    if (wipSchemes.length > 0) {
-                        alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
-                    }
-                });
-
-                // Add click event to the lowering WIP markers
-                loweringWIPMarker.on('plotly_click', function (data) {
-                    const monthIndex = data.points[0].pointIndex;
-                    const month = loweringMonths[monthIndex];
-                    const wipSchemes = loweringData[month]['WIP'];
-                    if (wipSchemes.length > 0) {
-                        alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
-                    }
-                });
-
                 // Group the data by OHT Excavation Status
                 const ohtExcavationStatusData = parsedData.reduce((accumulator, row) => {
                     const status = row['OHT Excavation Status'];
@@ -338,7 +306,11 @@
 
                 // Create the OHT Excavation Status pie chart
                 const ohtExcavationLabels = ['Not Started', 'WIP', 'Completed'];
-                const ohtExcavationValues = [ohtExcavationStatusData['Not Started'] || 0, ohtExcavationStatusData['WIP'] || 0, ohtExcavationStatusData['Completed'] || 0];
+                const ohtExcavationValues = [
+                    ohtExcavationStatusData['Not Started'] || 0,
+                    ohtExcavationStatusData['WIP'] || 0,
+                    ohtExcavationStatusData['Completed'] || 0
+                ];
 
                 const ohtExcavationStatusPieChart = {
                     labels: ohtExcavationLabels,
@@ -357,10 +329,10 @@
                 };
 
                 // Create the OHT Excavation Status pie chart
-                const ohtExcavationPieChartElement = document.getElementById('oht-excavation-pie-chart');
-                Plotly.newPlot(ohtExcavationPieChartElement, [ohtExcavationStatusPieChart], ohtExcavationStatusPieLayout);
+                Plotly.newPlot('oht-excavation-pie-chart', [ohtExcavationStatusPieChart], ohtExcavationStatusPieLayout);
 
                 // Add click event for the OHT Excavation Status pie chart
+                const ohtExcavationPieChartElement = document.getElementById('oht-excavation-pie-chart');
                 ohtExcavationPieChartElement.on('plotly_click', function (data) {
                     const label = data.points[0].label;
                     if (label === 'WIP' || label === 'Completed') {
