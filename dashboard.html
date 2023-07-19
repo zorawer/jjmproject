@@ -29,6 +29,9 @@
         <div id="pipe-laying-pie-chart" class="chart"></div>
         <div id="wip-pie-chart" class="chart"></div>
     </div>
+<div class="chart-container">
+        <div id="oht-excavation-pie-chart" class="chart"></div>
+</div>
 
     <script>
         // Fetch data from the CSV file
@@ -55,6 +58,19 @@
                             } else if (row['Drilling Status'] === 'WIP') {
                                 accumulator[month]['WIP'].push(row['Scheme Name']);
                             }
+                        }
+                    }
+                    return accumulator;
+                }, {});
+
+                // Group the data by OHT Excavation Status
+                const ohtExcavationStatusData = parsedData.reduce((accumulator, row) => {
+                    const status = row['OHT Excavation Status'];
+                    if (status === 'Not Started' || status === 'WIP') {
+                        if (accumulator.hasOwnProperty(status)) {
+                            accumulator[status]++;
+                        } else {
+                            accumulator[status] = 1;
                         }
                     }
                     return accumulator;
@@ -288,6 +304,74 @@
                 // Calculate the total work done for WIP schemes in D/N pipe laying
                 const workDone = wipData.reduce((sum, row) => sum + parseInt(row['D/N Excavation (m)']), 0);
 
+                        // Create the OHT Excavation Status pie chart
+                const ohtExcavationLabels = ['Not Started', 'WIP'];
+                const ohtExcavationValues = [ohtExcavationStatusData['Not Started'] || 0, ohtExcavationStatusData['WIP'] || 0];
+
+                const ohtExcavationStatusPieChart = {
+                    labels: ohtExcavationLabels,
+                    values: ohtExcavationValues,
+                    type: 'pie',
+                    textposition: 'inside',
+                    hoverinfo: 'label+value',
+                    textinfo: 'label+percent',
+                    marker: {
+                        colors: ['#818181', '#FFA500']
+                    }
+                };
+
+                const ohtExcavationStatusPieLayout = {
+                    title: 'OHT Excavation Status',
+                    legend: {
+                        orientation: 'h',
+                        y: -0.3
+                    }
+                };
+
+
+                // Create the OHT Excavation Status pie chart
+                Plotly.newPlot('oht-excavation-pie-chart', [ohtExcavationStatusPieChart], ohtExcavationStatusPieLayout);
+
+                // Filter the data for WIP schemes in OHT Excavation
+                const ohtWIPData = parsedData.filter(row => row['OHT Excavation Status'] === 'WIP');
+
+                // Create the pie chart for WIP schemes in OHT Excavation
+                const ohtWIPPieChart = {
+                    labels: ['Scope', 'Work Done'],
+                    values: [totalScope, workDone],
+                    type: 'pie',
+                    textposition: 'inside',
+                    hoverinfo: 'label+value',
+                    textinfo: 'label+percent',
+                    marker: {
+                        colors: ['#818181', '#FFA500']
+                    }
+                };
+
+                const ohtWIPPieLayout = {
+                    title: 'WIP Schemes for OHT Excavation',
+                    legend: {
+                        orientation: 'h',
+                        y: -0.3
+                    }
+                };
+
+
+                      // Create the pie chart for WIP schemes in OHT Excavation
+                Plotly.newPlot('oht-wip-pie-chart', [ohtWIPPieChart], ohtWIPPieLayout);
+
+                // Add click event for the "WIP" slice of the OHT Excavation pie chart
+                const ohtExcavationPieChartElement = document.getElementById('oht-excavation-pie-chart');
+                ohtExcavationPieChartElement.on('plotly_click', function (data) {
+                    const label = data.points[0].label;
+                    if (label === 'WIP') {
+                        const wipSchemes = ohtWIPData.map(row => row['Scheme Name']);
+                        if (wipSchemes.length > 0) {
+                            alert(`WIP Schemes for OHT Excavation:\n\n${wipSchemes.join('\n')}`);
+                        }
+                    }
+                });
+                
                 // Create the pie chart for WIP schemes in D/N pipe laying
                 const wipPieChart = {
                     labels: ['Scope', 'Work Done'],
