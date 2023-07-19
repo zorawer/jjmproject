@@ -42,16 +42,64 @@
                 const parsedData = Plotly.d3.csv.parse(data);
 
                 // Group the data by month for drilling completion
-                // ... (previously provided code for drilling chart)
+                const drillingData = parsedData.reduce((accumulator, row) => {
+                    if (row['T/W Drill Start Date'] && (row['Drilling Status'] === 'Completed' || row['Drilling Status'] === 'WIP')) {
+                        const dateParts = row['T/W Drill Start Date'].split('/');
+                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
+                        if (accumulator.hasOwnProperty(month)) {
+                            accumulator[month][row['Drilling Status']].push(row['Scheme Name']);
+                        } else {
+                            accumulator[month] = {
+                                'Completed': [],
+                                'WIP': []
+                            };
+                            if (row['Drilling Status'] === 'Completed') {
+                                accumulator[month]['Completed'].push(row['Scheme Name']);
+                            } else if (row['Drilling Status'] === 'WIP') {
+                                accumulator[month]['WIP'].push(row['Scheme Name']);
+                            }
+                        }
+                    }
+                    return accumulator;
+                }, {});
 
                 // Group the data by month for lowering completion
-                // ... (previously provided code for lowering chart)
+                const loweringData = parsedData.reduce((accumulator, row) => {
+                    if (row['T/W Lowering Date'] && (row['T/W Lowering Status'] === 'Completed' || row['T/W Lowering Status'] === 'WIP')) {
+                        const dateParts = row['T/W Lowering Date'].split('/');
+                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
+                        if (accumulator.hasOwnProperty(month)) {
+                            accumulator[month][row['T/W Lowering Status']].push(row['Scheme Name']);
+                        } else {
+                            accumulator[month] = {
+                                'Completed': [],
+                                'WIP': []
+                            };
+                            if (row['T/W Lowering Status'] === 'Completed') {
+                                accumulator[month]['Completed'].push(row['Scheme Name']);
+                            } else if (row['T/W Lowering Status'] === 'WIP') {
+                                accumulator[month]['WIP'].push(row['Scheme Name']);
+                            }
+                        }
+                    }
+                    return accumulator;
+                }, {});
 
-                // Group the data by D/N Pipe Laying Status
-                // ... (previously provided code for pipe laying pie chart)
+                 // Group the data by D/N Pipe Laying Status
+                const pipeLayingStatusData = parsedData.reduce((accumulator, row) => {
+                    const status = row['D/N Pipe Laying Status'];
+                    if (status === 'Not Started' || status === 'WIP') {
+                        if (accumulator.hasOwnProperty(status)) {
+                            accumulator[status]++;
+                        } else {
+                            accumulator[status] = 1;
+                        }
+                    }
+                    return accumulator;
+                }, {});
 
-                // Filter the data for WIP schemes in D/N pipe laying
-                // ... (previously provided code for WIP pie chart)
+                   // Filter the data for WIP schemes in D/N pipe laying
+                const wipData = parsedData.filter(row => row['D/N Pipe Laying Status'] === 'WIP');
 
                 // Group the data by OHT Excavation Status
                 const ohtExcavationStatusData = parsedData.reduce((accumulator, row) => {
