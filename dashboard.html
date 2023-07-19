@@ -227,8 +227,7 @@
                     title: 'Lowering Completion by Month',
                     xaxis: {
                         title: 'Month'
-                    
-                    
+                    },
                     yaxis: {
                         title: 'Number of Lowering Schemes',
                         range: [0, Math.max(...loweringCompleted, ...loweringWIP, 60)]
@@ -292,7 +291,7 @@
                 // Calculate the total work done for WIP schemes in D/N pipe laying
                 const workDone = wipData.reduce((sum, row) => sum + parseInt(row['D/N Excavation (m)']), 0);
 
-             // Group the data by OHT Excavation Status
+                // Group the data by OHT Excavation Status
                 const ohtExcavationStatusData = parsedData.reduce((accumulator, row) => {
                     const status = row['OHT Excavation Status'];
                     if (status === 'Not Started' || status === 'WIP') {
@@ -385,7 +384,7 @@
                     }
                 };
 
-             // Create the OHT Excavation Status pie chart
+                // Create the OHT Excavation Status pie chart
                 Plotly.newPlot('oht-excavation-pie-chart', [ohtExcavationPieChart], ohtExcavationPieLayout);
 
                 // Add click event for the OHT Excavation Status pie chart
