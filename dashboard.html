@@ -223,21 +223,21 @@
                     ay: -30
                 };
 
-                const loweringLayout = {
-                    title: 'Lowering Completion by Month',
-                    xaxis: {
-                        title: 'Month'
-                    },
-                    yaxis: {
-                        title: 'Number of Lowering Schemes',
-                        range: [0, Math.max(...loweringCompleted, ...loweringWIP, 60)]
-                    },
-                    annotations: loweringAnnotations.concat([loweringTargetAnnotation]),
-                    legend: {
-                        orientation: 'h',
-                        y: -0.3
-                    }
-                };
+              const loweringLayout = {
+    title: 'Lowering Completion by Month',
+    xaxis: {
+        title: 'Month'
+    },
+    yaxis: {
+        title: 'Number of Lowering Schemes',
+        range: [0, Math.max(...loweringCompleted, ...loweringWIP, 60)]
+    },
+    annotations: loweringAnnotations.concat([loweringTargetAnnotation]),
+    legend: {
+        orientation: 'h',
+        y: -0.3
+    }
+};
 
                 // Create the lowering chart
                 Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPMarker], loweringLayout);
