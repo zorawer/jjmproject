@@ -6,28 +6,23 @@
     <style>
         .chart-container {
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
             margin-bottom: 20px;
         }
-
-        .chart {
-            width: 100%;
-            max-width: 500px;
-            margin-bottom: 20px;
-        }
     </style>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <h1>JJM - HFCL Project Dashboard</h1>
     <div class="chart-container">
-        <div id="drilling-chart" class="chart"></div>
-        <div id="lowering-chart" class="chart"></div>
+        <div id="drilling-chart"></div>
+        <div id="lowering-chart"></div>
     </div>
     <div class="chart-container">
-        <div id="pipe-laying-pie-chart" class="chart"></div>
-        <div id="wip-pie-chart" class="chart"></div>
+        <div id="pipe-laying-pie-chart"></div>
+        <div id="wip-pie-chart"></div>
+    </div>
+    <div class="chart-container">
+        <div id="oht-excavation-pie-chart"></div>
     </div>
 
     <script>
@@ -107,7 +102,7 @@
 
                 const drillingTargetAnnotation = {
                     x: 'July',
-                    y: 45,
+                    y: 60,
                     text: 'Target: 45',
                     xanchor: 'left',
                     yanchor: 'middle',
@@ -129,11 +124,7 @@
                         title: 'Number of Drilling Schemes',
                         range: [0, Math.max(...drillingCompleted, ...drillingWIP, 60)]
                     },
-                    annotations: drillingAnnotations.concat([drillingTargetAnnotation]),
-                    legend: {
-                        orientation: 'h',
-                        y: -0.3
-                    }
+                    annotations: drillingAnnotations.concat([drillingTargetAnnotation])
                 };
 
                 // Create the drilling chart
@@ -207,7 +198,7 @@
 
                 const loweringTargetAnnotation = {
                     x: 'July',
-                    y: 45,
+                    y: 60,
                     text: 'Target: 45',
                     xanchor: 'left',
                     yanchor: 'middle',
@@ -229,11 +220,7 @@
                         title: 'Number of Lowering Schemes',
                         range: [0, Math.max(...loweringCompleted, ...loweringWIP, 60)]
                     },
-                    annotations: loweringAnnotations.concat([loweringTargetAnnotation]),
-                    legend: {
-                        orientation: 'h',
-                        y: -0.3
-                    }
+                    annotations: loweringAnnotations.concat([loweringTargetAnnotation])
                 };
 
                 // Create the lowering chart
@@ -264,16 +251,12 @@
                     hoverinfo: 'label+value',
                     textinfo: 'label+percent',
                     marker: {
-                        colors: ['#818181', '#FFA500']
+                        colors: ['#808080', '#FFA500']
                     }
                 };
 
                 const pipeLayingStatusPieLayout = {
                     title: 'D/N Pipe Laying Status',
-                    legend: {
-                        orientation: 'h',
-                        y: -0.3
-                    }
                 };
 
                 // Create the pipe laying status pie chart
@@ -297,32 +280,56 @@
                     hoverinfo: 'label+value',
                     textinfo: 'label+percent',
                     marker: {
-                        colors: ['#818181', '#FFA500']
+                        colors: ['#808080', '#FFA500']
                     }
                 };
 
                 const wipPieLayout = {
                     title: 'WIP Schemes for D/N Pipe Laying',
-                    legend: {
-                        orientation: 'h',
-                        y: -0.3
-                    }
                 };
 
                 // Create the pie chart for WIP schemes in D/N pipe laying
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
-                // Add click event for the WIP slice of the pipe laying pie chart
-                const pipeLayingPieChartElement = document.getElementById('pipe-laying-pie-chart');
-                pipeLayingPieChartElement.on('plotly_click', function (data) {
-                    const label = data.points[0].label;
-                    if (label === 'WIP') {
-                        const wipSchemes = wipData.map(row => row['Scheme Name']);
-                        if (wipSchemes.length > 0) {
-                            alert(`WIP Schemes for D/N Pipe Laying:\n\n${wipSchemes.join('\n')}`);
+                // Group the data by OHT Excavation Status
+                const excavationStatusData = parsedData.reduce((accumulator, row) => {
+                    const status = row['OHT Excavation Status'];
+                    if (status === 'Not Started' || status === 'WIP' || status === 'Completed') {
+                        if (accumulator.hasOwnProperty(status)) {
+                            accumulator[status]++;
+                        } else {
+                            accumulator[status] = 1;
                         }
                     }
-                });
+                    return accumulator;
+                }, {});
+
+                // Create the pie chart data
+                const excavationLabels = ['Not Started', 'WIP', 'Completed'];
+                const excavationValues = [
+                    excavationStatusData['Not Started'] || 0,
+                    excavationStatusData['WIP'] || 0,
+                    excavationStatusData['Completed'] || 0
+                ];
+
+                const excavationPieChart = {
+                    labels: excavationLabels,
+                    values: excavationValues,
+                    type: 'pie',
+                    textposition: 'inside',
+                    hoverinfo: 'label+value',
+                    textinfo: 'label+percent',
+                    marker: {
+                        colors: ['#808080', '#FFA500', '#1f77b4']
+                    }
+                };
+
+                const excavationLayout = {
+                    title: 'OHT Excavation Status',
+                };
+
+                // Create the pie chart for OHT Excavation Status
+                const ohtExcavationPieChart = Plotly.newPlot('oht-excavation-pie-chart', [excavationPieChart], excavationLayout);
 
                 // Add click event to the drilling WIP markers
                 drillingWIPMarker.on('plotly_click', function (data) {
@@ -341,6 +348,28 @@
                     const wipSchemes = loweringData[month]['WIP'];
                     if (wipSchemes.length > 0) {
                         alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
+                    }
+                });
+
+                // Add hover event to the drilling WIP markers
+                drillingWIPMarker.on('plotly_hover', function (data) {
+                    const monthIndex = data.points[0].pointIndex;
+                    const month = drillingMonths[monthIndex];
+                    const wipSchemes = drillingData[month]['WIP'];
+                    if (wipSchemes.length > 0) {
+                        const text = wipSchemes.join('<br>');
+                        Plotly.restyle('drilling-chart', { text: [[text]] }, [1]);
+                    }
+                });
+
+                // Add hover event to the lowering WIP markers
+                loweringWIPMarker.on('plotly_hover', function (data) {
+                    const monthIndex = data.points[0].pointIndex;
+                    const month = loweringMonths[monthIndex];
+                    const wipSchemes = loweringData[month]['WIP'];
+                    if (wipSchemes.length > 0) {
+                        const text = wipSchemes.join('<br>');
+                        Plotly.restyle('lowering-chart', { text: [[text]] }, [1]);
                     }
                 });
 
