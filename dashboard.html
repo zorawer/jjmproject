@@ -25,14 +25,14 @@
         <div id="drilling-chart" class="chart"></div>
         <div id="lowering-chart" class="chart"></div>
     </div>
-    <div class="chart-container">
-        <div id="pipe-laying-pie-chart" class="chart"></div>
-        <div id="wip-pie-chart" class="chart"></div>
-    </div>
+<div class="chart-container">
+    <div id="oht-excavation-pie-chart" class="chart"></div>
+    <div id="wip-pie-chart" class="chart"></div>
+</div>
 <div class="chart-container">
         <div id="oht-excavation-pie-chart" class="chart"></div>
 </div>
-
+    
     <script>
         // Fetch data from the CSV file
         fetch('https://zorawer.github.io/jjmproject/testfetch.csv')
@@ -427,6 +427,18 @@
                         alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
                     }
                 });
+
+                // Add click event for the "WIP" slice of the OHT Excavation pie chart
+const ohtExcavationPieChartElement = document.getElementById('oht-excavation-pie-chart');
+ohtExcavationPieChartElement.on('plotly_click', function (data) {
+    const label = data.points[0].label;
+    if (label === 'WIP') {
+        const wipSchemes = ohtWIPData.map(row => row['Scheme Name']);
+        if (wipSchemes.length > 0) {
+            alert(`WIP Schemes for OHT Excavation:\n\n${wipSchemes.join('\n')}`);
+        }
+    }
+});
 
             })
             .catch(error => console.error(error));
