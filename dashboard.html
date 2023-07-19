@@ -291,45 +291,17 @@
                 // Create the pie chart for WIP schemes in D/N pipe laying
                 Plotly.newPlot('wip-pie-chart', [wipPieChart], wipPieLayout);
 
-                // Group the data by OHT Excavation Status
-                const excavationStatusData = parsedData.reduce((accumulator, row) => {
-                    const status = row['OHT Excavation Status'];
-                    if (status === 'Not Started' || status === 'WIP' || status === 'Completed') {
-                        if (accumulator.hasOwnProperty(status)) {
-                            accumulator[status]++;
-                        } else {
-                            accumulator[status] = 1;
+                // Add click event for the WIP slice of the pipe laying pie chart
+                const pipeLayingPieChartElement = document.getElementById('pipe-laying-pie-chart');
+                pipeLayingPieChartElement.on('plotly_click', function (data) {
+                    const label = data.points[0].label;
+                    if (label === 'WIP') {
+                        const wipSchemes = wipData.map(row => row['Scheme Name']);
+                        if (wipSchemes.length > 0) {
+                            alert(`WIP Schemes for D/N Pipe Laying:\n\n${wipSchemes.join('\n')}`);
                         }
                     }
-                    return accumulator;
-                }, {});
-
-                // Create the pie chart data
-                const excavationLabels = ['Not Started', 'WIP', 'Completed'];
-                const excavationValues = [
-                    excavationStatusData['Not Started'] || 0,
-                    excavationStatusData['WIP'] || 0,
-                    excavationStatusData['Completed'] || 0
-                ];
-
-                const excavationPieChart = {
-                    labels: excavationLabels,
-                    values: excavationValues,
-                    type: 'pie',
-                    textposition: 'inside',
-                    hoverinfo: 'label+value',
-                    textinfo: 'label+percent',
-                    marker: {
-                        colors: ['#808080', '#FFA500', '#1f77b4']
-                    }
-                };
-
-                const excavationLayout = {
-                    title: 'OHT Excavation Status',
-                };
-
-                // Create the pie chart for OHT Excavation Status
-                const ohtExcavationPieChart = Plotly.newPlot('oht-excavation-pie-chart', [excavationPieChart], excavationLayout);
+                });
 
                 // Add click event to the drilling WIP markers
                 drillingWIPMarker.on('plotly_click', function (data) {
@@ -351,25 +323,51 @@
                     }
                 });
 
-                // Add hover event to the drilling WIP markers
-                drillingWIPMarker.on('plotly_hover', function (data) {
-                    const monthIndex = data.points[0].pointIndex;
-                    const month = drillingMonths[monthIndex];
-                    const wipSchemes = drillingData[month]['WIP'];
-                    if (wipSchemes.length > 0) {
-                        const text = wipSchemes.join('<br>');
-                        Plotly.restyle('drilling-chart', { text: [[text]] }, [1]);
+                // Group the data by OHT Excavation Status
+                const ohtExcavationStatusData = parsedData.reduce((accumulator, row) => {
+                    const status = row['OHT Excavation Status'];
+                    if (status === 'Not Started' || status === 'WIP' || status === 'Completed') {
+                        if (accumulator.hasOwnProperty(status)) {
+                            accumulator[status]++;
+                        } else {
+                            accumulator[status] = 1;
+                        }
                     }
-                });
+                    return accumulator;
+                }, {});
 
-                // Add hover event to the lowering WIP markers
-                loweringWIPMarker.on('plotly_hover', function (data) {
-                    const monthIndex = data.points[0].pointIndex;
-                    const month = loweringMonths[monthIndex];
-                    const wipSchemes = loweringData[month]['WIP'];
-                    if (wipSchemes.length > 0) {
-                        const text = wipSchemes.join('<br>');
-                        Plotly.restyle('lowering-chart', { text: [[text]] }, [1]);
+                // Create the OHT Excavation Status pie chart
+                const ohtExcavationLabels = ['Not Started', 'WIP', 'Completed'];
+                const ohtExcavationValues = [ohtExcavationStatusData['Not Started'] || 0, ohtExcavationStatusData['WIP'] || 0, ohtExcavationStatusData['Completed'] || 0];
+
+                const ohtExcavationStatusPieChart = {
+                    labels: ohtExcavationLabels,
+                    values: ohtExcavationValues,
+                    type: 'pie',
+                    textposition: 'inside',
+                    hoverinfo: 'label+value',
+                    textinfo: 'label+percent',
+                    marker: {
+                        colors: ['#808080', '#FFA500', '#1f77b4']
+                    }
+                };
+
+                const ohtExcavationStatusPieLayout = {
+                    title: 'OHT Excavation Status',
+                };
+
+                // Create the OHT Excavation Status pie chart
+                const ohtExcavationPieChartElement = document.getElementById('oht-excavation-pie-chart');
+                Plotly.newPlot(ohtExcavationPieChartElement, [ohtExcavationStatusPieChart], ohtExcavationStatusPieLayout);
+
+                // Add click event for the OHT Excavation Status pie chart
+                ohtExcavationPieChartElement.on('plotly_click', function (data) {
+                    const label = data.points[0].label;
+                    if (label === 'WIP' || label === 'Completed') {
+                        const schemes = parsedData.filter(row => row['OHT Excavation Status'] === label).map(row => row['Scheme Name']);
+                        if (schemes.length > 0) {
+                            alert(`${label} Schemes for OHT Excavation:\n\n${schemes.join('\n')}`);
+                        }
                     }
                 });
 
