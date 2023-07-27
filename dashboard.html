@@ -289,7 +289,7 @@
                 const totalScope = wipData.reduce((sum, row) => sum + parseInt(row['Distribition System Length']), 0);
 
                 // Calculate the total work done for WIP schemes in D/N pipe laying
-                const workDone = wipData.reduce((sum, row) => sum + parseInt(row['D/N Excavation (m)']), 0);
+                const workDone = wipData.reduce((sum, row) => sum + parseInt(row['D/N Pipe Laying (m)']), 0);
 
                 // Create the pie chart for WIP schemes in D/N pipe laying
                 const wipPieChart = {
@@ -305,7 +305,7 @@
                 };
 
                 const wipPieLayout = {
-                    title: 'WIP Schemes - D/N Pipe Laying Excavation',
+                    title: 'WIP Schemes - D/N Pipe Laying',
                     legend: {
                         orientation: 'h',
                         y: -0.3
