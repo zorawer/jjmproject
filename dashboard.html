@@ -15,7 +15,11 @@
             width: 100%;
             max-width: 500px;
             margin-bottom: 20px;
+              }
         }
+
+        #map-chart {
+            height: 500px;
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -32,7 +36,9 @@
     <div class="chart-container">
         <div id="oht-excavation-pie-chart" class="chart"></div>
     </div>
-
+ <div class="chart-container">
+        <div id="map-chart"></div>
+    </div>
     <script>
         // Fetch data from the CSV file
         fetch('https://zorawer.github.io/jjmproject/testfetch.csv')
@@ -391,6 +397,58 @@
 
                 // Create the OHT excavation status pie chart
                 Plotly.newPlot('oht-excavation-pie-chart', [ohtExcavationPieChart], ohtExcavationPieLayout);
+
+                // Extract latitude, longitude, and block name for map hover
+                const mapData = parsedData.map(row => ({
+                    lat: parseFloat(row['LAT']),
+                    lon: parseFloat(row['LONG']),
+                    block: row['Block'],
+                    schemeName: row['Scheme Name'],
+                    drillingStatus: row['Drilling Status'],
+                    loweringStatus: row['T/W Lowering Status'],
+                    dnPipeLayingStatus: row['D/N Pipe Laying Status'],
+                    ohtExcavationStatus: row['OHT Excavation Status'],
+                }));
+
+                // Create map trace
+                const mapTrace = {
+                    type: 'scattermapbox',
+                    lat: mapData.map(item => item.lat),
+                    lon: mapData.map(item => item.lon),
+                    mode: 'markers',
+                    marker: {
+                        size: 10,
+                        opacity: 0.8,
+                    },
+                    text: mapData.map(item => `Block: ${item.block}<br>Scheme Name: ${item.schemeName}<br>Drilling Status: ${item.drillingStatus}<br>T/W Lowering Status: ${item.loweringStatus}<br>D/N Pipe Laying Status: ${item.dnPipeLayingStatus}<br>OHT Excavation Status: ${item.ohtExcavationStatus}`),
+                    hoverinfo: 'text',
+                };
+
+                // Create map layout
+                const mapLayout = {
+                    title: 'JJM - HFCL Project Locations',
+                    mapbox: {
+                        style: 'mapbox://styles/mapbox/light-v10',
+                        center: {
+                            lat: 25.109437, // Provide your map center latitude
+                            lon: 83.226557, // Provide your map center longitude
+                        },
+                        zoom: 6, // Adjust the zoom level as needed
+                    },
+                    margin: {
+                        l: 10,
+                        r: 10,
+                        b: 10,
+                        t: 40,
+                    },
+                };
+
+                // Create the map chart
+                Plotly.newPlot('map-chart', [mapTrace], mapLayout);
+            })
+            .catch(error => console.error(error));
+    </script>
+
 
                 // Filter the data for WIP schemes in OHT excavation
                 const ohtWIPData = parsedData.filter(row => row['OHT Excavation Status'] === 'WIP');
