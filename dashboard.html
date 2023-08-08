@@ -68,17 +68,17 @@
                 const drillingMonths = monthNames.filter(month => drillingData.hasOwnProperty(month));
                 drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
 
-                // Create the drilling chart databar
+                // Create the drilling chart data
                 const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed'].length);
                 const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP'].length);
 
                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingMonths,
-                    y: [drillingCompleted, drillingWIP],
-                    type: 'bar',
-                    mode: 'bar+markers',
-                    name: 'Completed'
+                    y: drillingCompleted,
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    name: `Drilling Completion (${drillingCompleted.reduce((total, count) => total + count, 0)})`,
                     marker: {
                         color: '#1f77b4'
                     }
@@ -87,7 +87,7 @@
                 const drillingWIPMarker = {
                     x: drillingMonths,
                     y: drillingWIP,
-                    type: 'bar',
+                    type: 'scatter',
                     mode: 'markers',
                     name: `Drilling WIP (${drillingWIP.reduce((total, count) => total + count, 0)})`,
                     marker: {
@@ -132,7 +132,7 @@
                         title: 'Number of Drilling Schemes',
                         range: [0, Math.max(...drillingCompleted, ...drillingWIP, 60)]
                     },
-                    barmode: 'stack',
+                    annotations: drillingAnnotations.concat([drillingTargetAnnotation]),
                     legend: {
                         orientation: 'h',
                         y: -0.3
@@ -179,10 +179,10 @@
                 // Create the lowering chart
                 const loweringChart = {
                     x: loweringMonths,
-                    y: [loweringCompleted, loweringWIP], 
-                    type: 'bar',
-                    mode: 'bar+markers',
-                    name: 'Completed'
+                    y: loweringCompleted,
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    name: `Lowering Completion (${loweringCompleted.reduce((total, count) => total + count, 0)})`,
                     marker: {
                         color: '#1f77b4'
                     }
@@ -191,7 +191,7 @@
                 const loweringWIPMarker = {
                     x: loweringMonths,
                     y: loweringWIP,
-                    type: 'bar',
+                    type: 'scatter',
                     mode: 'markers',
                     name: `Lowering WIP (${loweringWIP.reduce((total, count) => total + count, 0)})`,
                     marker: {
@@ -236,7 +236,7 @@
                         title: 'Number of Lowering Schemes',
                         range: [0, Math.max(...loweringCompleted, ...loweringWIP, 60)]
                     },
-                   barmode: 'stack',
+                    annotations: loweringAnnotations.concat([loweringTargetAnnotation]),
                     legend: {
                         orientation: 'h',
                         y: -0.3
