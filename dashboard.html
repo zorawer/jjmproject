@@ -135,7 +135,7 @@ const drillingCombined = drillingMonths.map((month, index) => drillingCompleted[
                         title: 'Number of Drilling Schemes',
                         range: [0, Math.max(...drillingCompleted, ...drillingWIP, 60)]
                     },
-                    annotations: drillingAnnotations.concat([drillingTargetAnnotation]),
+                    barmode: 'stack',
                     legend: {
                         orientation: 'h',
                         y: -0.3
@@ -235,7 +235,7 @@ const drillingCombined = drillingMonths.map((month, index) => drillingCompleted[
                         title: 'Number of Lowering Schemes',
                         range: [0, Math.max(...loweringCompleted, ...loweringWIP, 60)]
                     },
-                    annotations: loweringAnnotations.concat([loweringTargetAnnotation]),
+                    barmode: 'stack',
                     legend: {
                         orientation: 'h',
                         y: -0.3
