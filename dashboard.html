@@ -75,10 +75,10 @@
                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingMonths,
-                    y: drillingCompleted,
-                    type: 'stack',
+                    y: [drillingCompleted, drillingWIP],
+                    type: 'bar',
                     mode: 'bar+markers',
-                    name: `Drilling Completion (${drillingCompleted.reduce((total, count) => total + count, 0)})`,
+                    name: 'Completed'
                     marker: {
                         color: '#1f77b4'
                     }
@@ -179,10 +179,10 @@
                 // Create the lowering chart
                 const loweringChart = {
                     x: loweringMonths,
-                    y: loweringCompleted,
+                    y: [loweringCompleted, loweringWIP], 
                     type: 'bar',
                     mode: 'bar+markers',
-                    name: `Lowering Completion (${loweringCompleted.reduce((total, count) => total + count, 0)})`,
+                    name: 'Completed'
                     marker: {
                         color: '#1f77b4'
                     }
