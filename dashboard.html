@@ -72,16 +72,19 @@
                 const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed'].length);
                 const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP'].length);
 
+                // Calculate the combined data for drilling
+const drillingCombined = drillingMonths.map((month, index) => drillingCompleted[index] + drillingWIP[index]);
+
                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingMonths,
                     y: drillingCompleted,
                     type: 'bar',
                     mode: 'bar+markers',
-                    name: `Drilling Completion (${drillingCompleted.reduce((total, count) => total + count, 0)})`,
-                    marker: {
-                        color: '#1f77b4'
-                    }
+                name: `Drilling Combined (${drillingCombined.reduce((total, count) => total + count, 0)})`,
+    marker: {
+        color: '#1f77b4'
+    }
                 };
 
                 const drillingWIPMarker = {
