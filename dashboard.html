@@ -73,54 +73,25 @@
                 const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP'].length);
 
                 // Create the drilling chart
+                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingMonths,
                     y: drillingCompleted,
-                    type: 'scatter',
-                    mode: 'lines+markers',
-                    name: `Drilling Completion (${drillingCompleted.reduce((total, count) => total + count, 0)})`,
+                    type: 'bar',
+                    name: 'Completed',
                     marker: {
                         color: '#1f77b4'
                     }
                 };
 
-                const drillingWIPMarker = {
+                const drillingWIPBar = {
                     x: drillingMonths,
                     y: drillingWIP,
-                    type: 'scatter',
-                    mode: 'markers',
-                    name: `Drilling WIP (${drillingWIP.reduce((total, count) => total + count, 0)})`,
+                    type: 'bar',
+                    name: 'WIP',
                     marker: {
-                        symbol: 'circle',
-                        size: 10,
                         color: '#FFA500'
-                    },
-                    text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>')),
-                    hovertemplate: 'WIP Schemes: <br>%{text}<extra></extra>'
-                };
-
-                const drillingAnnotations = drillingMonths.map((month, index) => ({
-                    x: month,
-                    y: drillingCompleted[index],
-                    text: drillingCompleted[index].toString(),
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: false
-                }));
-
-                const drillingTargetAnnotation = {
-                    x: 'July',
-                    y: 45,
-                    text: 'Target: 45',
-                    xanchor: 'left',
-                    yanchor: 'middle',
-                    showarrow: true,
-                    arrowhead: 4,
-                    arrowsize: 1,
-                    arrowwidth: 2,
-                    arrowcolor: '#FF0000',
-                    ax: -40,
-                    ay: -30
+                    }
                 };
 
                 const drillingLayout = {
@@ -132,7 +103,24 @@
                         title: 'Number of Drilling Schemes',
                         range: [0, Math.max(...drillingCompleted, ...drillingWIP, 60)]
                     },
-                    annotations: drillingAnnotations.concat([drillingTargetAnnotation]),
+                    barmode: 'stack',
+                    legend: {
+                        orientation: 'h',
+                        y: -0.3
+                    }
+                };
+
+
+                const drillingLayout = {
+                    title: 'Drilling Completion by Month',
+                    xaxis: {
+                        title: 'Month'
+                    },
+                    yaxis: {
+                        title: 'Number of Drilling Schemes',
+                        range: [0, Math.max(...drillingCompleted, ...drillingWIP, 60)]
+                    },
+                    barmode: 'stack',
                     legend: {
                         orientation: 'h',
                         y: -0.3
@@ -177,12 +165,11 @@
 
                  
                 // Create the lowering chart
-                const loweringChart = {
+               const loweringChart = {
                     x: loweringMonths,
                     y: loweringCompleted,
-                    type: 'scatter',
-                    mode: 'lines+markers',
-                    name: `Lowering Completion (${loweringCompleted.reduce((total, count) => total + count, 0)})`,
+                    type: 'bar',
+                    name: 'Completed',
                     marker: {
                         color: '#1f77b4'
                     }
