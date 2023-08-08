@@ -109,9 +109,9 @@
                 }));
 
                 const drillingTargetAnnotation = {
-                    x: 'July',
-                    y: 45,
-                    text: 'Target: 45',
+                    x: 'August',
+                    y: 60,
+                    text: 'Target: 60',
                     xanchor: 'left',
                     yanchor: 'middle',
                     showarrow: true,
@@ -177,7 +177,7 @@
                     x: loweringMonths,
                     y: loweringCompleted,
                     type: 'scatter',
-                    mode: 'lines+markers',
+                    mode: 'bar+markers',
                     name: `Lowering Completion (${loweringCompleted.reduce((total, count) => total + count, 0)})`,
                     marker: {
                         color: '#1f77b4'
