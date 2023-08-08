@@ -20,7 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <h1>JJM - HFCL Project Dashboard</h1>
+<h1>JJM - HFCL Project Dashboard</h1>
     <div class="chart-container">
         <div id="drilling-chart" class="chart"></div>
         <div id="lowering-chart" class="chart"></div>
@@ -68,29 +68,26 @@
                 const drillingMonths = monthNames.filter(month => drillingData.hasOwnProperty(month));
                 drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
 
-                // Create the drilling chart data
+                // Create the drilling chart databar
                 const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed'].length);
                 const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP'].length);
-
-                // Calculate the combined data for drilling
-const drillingCombined = drillingMonths.map((month, index) => drillingCompleted[index] + drillingWIP[index]);
 
                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingMonths,
                     y: drillingCompleted,
-                    type: 'bar',
+                    type: 'stack',
                     mode: 'bar+markers',
-                name: `Drilling Combined (${drillingCombined.reduce((total, count) => total + count, 0)})`,
-    marker: {
-        color: '#1f77b4'
-    }
+                    name: `Drilling Completion (${drillingCompleted.reduce((total, count) => total + count, 0)})`,
+                    marker: {
+                        color: '#1f77b4'
+                    }
                 };
 
                 const drillingWIPMarker = {
                     x: drillingMonths,
                     y: drillingWIP,
-                    type: 'bar',
+                    type: 'scatter',
                     mode: 'markers',
                     name: `Drilling WIP (${drillingWIP.reduce((total, count) => total + count, 0)})`,
                     marker: {
@@ -112,9 +109,9 @@ const drillingCombined = drillingMonths.map((month, index) => drillingCompleted[
                 }));
 
                 const drillingTargetAnnotation = {
-                    x: 'August',
-                    y: 60,
-                    text: 'Target: 60',
+                    x: 'July',
+                    y: 45,
+                    text: 'Target: 45',
                     xanchor: 'left',
                     yanchor: 'middle',
                     showarrow: true,
@@ -146,40 +143,44 @@ const drillingCombined = drillingMonths.map((month, index) => drillingCompleted[
                 Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPMarker], drillingLayout);
 
                 // Group the data by month for lowering completion
-                const loweringData = parsedData.reduce((accumulator, row) => {
-                    if (row['T/W Lowering Date'] && (row['T/W Lowering Status'] === 'Completed' || row['T/W Lowering Status'] === 'WIP')) {
-                        const dateParts = row['T/W Lowering Date'].split('/');
-                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
-                        if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month][row['T/W Lowering Status']].push(row['Scheme Name']);
-                        } else {
-                            accumulator[month] = {
-                                'Completed': [],
-                                'WIP': []
-                            };
-                            if (row['T/W Lowering Status'] === 'Completed') {
-                                accumulator[month]['Completed'].push(row['Scheme Name']);
-                            } else if (row['T/W Lowering Status'] === 'WIP') {
-                                accumulator[month]['WIP'].push(row['Scheme Name']);
-                            }
-                        }
-                    }
-                    return accumulator;
-                }, {});
+         const loweringData = parsedData.reduce((accumulator, row) => {
+    if (row['T/W Lowering Date'] && (row['T/W Lowering Status'] === 'Completed' || row['T/W Lowering Status'] === 'WIP')) {
+        const dateParts = row['T/W Lowering Date'].split('/');
+        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
+        if (accumulator.hasOwnProperty(month)) {
+            accumulator[month][row['T/W Lowering Status']].push(row['Scheme Name']);
+        } else {
+            accumulator[month] = {
+                'Completed': [],
+                'WIP': []
+            };
+            if (row['T/W Lowering Status'] === 'Completed') {
+                accumulator[month]['Completed'].push(row['Scheme Name']);
+            } else if (row['T/W Lowering Status'] === 'WIP') {
+                accumulator[month]['WIP'].push(row['Scheme Name']);
+            }
+        }
+    }
+    return accumulator;
+}, {});
 
                 // Sort lowering months in chronological order
                 const loweringMonths = monthNames.filter(month => loweringData.hasOwnProperty(month));
                 loweringMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
 
                 // Create the lowering chart data
-                const loweringCompleted = loweringMonths.map(month => loweringData[month]['Completed'].length);
-                const loweringWIP = loweringMonths.map(month => loweringData[month]['WIP'].length);
+               const loweringCompleted = loweringMonths.map(month => loweringData[month]['Completed'].length);
+               const loweringWIP = loweringMonths.map(month => loweringData[month]['WIP'].length);
 
+                // Correctly calculate the lowering WIP count
+               const loweringWIPCount = loweringWIP.reduce((total, count) => total + count, 0);
+
+                 
                 // Create the lowering chart
                 const loweringChart = {
                     x: loweringMonths,
                     y: loweringCompleted,
-                    type: 'bar',
+                    type: 'scatter',
                     mode: 'bar+markers',
                     name: `Lowering Completion (${loweringCompleted.reduce((total, count) => total + count, 0)})`,
                     marker: {
@@ -190,7 +191,7 @@ const drillingCombined = drillingMonths.map((month, index) => drillingCompleted[
                 const loweringWIPMarker = {
                     x: loweringMonths,
                     y: loweringWIP,
-                    type: 'bar',
+                    type: 'scatter',
                     mode: 'markers',
                     name: `Lowering WIP (${loweringWIP.reduce((total, count) => total + count, 0)})`,
                     marker: {
@@ -235,7 +236,7 @@ const drillingCombined = drillingMonths.map((month, index) => drillingCompleted[
                         title: 'Number of Lowering Schemes',
                         range: [0, Math.max(...loweringCompleted, ...loweringWIP, 60)]
                     },
-                    barmode: 'stack',
+                   barmode: 'stack',
                     legend: {
                         orientation: 'h',
                         y: -0.3
@@ -350,6 +351,79 @@ const drillingCombined = drillingMonths.map((month, index) => drillingCompleted[
                         alert(`WIP Schemes for ${month}:\n\n${wipSchemes.join('\n')}`);
                     }
                 });
+
+                // Group the data by OHT Excavation Status
+                const ohtExcavationData = parsedData.reduce((accumulator, row) => {
+                    const status = row['OHT Excavation Status'];
+                    if (status === 'Not Started' || status === 'WIP') {
+                        if (accumulator.hasOwnProperty(status)) {
+                            accumulator[status]++;
+                        } else {
+                            accumulator[status] = 1;
+                        }
+                    }
+                    return accumulator;
+                }, {});
+
+                // Create the OHT excavation status pie chart
+                const ohtExcavationLabels = ['Not Started', 'WIP'];
+                const ohtExcavationValues = [ohtExcavationData['Not Started'] || 0, ohtExcavationData['WIP'] || 0];
+
+                const ohtExcavationPieChart = {
+                    labels: ohtExcavationLabels,
+                    values: ohtExcavationValues,
+                    type: 'pie',
+                    textposition: 'inside',
+                    hoverinfo: 'label+value',
+                    textinfo: 'label+percent',
+                    marker: {
+                        colors: ['#818181', '#FFA500']
+                    }
+                };
+
+                const ohtExcavationPieLayout = {
+                    title: 'OHT Excavation Status',
+                    legend: {
+                        orientation: 'h',
+                        y: -0.3
+                    }
+                };
+
+                // Create the OHT excavation status pie chart
+                Plotly.newPlot('oht-excavation-pie-chart', [ohtExcavationPieChart], ohtExcavationPieLayout);
+
+                // Filter the data for WIP schemes in OHT excavation
+                const ohtWIPData = parsedData.filter(row => row['OHT Excavation Status'] === 'WIP');
+
+                // Calculate the total scope for OHT excavation
+                const ohtTotalScope = ohtWIPData.reduce((sum, row) => sum + parseInt(row['OHT Excavation Scope (m)']), 0);
+
+                // Calculate the total work done for WIP schemes in OHT excavation
+                const ohtWorkDone = ohtWIPData.reduce((sum, row) => sum + parseInt(row['OHT Excavation Work Done (m)']), 0);
+
+                // Create the pie chart for WIP schemes in OHT excavation
+                const ohtWipPieChart = {
+                    labels: ['Scope', 'Work Done'],
+                    values: [ohtTotalScope, ohtWorkDone],
+                    type: 'pie',
+                    textposition: 'inside',
+                    hoverinfo: 'label+value',
+                    textinfo: 'label+percent',
+                    marker: {
+                        colors: ['#818181', '#FFA500']
+                    }
+                };
+
+                const ohtWipPieLayout = {
+                    title: 'WIP Schemes for OHT Excavation',
+                    legend: {
+                        orientation: 'h',
+                        y: -0.3
+                    }
+                };
+
+                // Create the pie chart for WIP schemes in OHT excavation
+                Plotly.newPlot('oht-excavation-pie-chart', [ohtWipPieChart], ohtWipPieLayout);
             })
             .catch(error => console.error(error));
     </script>
