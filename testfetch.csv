@@ -1,0 +1,496 @@
+Owner's,Scheme ID,Scheme Name,Block,District,T/W Vendor,Drilling Depth,Area Manager,T/W Drill Start Date,T/W Drill End Date,Drilling Status,T/W Lowering Date,T/W Lowering Status,Distribition System Length,D/N Pipe Laying (m),D/N Pipe Laying Status,OHT Excavation Status,Machine,Machine Status,Remarks
+Ravi Singh,20085987,Dahiya,Chakiya,Chandauli,Advika Enterprises,200,9.19E+11,20/06/2023,25/06/2023,Completed,28/06/2023,Completed,8582,5725,WIP,Not Started,,,Completed
+Ravi Singh,20095072,Kharid,Chakiya,Chandauli,Advika Enterprises,200,,30/06/2023,07/07/2023,Completed,09/07/2023,Completed,16552,,Not Started,Not Started,,,Completed
+Ravi Singh,20096766,Amara,Chakiya,Chandauli,Advika Enterprises,100,,11/07/2023,16/07/2023,Completed,18/07/2023,Completed,9176,,Not Started,Not Started,,,Completed
+Ravi Singh,20093584,Gaighat,Chakiya,Chandauli,Advika Enterprises,200,,14/07/2023,14/07/2023,Completed,15/07/2023,Completed,20196,427,WIP,Not Started,,,Completed
+Ravi Singh,20093629,Pipriya,Chakiya,Chandauli,Jai Bajrang Associate,100,,19/05/2023,20/05/2023,Completed,21/05/2023,Completed,11658,5543,WIP,Not Started,,,Bore failed due to low LPM
+Ravi Singh,20085972,Chhuchharh,Chakiya,Chandauli,Jai Bajrang Associate,200,,22/05/2023,23/05/2023,Completed,23/05/2023,Completed,16445,,Not Started,Not Started,,,Bore failed
+Ravi Singh,20093594,Chamerbadh,Naugarh,Chandauli,Jai Bajrang Associate,200,,06/05/2023,07/05/2023,Completed,09/05/2023,Completed,17444,8680,WIP,Not Started,,,Completed
+Ravi Singh,20096772,Jatmohni Posta,Naugarh,Chandauli,Jai Bajrang Associate,200,,10/05/2023,18/05/2023,Completed,19/05/2023,Completed,38942,3404,WIP,Not Started,,,Completed
+Ravi Singh,20095054,Lauwari Kalan,Naugarh,Chandauli,Jai Bajrang Associate,200,,30/05/2023,03/06/2023,Completed,07/07/2023,Completed,40976,2170,WIP,Not Started,,,Completed
+Ravi Singh,20101369,Ajagara,Chahaniya,Chandauli,K G Associates,200,,09/07/2023,17/07/2023,Completed,27/07/2023,Completed,6254,,Not Started,Not Started,,,Completed
+Ravi Singh,20101371,Matiyara,Chahaniya,Chandauli,K G Associates,165,,,,Not Started,,Not Started,6997,,Not Started,Not Started,,,Not Started
+Ravi Singh,20093578,Alipur Bhagrha,Chakiya,Chandauli,Rohit Enterprises,100,,22/06/2023,22/06/2023,Completed,22/06/2023,Completed,16382,5171,WIP,Not Started,,,Completed
+Ravi Singh,20093618,Karavadia,Chakiya,Chandauli,Rohit Enterprises,50,,29/06/2023,30/06/2023,Completed,30/06/2023,Completed,8127,2418,WIP,Not Started,,,Completed
+Ravi Singh,20093640,Pandi,Chakiya,Chandauli,Sankatmochan,200,,01/07/2023,02/07/2023,Completed,02/07/2023,Completed,9394,,Not Started,Not Started,,,Bore Failed dry
+Ravi Singh,20093589,Pachphriya,Chakiya,Chandauli,Sankatmochan,100,,17/06/2023,17/06/2023,Completed,18/06/2023,Completed,12051,5095,WIP,Not Started,,,Completed
+Ravi Singh,20085967,Baliya Kalan,Chakiya,Chandauli,Sankatmochan,200,,21/06/2023,,Issue,,Not Started,10561,,Not Started,Not Started,,,pending /220 feet site become dc cum dth due to rocks so work stop now dc machine required
+Ravi Singh,20101471,Rampur,Chakiya,Chandauli,Sankatmochan,165,,21/06/2023,,Issue,,Not Started,12816,,Not Started,Not Started,,,pending/120 feet site become dc cum dth due to rocks so work stop now dc machine required
+Ravi Singh,20085982,Ganeshpur,Chakiya,Chandauli,SIPL,200,,08/04/2023,09/04/2023,Completed,09/04/2023,Completed,14732,2522,WIP,Not Started,,,Bore failed due to low LPM
+Ravi Singh,20092802,Daudpur,Chakiya,Chandauli,SIPL,200,,05/05/2023,05/05/2023,Completed,05/05/2023,Completed,15456,,Not Started,Not Started,,,Bore Failed dry
+Ravi Singh,20093558,Newaj Ganj,Chakiya,Chandauli,SIPL,100,,05/04/2023,07/04/2023,Completed,07/04/2023,Completed,9700,218,WIP,Not Started,,,Completed
+Ravi Singh,20093544,Mahadevpur Kalan,Chakiya,Chandauli,SIPL,100,,28/04/2023,28/04/2023,Completed,28/04/2023,Completed,9662,410,WIP,Completed,,,Completed
+Ravi Singh,20096773,Purana Dih zone 1,Chakiya,Chandauli,SIPL,200,,17/05/2023,18/05/2023,Completed,20/05/2023,Completed,11634,,Not Started,Not Started,,,Completed
+Ravi Singh,20096773,Purana Dih zone 2,Chakiya,Chandauli,SIPL,200,,17/05/2023,18/05/2023,Completed,20/05/2023,Completed,10178,,Not Started,Not Started,,,Completed
+Ravi Singh,20096778,Chilbili,Dhanapur,Chandauli,SVBP Construction,165,,22/07/2023,,Issue,,Not Started,6047,,Not Started,Not Started,,,site is at pending bore collapes twice
+Ravi Singh,20093636,Kudara,Chakiya,Chandauli,TLEC,100,,12/04/2023,13/04/2023,Completed,13/04/2023,Completed,9815,,Not Started,Not Started,,,Bore failed due to low LPM
+Ravi Singh,20092785,Firozpur,Chakiya,Chandauli,TLEC,200,,26/04/2023,27/04/2023,Completed,27/04/2023,Completed,11106,5966,WIP,WIP,,,Completed
+Ravi Singh,20093571,Nawdiha & Baliya Khurd,Chakiya,Chandauli,TLEC,100,,03/05/2023,04/05/2023,Completed,04/05/2023,Completed,24546,4012,WIP,Completed,,,Completed
+Ravi Singh,20093632,Nasartha,Chakiya,Chandauli,TLEC,165,,11/05/2023,24/05/2023,Completed,01/06/2023,Completed,11499,1080,WIP,Not Started,,,Completed
+Ravi Singh,20096767,Dabarikala,Chakiya,Chandauli,TLEC,165,,02/06/2023,10/06/2023,Completed,15/06/2023,Completed,6633,1151,WIP,Not Started,,,Completed
+Ravi Singh,20096988,Ghuron,Niyamatabad,Chandauli,TLEC,165,,20/06/2023,25/06/2023,Completed,02/07/2023,Completed,5280,,Not Started,Not Started,,,Completed
+Ravi Singh,20095062,Pachwaniya,Chakiya,Chandauli,TLEC,200,,12/07/2023,16/07/2023,Completed,21/07/2023,Completed,10299,,Not Started,Not Started,,,Completed
+Ravi Singh,20096738,Sikandarpure,Chandauli,Chandauli,TLEC,165,,,,Not Started,,Not Started,5707,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096768,Ganja Khwaja,Sakaldiha,Chandauli,Tubewell Expert,200,,07/07/2023,11/07/2023,Completed,15/07/2023,Completed,7846,,Not Started,Not Started,,,Completed
+Ravi Singh,20096739,Akaunii,Chandauli,Chandauli,Tubewell Expert,165,,,,Not Started,,Not Started,5083,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096987,Saresar,Sakaldiha,Chandauli,Tubewell Expert,200,,22/07/2023,29/07/2023,Completed,,Lowring Awaited,7746,,Not Started,Not Started,Yes,working,logging done/ report received
+Ravi Singh,20092676,Sudaw,Chandauli,Chandauli,,200,,,,Not Started,,Not Started,11235,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092773,Koniya & Narhan Kalan,Chandauli,Chandauli,,165,,28/07/2023,29/07/2023,Completed,,Lowring Awaited,13671,,Not Started,Not Started,Yes,working,#REF!
+Ravi Singh,20092730,"Vijaipur,Narayanpur & Sohdwar",Chandauli,Chandauli,,200,,,,Not Started,,Not Started,27887,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092657,Majhawar Khas,Chandauli,Chandauli,,200,,,,Not Started,,Not Started,11074,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092699,Shahpure & Purawa Taluka Maidhi ,Chandauli,Chandauli,,200,,,,Not Started,,Not Started,20500,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092827,Jogiya Kalan & Sadapur,Chakiya,Chandauli,,200,,,,Not Started,,Not Started,21558,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092808,Hinautee & Amra Daksiri,Chakiya,Chandauli,,200,,,,Not Started,,Not Started,17908,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092666,Kurthiya & Chitauri,Chakiya,Chandauli,,200,,24/07/2023,30/07/2023,Completed,,Lowring Awaited,19558,,Not Started,Not Started,Yes,working,#REF!
+Ravi Singh,20092622,Dhanawal Kalan,Chakiya,Chandauli,,200,,,,Not Started,,Not Started,10960,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092628,Duhi,Chakiya,Chandauli,,200,,,,Not Started,,Not Started,8069,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092643,Keradih & Tiyari,Chakiya,Chandauli,,200,,25/07/2023,,WIP,,Not Started,14327,,Not Started,Not Started,Yes,working,"110 feet done, work stop  hard rock found"
+Ravi Singh,20093548,Mohamadabad,Chakiya,Chandauli,,100,,,,Not Started,,Not Started,4618,,Not Started,Not Started,,,Not Started
+Ravi Singh,20093644,Haripur,Chakiya,Chandauli,,165,,,,Not Started,,Not Started,14144,,Not Started,Not Started,,,Not Started
+Ravi Singh,20093647,Bharehta Kalan,Chakiya,Chandauli,,165,,,,Not Started,,Not Started,5061,,Not Started,Not Started,,,Not Started
+Ravi Singh,20093655,Budawal,Chakiya,Chandauli,,100,,,,Not Started,,Not Started,3708,,Not Started,Not Started,,,Not Started
+Ravi Singh,20095105,Kuwan,Chakiya,Chandauli,,200,,,,Not Started,,Not Started,6569,,Not Started,Not Started,,,Not Started
+Ravi Singh,20093563,Dhankuawari Kalan,Naugarh,Chandauli,,200,,,,Not Started,,Not Started,19026,,Not Started,Not Started,,,Not Started
+Ravi Singh,20093625,Semarsa Dhopur,Naugarh,Chandauli,,200,,,,Not Started,,Not Started,22737,,Not Started,Not Started,,,Not Started
+Ravi Singh,20095082,Jasori,Chandauli,Chandauli,,200,,,,Not Started,,Not Started,11247,,Not Started,Not Started,,,Not Started
+Ravi Singh,20095112,Banauli Khurd,Chandauli,Chandauli,,165,,,,Not Started,,Not Started,9700,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096737,Chandauli Khurd,Sakaldiha,Chandauli,,165,,,,Not Started,,Not Started,4941,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096782,Semaray,Niyamatabad,Chandauli,,200,,,,Not Started,,Not Started,7190,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096792,Malokhar & Muhammadpur,Niyamatabad,Chandauli,,200,,,,Not Started,,Not Started,17801,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096985,Muhammadpur (bagahi) & Bagahi,Niyamatabad,Chandauli,,200,,,,Not Started,,Not Started,10616,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096989,Dulahipur,Niyamatabad,Chandauli,,200,,,,Not Started,,Not Started,20907,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096933,Puraini,Niyamatabad,Chandauli,,165,,,,Not Started,,Not Started,4537,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096790,Hasanpur,Niyamatabad,Chandauli,,200,,,,Not Started,,Not Started,10722,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096934,Amogpur & Kush Kala,Niyamatabad,Chandauli,,200,,,,Not Started,,Not Started,17018,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096937,Goghara,Chakiya,Chandauli,,200,,,,Not Started,,Not Started,14548,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096777,Khuchama,Sakaldiha,Chandauli,,200,,,,Not Started,,Not Started,16103,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096774,Sevakhar Kala,Sakaldiha,Chandauli,,165,,,,Not Started,,Not Started,7492,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096779,Chatur Bhujpur,Sakaldiha,Chandauli,,200,,,,Not Started,,Not Started,12383,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096935,Amaara & Nasirpur,Sakaldiha,Chandauli,,200,,,,Not Started,,Not Started,16014,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096780,Mirjapur,Dhanapur,Chandauli,,165,,,,Not Started,,Not Started,15952,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096776,Jiyanpur,Dhanapur,Chandauli,,165,,,,Not Started,,Not Started,4291,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096775,Dariapur,Chahaniya,Chandauli,,165,,,,Not Started,,Not Started,12319,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096789,Jagadeeshpur,Chandauli,Chandauli,,165,,,,Not Started,,Not Started,4156,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096788,Jamalpur,Chahaniya,Chandauli,,200,,,,Not Started,,Not Started,13088,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096791,Molanapur,Chahaniya,Chandauli,,165,,,,Not Started,,Not Started,5147,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096936,Jivanpur & Tarapur,Sakaldiha,Chandauli,,200,,,,Not Started,,Not Started,7691,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096794,MATHUCHHALGIRI,DHANAPUR,Chandauli,,165,,,,Not Started,,Not Started,6913,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096787,Pandeypurmilki,Dhanapur,Chandauli,,165,,,,Not Started,,Not Started,3779,,Not Started,Not Started,,,Not Started
+Ravi Singh,20095077,Deori Kalan,Naugarh,Chandauli,,200,,,,Not Started,,Not Started,29262,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097029,Prahaladpur,Dhanapur,Chandauli,,165,,,,Not Started,,Not Started,5724,,Not Started,Not Started,,,Not Started
+Ravi Singh,20095089,Parasi Kala & Jamokhar,Chandauli,Chandauli,,200,,,,Not Started,,Not Started,16404,,Not Started,Not Started,,,Not Started
+Ravi Singh,20101372,Mazadiha,Chahaniya,Chandauli,,165,,30/07/2023,,WIP,,Not Started,6895,,Not Started,Not Started,Yes,working,60 feet done
+Ravi Singh,20101470,Nairhi,Chahaniya,Chandauli,,200,,,,Not Started,,Not Started,20218,,Not Started,Not Started,,,Not Started
+Ravi Singh,20101472,Son Barasa,Chahaniya,Chandauli,,165,,,,Not Started,,Not Started,9522,,Not Started,Not Started,,,Not Started
+Ravi Singh,20101473,Belwani,Chahaniya,Chandauli,,165,,,,Not Started,,Not Started,10708,,Not Started,Not Started,,,Not Started
+Ravi Singh,20101370,Pura Kataru,Chahaniya,Chandauli,,165,,,,Not Started,,Not Started,6704,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086391,DHARI KHURD,Deokali,Ghazipur,Anand Enterprises,220,,21/04/2023,25/04/2023,Completed,,Bore Failed,20259,,Not Started,Not Started,,,Bore failed/shaline water
+Ravi Singh,20094383,MUDARNA (MUDARBHA),Deokali,Ghazipur,Anand Enterprises,220,,24/04/2023,12/05/2023,Completed,,Bore Failed,22602,,Not Started,Not Started,,,Bore failed/shaline water
+Ravi Singh,20086489,DHARIKALA & SHIKARPUR,Deokali,Ghazipur,Anand Enterprises,220,,30/04/2023,05/05/2023,Completed,,Bore Failed,20972,,Not Started,Not Started,,,Bore failed/shaline water
+Ravi Singh,20086386,CHAURA,Manihari,Ghazipur,Anand Enterprises,120,,09/06/2023,12/06/2023,Completed,20/06/2023,Completed,11181,1360,WIP,Not Started,,,Completed
+Ravi Singh,20086359,ENDARPUR CHHIRI,Manihari,Ghazipur,Anand Enterprises,120,,,,Not Started,,Not Started,8549,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086479,GORARI,Manihari,Ghazipur,Kshitiz Enterprise,120,,10/05/2023,15/05/2023,Completed,20/05/2023,Completed,9735,1304,WIP,Not Started,,,Completed
+Ravi Singh,20088533,UNKRAON,Sadat,Ghazipur,Om Construction,100,,24/06/2023,28/06/2023,Completed,,Bore Failed,26008,,Not Started,Not Started,,,Bore failed/shaline water
+Ravi Singh,20074299,DEVAPAR,Sadat,Ghazipur,Om Construction,100,,21/06/2023,24/06/2023,Completed,01/07/2023,Completed,9742,4833,WIP,Not Started,,,Completed
+Ravi Singh,20074281,BALIYA RAI PATTI ,Sadat,Ghazipur,Om Construction,100,,26/06/2023,02/07/2023,Completed,17/07/2023,Completed,9571,2063,WIP,Not Started,,,Completed
+Ravi Singh,20100548,CHAKFARID,Sadat,Ghazipur,Om Construction,100,,05/07/2023,09/07/2023,Completed,21/07/2023,Completed,16041,811,WIP,Not Started,,,Completed
+Ravi Singh,20088554,KARAMPUR,Saidpur,Ghazipur,Om Construction,300,,15/07/2023,24/07/2023,Completed,30/07/2023,Completed,16245,892,WIP,Not Started,Yes,working,Completed
+Ravi Singh,20088953,MAHPUR,Sadat,Ghazipur,Om Construction,100,,17/07/2023,26/07/2023,Completed,,Lowring Awaited,15225,,Not Started,Not Started,Yes,working,lowering tomorrow
+Ravi Singh,20088954,"FATIMPUR, BANKATTA",Sadat,Ghazipur,Om Construction,100,,,,Not Started,,Not Started,17477,,Not Started,Not Started,,,Not Started
+Ravi Singh,20100537,PYAREPUR,Sadat,Ghazipur,Om Construction,100,,,,Not Started,,Not Started,9690,,Not Started,Not Started,,,Not Started
+Ravi Singh,20073685,KATGHRA,Manihari,Ghazipur,Padma construction,120,,15/05/2023,27/05/2023,Completed,,Issue,15061,,Not Started,Not Started,,,site is at pending work has been stoped by vendor
+Ravi Singh,20086397,KISHOHARI & KATHI,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,17/04/2023,25/04/2023,Completed,,Bore Failed,27039,,Not Started,Not Started,,,Bore failed/shaline water
+Ravi Singh,20091991,AALAMPUR,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,01/06/2023,04/06/2023,Completed,,Bore Failed,7598,,Not Started,Not Started,,,Bore failed/shaline water
+Ravi Singh,20092061,TARAWN,Saidpur,Ghazipur,Shakti Infra Pvt Ltd,300,,05/06/2023,12/06/2023,Completed,,Bore Failed,17602,,Not Started,Not Started,,,Bore failed
+Ravi Singh,20086199,TARAW,Deokali,Ghazipur,Shakti Infra Pvt Ltd,120,,03/05/2023,05/05/2023,Completed,14/05/2023,Completed,15667,4158,WIP,Completed,,,Completed
+Ravi Singh,20088191,POOTA,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,11/05/2023,12/05/2023,Completed,20/05/2023,Completed,12112,2748,WIP,Not Started,,,Completed
+Ravi Singh,20086255,CHITORA,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,15/05/2023,23/05/2023,Completed,06/06/2023,Completed,17442,5844,WIP,Not Started,,,Completed
+Ravi Singh,20097680,RAJAPUR URF ALAMPUR,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,28/05/2023,,Issue,,Not Started,11603,,Not Started,Not Started,,,site is at pending due to white sand
+Ravi Singh,20086473,BALASI,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,09/06/2023,11/06/2023,Completed,21/06/2023,Completed,11013,,Not Started,Not Started,,,Completed
+Ravi Singh,20088229,SHAKHPUR,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,10/06/2023,15/06/2023,Completed,23/06/2023,Completed,13145,,Not Started,Not Started,,,Completed
+Ravi Singh,20088584,MANDAPA,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,24/06/2023,28/06/2023,Completed,08/07/2023,Completed,14627,1543,WIP,Not Started,,,Completed
+Ravi Singh,20097092,ISANPUR URF HASANPUR & BHITARI TARAF SADUR,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,26/06/2023,01/07/2023,Completed,10/07/2023,Completed,25204,7776,WIP,Not Started,,,Completed
+Ravi Singh,20086514,BASUCHACK & SHIVDASICHAK,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,14/07/2023,20/07/2023,Completed,30/07/2023,Completed,18115,,Not Started,Not Started,Yes,shifting,Completed
+Ravi Singh,20092043,LOLHA,Saidpur,Ghazipur,Shakti Infra Pvt Ltd,300,,,,Not Started,,Not Started,16908,,Not Started,Not Started,,,Not Started
+Ravi Singh,20091455,MODHA,Saidpur,Ghazipur,Shakti Infra Pvt Ltd,300,,,,Not Started,,Not Started,29213,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092066,MATHIYA,Saidpur,Ghazipur,Shakti Infra Pvt Ltd,300,,,,Not Started,,Not Started,8193,,Not Started,Not Started,,,Not Started
+Ravi Singh,20091452,MAKRASAN,Saidpur,Ghazipur,Shakti Infra Pvt Ltd,300,,,,Not Started,,Not Started,11761,,Not Started,Not Started,,,Not Started
+Ravi Singh,20096968,KAMALPUR & RASULPUR PACHRASI,Deokali,Ghazipur,Shakti Infra Pvt Ltd,200,,,,Not Started,,Not Started,20692,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086398,RAISPUR,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,,,Not Started,,Not Started,20426,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086470,MAHMUD HATHINI,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,,,Not Started,,Not Started,19539,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088321,BHAWANIPUR AND JEVAL,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,30/07/2023,01/08/2023,Completed,,Issue,25453,,Not Started,Not Started,Yes,working,drilling done/ bore collapse
+Ravi Singh,20088565,ZABRAN PUR,Saidpur,Ghazipur,Shakti Infra Pvt Ltd,300,,,,Not Started,,Not Started,17338,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088579,NASIRPUR KHAS,Saidpur,Ghazipur,Shakti Infra Pvt Ltd,300,,,,Not Started,,Not Started,16135,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092078,SIKANDAR CHACK HATIM,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,,,Not Started,,Not Started,11471,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092079,BAGHIPUR & LONEPUR,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,,,Not Started,,Not Started,12310,,Not Started,Not Started,,,Not Started
+Ravi Singh,20091409,MAHULIA,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,,,Not Started,,Not Started,13465,,Not Started,Not Started,,,Not Started
+Ravi Singh,20091986,SIGARPUR &  KODRI,Saidpur,Ghazipur,Shakti Infra Pvt Ltd,300,,,,Not Started,,Not Started,21607,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092085,CHHAPRA,Saidpur,Ghazipur,Shakti Infra Pvt Ltd,300,,,,Not Started,,Not Started,20027,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092086,JAMEEN ASANDAL,Saidpur,Ghazipur,Shakti Infra Pvt Ltd,300,,,,Not Started,,Not Started,15908,,Not Started,Not Started,,,Not Started
+Ravi Singh,20100559,KHUTHAN NAMJAD KARMAITA,Deokali,Ghazipur,Shakti Infra Pvt Ltd,220,,,,Not Started,,Not Started,8299,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097682,AKAWAS PATTI,Deokali,Ghazipur,Shakti Infra Pvt Ltd  ,220,,26/04/2023,28/04/2023,Completed,06/05/2023,Completed,21126,10728,WIP,Not Started,,,Completed
+Ravi Singh,20088562,NARAYNPUR KAKARHI,Saidpur,Ghazipur,Shashi Kant & Construction,300,,17/05/2023,26/05/2023,Completed,06/06/2023,Completed,13885,7433,WIP,Not Started,,,Completed
+Ravi Singh,20088552,M RAFI ALIAS SHIVDASPUR,Saidpur,Ghazipur,Shashi Kant & Construction,300,,22/05/2023,26/05/2023,Completed,09/06/2023,Completed,19137,4990,WIP,Not Started,,,Completed
+Ravi Singh,20088558,UCHORI,Saidpur,Ghazipur,Shashi Kant & Construction,300,,12/06/2023,19/06/2023,Completed,24/06/2023,Completed,22865,4419,WIP,Not Started,,,Completed
+Ravi Singh,20088561,SARWARPUR,Saidpur,Ghazipur,Shashi Kant & Construction,300,,15/06/2023,04/07/2023,Completed,15/07/2023,Completed,22967,,Not Started,Not Started,,,Completed
+Ravi Singh,20073704,SUZNI PUR,Manihari,Ghazipur,Shashwat Construction,120,,14/07/2023,17/07/2023,Completed,23/07/2023,Completed,6071,,Not Started,Not Started,,,Completed
+Ravi Singh,20086235,SIKHARI,Manihari,Ghazipur,Shashwat Construction,120,,20/07/2023,25/07/2023,Completed,,Lowring Awaited,36645,,Not Started,Not Started,Yes,working,lowering tomorrow
+Ravi Singh,20075837,ANDHOKHAR,Manihari,Ghazipur,shashwat construction,120,,23/05/2023,27/05/2023,Completed,08/06/2023,Completed,16474,1570,WIP,Not Started,,,Completed
+Ravi Singh,20086437,BISUNPUR TARWA,Manihari,Ghazipur,Surender Enterprises,120,,29/05/2023,,Issue,,Not Started,13652,,Not Started,Not Started,,,96 mtr done/machine removed by vendor
+Ravi Singh,20086435,BAHRAMPUR,Manihari,Ghazipur,Surender Enterprises,120,,26/04/2023,07/05/2023,Completed,18/05/2023,Completed,12113,2434,WIP,Not Started,,,Completed
+Ravi Singh,20086460,SIRGITHA,Deokali,Ghazipur,SVBP Construction,220,,16/06/2023,23/06/2023,Completed,,Bore Failed,7700,,Not Started,Not Started,,,Bore failed/shaline water
+Ravi Singh,20088470,KANERI,Sadat,Ghazipur,SVBP Construction,100,,20/06/2023,,Issue,,Not Started,19729,,Not Started,Not Started,,,
+Ravi Singh,20100553,BASHI,Sadat,Ghazipur,SVBP Construction,100,,15/07/2023,,Issue,,Not Started,5764,,Not Started,Not Started,,,land issue machine shifted to ramdaspur
+Ravi Singh,20076112,HARAULI,Manihari,Ghazipur,SVBP Construction,120,,28/07/2023,30/07/2023,Completed,,Bore Failed,15012,,Not Started,Not Started,Yes,working,Bore failed/shaline water
+Ravi Singh,20086202,MAKHDUM PUR,Sadat,Ghazipur,SVBP Construction,100,,,,Not Started,,Not Started,7409,,Not Started,Not Started,,,Not Started
+Ravi Singh,20074284,JABRAPAR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,7451,,Not Started,Not Started,,,Not Started
+Ravi Singh,20073678,RAMCHARANPUR ,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,8065,,Not Started,Not Started,,,Not Started
+Ravi Singh,20074316,BERBHAN ,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,4921,,Not Started,Not Started,,,Not Started
+Ravi Singh,20074274,BARHAPAR BHOJURAI,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,11599,,Not Started,Not Started,,,Not Started
+Ravi Singh,20074288,KHUTHI,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,5910,,Not Started,Not Started,,,Not Started
+Ravi Singh,20075820,CHAK DAUD,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,16232,,Not Started,Not Started,,,Not Started
+Ravi Singh,20073694,MARDAN PUR,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,8750,,Not Started,Not Started,,,Not Started
+Ravi Singh,20073711,CHOKARI,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,8551,,Not Started,Not Started,,,Not Started
+Ravi Singh,20073717,SIHABARI,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,16919,,Not Started,Not Started,,,Not Started
+Ravi Singh,20075942,BARAULI SULTAN SINGH,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,13219,,Not Started,Not Started,,,Not Started
+Ravi Singh,20076123,PAREWA,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,12384,,Not Started,Not Started,,,Not Started
+Ravi Singh,20073725,SAMOGAR,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,7335,,Not Started,Not Started,,,Not Started
+Ravi Singh,20075927,AOUDARI,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,19221,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097685,SULTANPUR,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,16474,,Not Started,Not Started,,,Not Started
+Ravi Singh,20076141,SARAI MANIKRAJ,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,15301,,Not Started,Not Started,,,Not Started
+Ravi Singh,20073848,CHAK MALUK,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,6606,,Not Started,Not Started,,,Not Started
+Ravi Singh,20075756,DILAVAL PATTI,Manihari,Ghazipur,,120,,28/07/2023,30/07/2023,Completed,,Lowring Awaited,12608,,Not Started,Not Started,Yes,working,lowering tomorrow
+Ravi Singh,20074311,SESUKAPAR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,15259,,Not Started,Not Started,,,Not Started
+Ravi Singh,20074306,ISHOPUR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,8656,,Not Started,Not Started,,,Not Started
+Ravi Singh,20091446,MATHSARAIYA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,8623,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092037,ITAHA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,11331,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092041,DHARAMMARPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,13139,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086190,KARAMDAPUR,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,6587,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086195,SARAI GOBIND,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,15323,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086462,MUBARAKPUR KAZI,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,9536,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086446,SONBARSA,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,11187,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086466,MOHABBAT PUR,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,15676,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086425,BURANPUR,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,16095,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086428,RAMDAS PUR,Sadat,Ghazipur,SVBP Construction,100,,23/07/2023,01/08/2023,Completed,,Lowring Awaited,14635,,Not Started,Not Started,Yes,working,drilling done
+Ravi Singh,20086265,TADIYAW,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,7959,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086440,GURNA & TODARPUR,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,17672,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086313,MARDANPUR LAXMAN,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,6474,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086478,MOHAMMADPUR,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,16171,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086481,FIROZSHAH & CHAK BAKAR,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,17136,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086451,SHAHPUR SAMSHER KHAN,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,7487,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086475,PARAVA & TILSARA,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,18993,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086363,TARWA TAPPA SORI,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,13013,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086372,BEZHARI,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,10801,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086430,HURMUJ PUR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,17172,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086381,MALA KHURD,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,16401,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086196,VASILA & JAGMAL ZOT,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,36510,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086207,MOUDHIA & BARWA KHURD,Manihari,Ghazipur,,120,,,,Not Started,,Not Started,22569,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086438,SAVAS,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,19124,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086441,PALIWAR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,7679,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086230,BURNPUR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,11880,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092060,BADALA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,16292,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092063,AMEHTA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,16244,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092068,DARHWAL,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,17228,,Not Started,Not Started,,,Not Started
+Ravi Singh,20086376,KHIJIRA PUR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,8367,,Not Started,Not Started,,,Not Started
+Ravi Singh,20087352,KHALILPUR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,10260,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088517,SONIYAPAR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,12598,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088542,BHABHORA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,16827,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088545,RASTEPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,9983,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088548,MIRZAPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,18194,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088563,BHUWARPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,16624,,Not Started,Not Started,,,Not Started
+Ravi Singh,20089911,MATH. UCHOURI,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,18658,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088574,SARAY ALI KHAN,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,8846,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088576,MAHAROOMPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,12180,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088583,DAULATPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,10288,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097771,MUBARAKPUR,Sadat,Ghazipur,,100,,25/07/2023,30/07/2023,Completed,,Lowring Awaited,7476,,Not Started,Not Started,Yes,working,lowering tomorrow
+Ravi Singh,20088585,GADAIPUR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,24886,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088219,IAKRA,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,10626,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088428,DHARAMAWA URF KOSA,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,10369,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088221,SARDARPUR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,15151,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088438,"MAHMUDPUR ATIULLA, NAGAWA",Sadat,Ghazipur,,100,,,,Not Started,,Not Started,17624,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088455,MAJUI,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,18921,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088474,HAZIPUR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,7863,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088479,KATYA,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,14440,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088224,SARSAULI,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,6078,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088225,MANGARI,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,27254,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088908,"BAIRAKH, ASSPUR",Sadat,Ghazipur,,100,,,,Not Started,,Not Started,17417,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088551,MALORA & KUVATI,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,18288,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088528,TANDA,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,7224,,Not Started,Not Started,,,Not Started
+Ravi Singh,20088589,KANDAR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,8527,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092083,KOTIYA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,17932,,Not Started,Not Started,,,Not Started
+Ravi Singh,20091413,DARBEPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,13062,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097676,PAHADPUR HALDAR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,11086,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092020,VIJVAL,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,9786,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092023,VIKHAEPUR,Deokali,Ghazipur,,220,,,,Not Started,,Not Started,10650,,Not Started,Not Started,,,Not Started
+Ravi Singh,20092093,BHATOLA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,11345,,Not Started,Not Started,,,Not Started
+Ravi Singh,20094726,SHEDHRA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,13592,,Not Started,Not Started,,,Not Started
+Ravi Singh,20094446,JAINPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,10543,,Not Started,Not Started,,,Not Started
+Ravi Singh,20094750,TANDWA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,16346,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097093,NEWADA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,11331,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097096,NAVADA & SHEKHPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,15877,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097087,SASANA,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,6908,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097737,ALAMPUR &  SONA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,29245,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097769,AHLADPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,6442,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097741,HASANPUR & LUDIPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,17291,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097748,MUJADY,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,7641,,Not Started,Not Started,,,Not Started
+Ravi Singh,20097740,BHARIYA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,11016,,Not Started,Not Started,,,Not Started
+Ravi Singh,20100533,KHAZURA,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,18146,,Not Started,Not Started,,,Not Started
+Ravi Singh,20100562,PIPNAR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,27306,,Not Started,Not Started,,,Not Started
+Ravi Singh,20100534,KHAZURHAT,Sadat,Ghazipur,,100,,28/07/2023,29/07/2023,Completed,,Lowring Awaited,10801,,Not Started,Not Started,Yes,working,logging done/ report received
+Ravi Singh,20100536,SALEMPUR BAGHAI,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,21244,,Not Started,Not Started,,,Not Started
+Ravi Singh,20100538,BHAIROPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,8581,,Not Started,Not Started,,,Not Started
+Ravi Singh,20100555,AURIHAR KALA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,8952,,Not Started,Not Started,,,Not Started
+Ravi Singh,20100545,RANIPUR,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,3189,,Not Started,Not Started,,,Not Started
+Ravi Singh,20100542,HATHORA,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,15731,,Not Started,Not Started,,,Not Started
+Ravi Singh,20100551,SADAT,Sadat,Ghazipur,,100,,,,Not Started,,Not Started,6530,,Not Started,Not Started,,,Not Started
+Ravi Singh,20100556,HARIHARPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,10495,,Not Started,Not Started,,,Not Started
+Ravi Singh,20100563,MAHAMUDPUR,Saidpur,Ghazipur,,300,,,,Not Started,,Not Started,9159,,Not Started,Not Started,,,Not Started
+Ravi Singh,20102082,KANHAIPUR,Saidpur,Ghazipur,,Not Found,,,,Not Started,,Not Started,Not Now,,Not Started,Not Started,,,Not Started
+Basant,20094398,AURANGABAD AND ISLAMABAD,Ghazipur,Ghazipur_1,Anand Enterprises,200,,19/05/2023,06/06/2023,Completed,20/06/2023,Completed,9529,,Not Started,Not Started,,,Completed
+Basant,20097108,SHAIRTGAHMAR & PARTIALLY RAISENPUR,Bhadaura,Ghazipur_1,Azhar,200,,07/07/2023,,Issue,,Bore Failed,32729,,Not Started,Not Started,Yes,working,"First Bore Collabs, machine reached at site for second bore  "
+Basant,20097732,PAHARPUR TAUFIR,Varachavar,Ghazipur_1,Bajrang Bali Group,360,,01/06/2023,08/06/2023,Completed,17/06/2023,Completed,7441,1189,WIP,Not Started,,,Completed
+Basant,20092097,CHAUTHI,Virno,Ghazipur_1,Bajrang Bali Group,360,,04/06/2023,10/06/2023,Completed,06/07/2023,Completed,9707,,Not Started,Not Started,,,Completed
+Basant,20097689,BAIDAWALI,Virno,Ghazipur_1,Bajrang Bali Group,360,,06/06/2023,11/06/2023,Completed,28/06/2023,Completed,6611,,Not Started,Not Started,,,Completed
+Basant,20088577,BARAULI KALAN AWAL & BISAMBHARPUR PUNJAM,Varachavar,Ghazipur_1,Bajrang Bali Group,360,,11/06/2023,17/06/2023,Completed,26/06/2023,Completed,15999,791,WIP,WIP,,,Completed
+Basant,20088188,TODERPUR,Varachavar,Ghazipur_1,Bajrang Bali Group,360,,12/06/2023,13/06/2023,Completed,20/06/2023,Completed,9947,2846,WIP,Not Started,,,Completed
+Basant,20093397,CHAITHO BANDH,Varachavar,Ghazipur_1,Bajrang Bali Group,360,,24/06/2023,03/07/2023,Completed,13/07/2023,Completed,7109,1456,WIP,Not Started,,,Completed
+Basant,20091979,CHAK FATMA & SALHAR KHAN,Varachavar,Ghazipur_1,Bajrang Bali Group,360,,24/06/2023,26/06/2023,Completed,08/07/2023,Completed,15053,1694,WIP,Not Started,,,Completed
+Basant,20092048,KALAURA & JAGDISHPUR AUTAR,Mardah,Ghazipur_1,Bajrang Bali Group,360,,06/07/2023,10/07/2023,Completed,26/07/2023,Completed,8274,,Not Started,Not Started,Yes,working,Completed
+Basant,20092094,PAHDARIA,Varachavar,Ghazipur_1,Bajrang Bali Group,360,,06/07/2023,08/07/2023,Completed,22/07/2023,Completed,14739,826,WIP,Not Started,,,Completed
+Basant,20100550,SARWAN DIH,Mardah,Ghazipur_1,Bajrang Bali Group,360,,08/07/2023,13/07/2023,Completed,29/07/2023,Completed,6476,,Not Started,Not Started,Yes,working,Completed
+Basant,20091441,DEHAMA, Varachavar,Ghazipur_1,Bajrang Bali Group,360,,,,Not Started,,Not Started,11069,,Not Started,Not Started,,,Not Started
+Basant,20092034,GOVINDPUR,Varachavar,Ghazipur_1,Bajrang Bali Group,360,,,,Not Started,,Not Started,18834,,Not Started,Not Started,,,Not Started
+Basant,20092053,ABHISAN,Mardah,Ghazipur_1,Bajrang Bali Group,360,,,,Not Started,,Not Started,10404,,Not Started,Not Started,,,Not Started
+Basant,20088289,AMWA ASKARAN & SAMPUR LAKAMI,Varachavar,Ghazipur_1,Bajrang Bali Group,360,,28/07/2023,,WIP,,Not Started,18860,,Not Started,Not Started,Yes,working,Drilling Done-350 Mtr rest WIP
+Basant,20088341,MAHUWARI URF KRIPALPUR,Varachavar,Ghazipur_1,Bajrang Bali Group,360,,,,Not Started,,Not Started,16605,,Not Started,Not Started,,,Not Started
+Basant,20092052,MAHMUDPUR,Mardah,Ghazipur_1,Balaji Construction,360,,15/07/2023,19/07/2023,Completed,26/07/2023,Completed,7185,,Not Started,Not Started,,,Completed
+Basant,20088536,BADDO PUR & CHAK BADHOPUR,Varachavar,Ghazipur_1,Balaji Construction,360,,15/07/2023,31/07/2023,Completed,,Lowring Awaited,14892,,Not Started,Not Started,Yes,working,"logging Doe, waiting for chart"
+Basant,20073794,GHATORA,Jakhania,Ghazipur_1,Dheerender Enterprise,120,,10/07/2023,18/07/2023,Completed,26/07/2023,Completed,14434,,Not Started,Not Started,,,Completed
+Basant,20100557,BURANPUR,Jakhania,Ghazipur_1,Dheerender Enterprise,120,,12/07/2023,14/07/2023,Completed,26/07/2023,Completed,7633,,Not Started,Not Started,,,Completed
+Basant,20086447,JAKHANIA GOBIND,Jakhania,Ghazipur_1,Dornam Construction,120,,27/06/2023,27/07/2023,Completed,12/07/2023,Completed,16403,800,WIP,Not Started,,,Completed
+Basant,20073780,RAJAPUR,Jakhania,Ghazipur_1,Dornam Construction,120,,02/07/2023,15/07/2023,Completed,21/07/2023,Completed,7597,,Not Started,Not Started,,,Completed
+Basant,20073742,HATHIYA RAM,Jakhania,Ghazipur_1,Dornam Construction,300,,,,Not Started,,Not Started,9840,,Not Started,Not Started,,,Not Started
+Basant,20086244,PALI,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,05/04/2023,08/04/2023,Completed,16/04/2023,Completed,13762,,Not Started,Not Started,,,Completed
+Basant,20086237,SINDAGAR,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,07/04/2023,09/04/2023,Completed,20/04/2023,Completed,12016,2505,WIP,Completed,,,Completed
+Basant,20086204,KATYA LAHANG,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,20/04/2023,26/04/2023,Completed,10/05/2023,Completed,22191,5350,WIP,WIP,,,Completed
+Basant,20097106,SIURA,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,24/04/2023,25/04/2023,Completed,,Bore Failed,14051,,Not Started,Not Started,,,Bore Faliled Due to Saline Water
+Basant,20088481,SIDHAUT,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,09/05/2023,11/05/2023,Completed,17/05/2023,Completed,18827,3349,WIP,Not Started,,,Completed
+Basant,20088488,PARSUPUR,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,02/06/2023,10/06/2023,Completed,17/06/2023,Completed,11315,863,WIP,Not Started,,,Completed
+Basant,20097765,DIHAWA,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,28/07/2023,29/07/2023,Completed,,08/08/2023,5947,,Not Started,Not Started,Yes,working,Lowering plan-02.08.2023@11 AM
+Basant,20097687,BARAR & JANUPUR,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,29/07/2023,01/08/2023,Completed,,Lowring Awaited,13682,,Not Started,Not Started,Yes,working,Logging plan Today
+Basant,20086523,MARDANPUR,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,,,Not Started,,Not Started,11603,,Not Started,Not Started,,,Not Started
+Basant,20088394,CHAURA  MU KAGJIPUR,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,,,Not Started,,Not Started,12547,,Not Started,Not Started,,,Not Started
+Basant,20088204,DUDHAURA,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,,,Not Started,,Not Started,11620,,Not Started,Not Started,,,Not Started
+Basant,20088209,ASANA,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,,,Not Started,,Not Started,9972,,Not Started,Not Started,,,Not Started
+Basant,20091419,RASULPUR,Kasimabad,Ghazipur_1,Durgesh Work Constructors,100,,,,Not Started,,Not Started,11797,,Not Started,Not Started,,,Not Started
+Basant,20073831,BURHADIH,Zamania,Ghazipur_1,Kshitiz Bala Ji,220,,24/05/2023,26/05/2023,Completed,08/06/2023,Completed,8111,,Not Started,Not Started,,,Completed
+Basant,20092072,NEW URF UNCHA DIH,Varachavar,Ghazipur_1,Kshitiz Bala Ji,360,,,,Not Started,,Not Started,16634,,Not Started,Not Started,,,Not Started
+Basant,20091433,TEJPURA,Mardah,Ghazipur_1,MSG Group,360,,20/07/2023,26/07/2023,Completed,,08/08/2023,6360,,Not Started,Not Started,Yes,working,"Lowering plan-03.08.2023, Material in transit"
+Basant,20074161,KADIPUR,Kasimabad,Ghazipur_1,Padma construction,100,,03/05/2023,27/05/2023,Completed,12/06/2023,Completed,6490,891,WIP,WIP,,,Completed
+Basant,20088383,LOHWA & HAZIPUR BARESAR & HASANPUR GAURA,Kasimabad,Ghazipur_1,Padma construction,100,,17/05/2023,06/07/2023,Completed,15/07/2023,Completed,23020,,Not Started,Not Started,,,Completed
+Basant,20086249,KAGJIPUR,Kasimabad,Ghazipur_1,Padma construction,100,,,,Not Started,,Not Started,11719,,Not Started,Not Started,,,Not Started
+Basant,20088408,MALIKPURA,Kasimabad,Ghazipur_1,Padma construction,100,,,,Not Started,,Not Started,10446,,Not Started,Not Started,,,Not Started
+Basant,20088331,MALASA & MAHASHPUR,Bhanwarkol,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,12/04/2023,15/04/2023,Completed,22/04/2023,Completed,13986,,Not Started,WIP,,,Completed
+Basant,20076448,CHAK RUKUNDINPUR & MAHUWI,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,15/04/2023,23/04/2023,Completed,29/04/2023,Completed,16328,1650,WIP,WIP,,,Completed
+Basant,20088339,AMWA SINGH,Varachavar,Ghazipur_1,Radianz Enlightenment Pvt Ltd,360,,26/04/2023,03/05/2023,Completed,19/05/2023,Completed,13210,4307,WIP,Not Started,,,Completed
+Basant,20076574,AHIRAULI,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,01/05/2023,06/05/2023,Completed,12/05/2023,Completed,9984,,Not Started,Not Started,,,Completed
+Basant,20092069,HATWAR DAYAL SINGH & HATWAR MURAR SINGH,Varachavar,Ghazipur_1,Radianz Enlightenment Pvt Ltd,360,,01/05/2023,09/05/2023,Completed,26/05/2023,Completed,20366,2638,WIP,Completed,,,Completed
+Basant,20092070,SAGAPALI DAYAL SINGH & SAGAPALI MURAR SINGH,Varachavar,Ghazipur_1,Radianz Enlightenment Pvt Ltd,360,,01/05/2023,22/05/2023,Completed,06/06/2023,Completed,9822,5926,WIP,Not Started,,,Completed
+Basant,20076556,HAINI,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,02/05/2023,04/05/2023,Completed,11/05/2023,Completed,11123,,Not Started,WIP,,,Completed
+Basant,20088227,SHIWARI KHAS,Varachavar,Ghazipur_1,Radianz Enlightenment Pvt Ltd,360,,09/05/2023,18/05/2023,Completed,31/05/2023,Completed,10456,4195,WIP,WIP,,,Completed
+Basant,20076462,JAKARAULI,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,10/05/2023,14/05/2023,Completed,20/05/2023,Completed,14162,500,WIP,Not Started,,,Completed
+Basant,20088327,CHAK MUKUND URF BARTAR & THANAIPUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,11/05/2023,17/05/2023,Completed,23/05/2023,Completed,17446,,Not Started,Not Started,,,Completed
+Basant,20100552,CHAK PAHAR M. MURTAJAPUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,18/05/2023,22/05/2023,Completed,02/06/2023,Completed,6419,,Not Started,Not Started,,,Completed
+Basant,20076423,SONARI & REWSARA,Bhanwarkol,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,22/05/2023,24/05/2023,Completed,31/05/2023,Completed,15866,,Not Started,Not Started,,,Completed
+Basant,20092082,TARKA & AMAROPUR,Bhanwarkol,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,22/05/2023,28/05/2023,Completed,03/06/2023,Completed,15772,,Not Started,Not Started,,,Completed
+Basant,20100821,MURKI AGADH,Bhanwarkol,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,27/05/2023,19/06/2023,Completed,,Lowring Awaited,12768,,Not Started,Not Started,,,
+Basant,20088297,AMHAT & BHIKHAM AMHAT,Varachavar,Ghazipur_1,Radianz Enlightenment Pvt Ltd,360,,31/05/2023,09/06/2023,Completed,27/06/2023,Completed,14505,2248,WIP,Not Started,,,Completed
+Basant,20100532,CHAK MUKURI BAREJ PUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,03/06/2023,07/06/2023,Completed,10/06/2023,Completed,4469,,Not Started,Not Started,,,Completed
+Basant,20088263,"CHAK ABDUL WAHAB , SOHILAPUR",Sadar,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,05/06/2023,09/06/2023,Completed,17/06/2023,Completed,16221,,Not Started,Not Started,,,Completed
+Basant,20073666,PAHARIPUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,275,,13/06/2023,17/06/2023,Completed,22/06/2023,Completed,11873,,Not Started,Not Started,,,Completed
+Basant,20100558,BIDIAPARA,Ghazipur,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,30/06/2023,02/07/2023,Completed,06/07/2023,Completed,8883,,Not Started,Not Started,,,Completed
+Basant,20088287,CHAKJALAL KUMARI URF MOHANPURA/TODERPUR URF PARTAP PUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,07/07/2023,12/07/2023,Completed,18/07/2023,Completed,7639,,Not Started,Not Started,Yes,Under mainteanance,Completed
+Basant,20088277,"BIKAPUR , MISHRAULIYA",Sadar,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,13/07/2023,15/07/2023,Completed,23/07/2023,Completed,22930,,Not Started,Not Started,,,Completed
+Basant,20088587,BHAT SARAI & BHARAULI ALA,Varachavar,Ghazipur_1,Radianz Enlightenment Pvt Ltd,360,,20/07/2023,27/07/2023,Completed,21/07/2023,Completed,25157,,Not Started,Not Started,,,Completed
+Basant,20086408,SARAI BAHADUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,,,Not Started,,Not Started,12506,,Not Started,Not Started,,,Not Started
+Basant,20093424,BIBI PUR KHAS,Varachavar,Ghazipur_1,Radianz Enlightenment Pvt Ltd,360,,,,Not Started,,Not Started,6546,,Not Started,Not Started,,,Not Started
+Basant,20086444,BHALA,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,,,Not Started,,Not Started,6547,,Not Started,Not Started,,,Machine not shifted this point- absconding
+Basant,20086395,BAHADURPUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,,,Not Started,,Not Started,5845,,Not Started,Not Started,,,Not Started
+Basant,20088282,TANDWA M. KAJIPUR SIRAJ & ASMANICHAK URF MALICHAK,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,,,Not Started,,Not Started,13743,,Not Started,Not Started,,,Not Started
+Basant,20088301,LALUPUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,,,Not Started,,Not Started,11207,,Not Started,Not Started,,,Not Started
+Basant,20088307,BARHI URF BANDAE,Varachavar,Ghazipur_1,Radianz Enlightenment Pvt Ltd,360,,,,Not Started,,Not Started,9427,,Not Started,Not Started,,,Not Started
+Basant,20088336,BREJI & BRAHAMDASPUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,,,Not Started,,Not Started,19228,,Not Started,Not Started,,,Not Started
+Basant,20092081,KESAW PUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,,,Not Started,,Not Started,8042,,Not Started,Not Started,,,Not Started
+Basant,20100531,HUSAYPUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,,,Not Started,,Not Started,8441,,Not Started,Not Started,,,Not Started
+Basant,20100554,NATHANPUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd,200,,,,Not Started,,Not Started,8285,,Not Started,Not Started,,,Not Started
+Basant,20086393,UTTAMPUR,Mohammadabad,Ghazipur_1,Radianz Enlightenment Pvt Ltd ,200,,25/04/2023,12/05/2023,Completed,19/05/2023,Completed,8910,,Not Started,WIP,,,Completed
+Basant,20074377,JALALPUR DHANI,Jakhania,Ghazipur_1,Renva Global,120,,23/07/2023,24/07/2023,Completed,29/07/2023,Completed,8125,,Not Started,Not Started,,,Completed
+Basant,20076400,SHAHPUR & MURERA BUZURG,Bhanwarkol,Ghazipur_1,Saujal Constructors,200,,28/05/2023,05/06/2023,Completed,11/06/2023,Completed,19207,,Not Started,Not Started,,,Completed
+Basant,20088316,SIPARI,Bhanwarkol,Ghazipur_1,Saujal Constructors,200,,14/06/2023,23/06/2023,Completed,27/06/2023,Completed,7642,,Not Started,Not Started,,,Completed
+Basant,20076149,DHUDIA,Bhanwarkol,Ghazipur_1,Saujal Constructors,200,,16/07/2023,24/07/2023,Completed,28/07/2023,Completed,7452,,Not Started,Not Started,,,Completed
+Basant,20086260,CHAK AHMAD KALA & KHAIRABARI,Bhanwarkol,Ghazipur_1,Saujal Constructors,200,,,,Not Started,,Not Started,11442,,Not Started,Not Started,,,Not Started
+Basant,20086345,OTANA,Jakhania,Ghazipur_1,Shrishti Enterprises,120,,08/07/2023,12/07/2023,Completed,21/07/2023,Completed,11346,,Not Started,Not Started,,,Completed
+Basant,20088258,SHEKHUPUR,Virno,Ghazipur_1,Subhash Enterprises,200,,08/07/2023,15/07/2023,Completed,22/07/2023,Completed,17419,,Not Started,Not Started,,,Completed
+Basant,20091429,RAIPUR,Virno,Ghazipur_1,Subhash Enterprises,360,,,,Not Started,,Not Started,9208,,Not Started,Not Started,,,Not Started
+Basant,20086418,TOKAWA,Zamania,Ghazipur_1,Subhash Enterprises,220,,,,Not Started,,Not Started,5973,,Not Started,Not Started,,,Not Started
+Basant,20088257,GOPOLPUR,Virno,Ghazipur_1,Subhash Enterprises,360,,,,Not Started,,Not Started,12963,,Not Started,Not Started,,,Not Started
+Basant,20097754,SUGBALIA & BARAURA,Revtipur,Ghazipur_1,Subhash Enterprises,200,,18/07/2023,19/07/2023,Completed,29/07/2023,Completed,17058,,Not Started,Not Started,,,Completed
+Basant,20073856,BARESAR KHAS,Kasimabad,Ghazipur_1,Suraj Brothers,100,,20/04/2023,25/04/2023,Completed,04/05/2023,Completed,7654,2298,WIP,WIP,,,Completed
+Basant,20074268,DARIYAPUR,Kasimabad,Ghazipur_1,Suraj Brothers,100,,06/05/2023,01/07/2023,Completed,05/07/2023,Completed,7615,,Not Started,Not Started,,,Completed
+Basant,20088451,HORLIPUR BARESAR,Kasimabad,Ghazipur_1,Suraj Brothers,100,,,,Not Started,,Not Started,10833,,Not Started,Not Started,,,Not Started
+Basant,20088505,BHESDA,Kasimabad,Ghazipur_1,Suraj Brothers,100,,,,Not Started,,Not Started,7231,,Not Started,Not Started,,,Not Started
+Basant,20076411,SONWANI,Bhanwarkol,Ghazipur_1,,200,,,,Not Started,,Not Started,10299,,Not Started,Not Started,,,Not Started
+Basant,20097911,KARKATPUR T. BHARAULI,Varachavar,Ghazipur_1,,275,,,,Not Started,,Not Started,6040,,Not Started,Not Started,Yes,Under mainteanance,Machine shifting after repairing
+Basant,20076163,MAURA,Varachavar,Ghazipur_1,,275,,,,Not Started,,Not Started,14215,,Not Started,Not Started,,,Not Started
+Basant,20089891,AWATHHI BASANT,Bhanwarkol,Ghazipur_1,,200,,,,Not Started,,Not Started,17780,,Not Started,Not Started,Yes,working,"Rig machine reached at site from Dhudhiya, Drilling start Today"
+Basant,20073672,LAHANA,Bhadaura,Ghazipur_1,,200,,,,Not Started,,Not Started,15652,,Not Started,Not Started,,,Not Started
+Basant,20074381,KANUWAN,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,15730,,Not Started,Not Started,,,Not Started
+Basant,20075253,KHETABPUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,8436,,Not Started,Not Started,,,Not Started
+Basant,20074345,KAULA JAKHANIA,Jakhania,Ghazipur_1,,300,,,,Not Started,,Not Started,13569,,Not Started,Not Started,,,Not Started
+Basant,20075413,KUDILA,Jakhania,Ghazipur_1,,300,,,,Not Started,,Not Started,13027,,Not Started,Not Started,,,Not Started
+Basant,20073734,RAIPUR,Jakhania,Ghazipur_1,,300,,,,Not Started,,Not Started,6362,,Not Started,Not Started,,,Not Started
+Basant,20075421,JAHNI,Jakhania,Ghazipur_1,,275,,,,Not Started,,Not Started,9564,,Not Started,Not Started,,,Not Started
+Basant,20074350,BAGHAI,Jakhania,Ghazipur_1,,120,,26/07/2023,,WIP,,Not Started,7782,,Not Started,Not Started,Yes,working,Drilling WIP-90 Mtr. Done
+Basant,20075740,RAMBAN,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,15799,,Not Started,Not Started,,,Not Started
+Basant,20087139,DAMOODARPUR,Jakhania,Ghazipur_1,,300,,,,Not Started,,Not Started,7450,,Not Started,Not Started,Yes,working,"Machine shifting from Jalalpur Dhani, Drilling start-02.08.2023"
+Basant,20073748,BELHARA,Jakhania,Ghazipur_1,,300,,,,Not Started,,Not Started,10191,,Not Started,Not Started,,,Not Started
+Basant,20075290,KHOJAPUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,12225,,Not Started,Not Started,,,Not Started
+Basant,20073788,MIRPUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,13435,,Not Started,Not Started,,,Not Started
+Basant,20087154,BIJAHARA,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,6748,,Not Started,Not Started,,,Not Started
+Basant,20075396,MAKHANPUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,9877,,Not Started,Not Started,,,Not Started
+Basant,20074355,BAHRAMPUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,6588,,Not Started,Not Started,,,Not Started
+Basant,20087135,KOTHIYA,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,9820,,Not Started,Not Started,,,Not Started
+Basant,20075377,LEDIHA,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,12744,,Not Started,Not Started,,,Not Started
+Basant,20092096,GAZAPATPUR,Virno,Ghazipur_1,,360,,,,Not Started,,Not Started,6928,,Not Started,Not Started,,,Not Started
+Basant,20091427,KELAHI,Virno,Ghazipur_1,,360,,,,Not Started,,Not Started,12331,,Not Started,Not Started,,,Not Started
+Basant,20092098,KHARAGPUR,Virno,Ghazipur_1,,360,,,,Not Started,,Not Started,15476,,Not Started,Not Started,,,Not Started
+Basant,20096967,SUBHAKHARPUR,Virno,Ghazipur_1,,200,,,,Not Started,,Not Started,8025,,Not Started,Not Started,,,Not Started
+Basant,20073819,AARIPUR,Virno,Ghazipur_1,,200,,,,Not Started,,Not Started,4592,,Not Started,Not Started,,,Not Started
+Basant,20097678,BHADEV,Sadar,Ghazipur_1,,200,,,,Not Started,,Not Started,6983,,Not Started,Not Started,Yes,working,"Rig machine not shifted this site due to Approach Road issue, Machine shift other location"
+Basant,20097715,JALLAPUR,Sadar,Ghazipur_1,,200,,,,Not Started,,Not Started,6301,,Not Started,Not Started,,,Not Started
+Basant,20092028,BASWARI,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,7712,,Not Started,Not Started,,,Not Started
+Basant,20092031,KHAJUR GAON,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,14237,,Not Started,Not Started,,,Not Started
+Basant,20091431,CHANWAR,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,9835,,Not Started,Not Started,,,Not Started
+Basant,20092032,BAHTURA,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,8581,,Not Started,Not Started,,,Not Started
+Basant,20091435,BELSARI,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,11682,,Not Started,Not Started,,,Not Started
+Basant,20091437,TAWAKKALPUR URF DANDAPURA,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,6697,,Not Started,Not Started,,,Not Started
+Basant,20097674,CHAK JAINAB,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,19329,,Not Started,Not Started,,,Not Started
+Basant,20091439,FEPHRA,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,6269,,Not Started,Not Started,,,Not Started
+Basant,20074257,JAGDISHPUR M DAHEDU,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,10691,,Not Started,Not Started,,,Not Started
+Basant,20091442,PIHULI, Varachavar,Ghazipur_1,,360,,,,Not Started,,Not Started,9631,,Not Started,Not Started,,,Not Started
+Basant,20091444,KAMSARI,Varachavar,Ghazipur_1,,360,,,,Not Started,,Not Started,14819,,Not Started,Not Started,,,Not Started
+Basant,20091447,KHARHARA,Varachavar,Ghazipur_1,,360,,,,Not Started,,Not Started,8816,,Not Started,Not Started,,,Not Started
+Basant,20086485,EMAMUDDINPUR,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,8277,,Not Started,Not Started,,,Not Started
+Basant,20092046,PANDAYPUR RADHE,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,6118,,Not Started,Not Started,,,Not Started
+Basant,20086415,CHAK ASIA URF KHALILANCH,Zamania,Ghazipur_1,,220,,31/07/2023,,WIP,,Not Started,8346,,Not Started,Not Started,Yes,working,Drilling WIP
+Basant,20086433,CHAKMAZID URF CHAK,Zamania,Ghazipur_1,,220,,29/07/2023,30/07/2023,Completed,,Lowring Awaited,7554,,Not Started,Not Started,Yes,working,"Report received, Lowering material plan-02.08.2023"
+Basant,20092051,TISAURI,Kasimabad,Ghazipur_1,,360,,,,Not Started,,Not Started,7753,,Not Started,Not Started,,,Not Started
+Basant,20092054,RUHEPUR,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,8395,,Not Started,Not Started,,,Not Started
+Basant,20092056,DADI KALA,Mardah,Ghazipur_1,,360,,30/07/2023,,WIP,,Not Started,8470,,Not Started,Not Started,Yes,working,"Drilling done-110 Mtr., Rest WIP"
+Basant,20097670,BANKA KHAS,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,15363,,Not Started,Not Started,,,Not Started
+Basant,20086288,SONHARA,Jakhania,Ghazipur_1,,120,,25/07/2023,27/07/2023,Completed,,08/08/2023,15007,,Not Started,Not Started,Yes,working,"Lowering material in transit, Lowering plan-01.08.2023"
+Basant,20086284,MOLNAPUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,10395,,Not Started,Not Started,,,Not Started
+Basant,20086281,ODASAN,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,5223,,Not Started,Not Started,,,Not Started
+Basant,20086349,BARODIH MUBARAKPUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,9156,,Not Started,Not Started,,,Not Started
+Basant,20086343,PADUMPUR MAGRAI,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,8491,,Not Started,Not Started,Yes,working,Machine in Transit
+Basant,20086336,JAFAR PUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,10877,,Not Started,Not Started,,,Not Started
+Basant,20086332,TIRCHHI,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,16388,,Not Started,Not Started,,,Not Started
+Basant,20086510,HARDASHPUR KALA,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,9945,,Not Started,Not Started,,,Not Started
+Basant,20086314,DILLA,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,5852,,Not Started,Not Started,,,Not Started
+Basant,20086449,MARDANPUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,9322,,Not Started,Not Started,,,Not Started
+Basant,20097768,VAJIDPUR,Sadar,Ghazipur_1,,200,,,,Not Started,,Not Started,3997,,Not Started,Not Started,,,Not Started
+Basant,20091453,HARDASPUR T. NEWADA,Varachavar,Ghazipur_1,,360,,22/07/2023,27/07/2023,Completed,,08/08/2023,13061,,Not Started,Not Started,Yes,working,Lowering plan-02.08.2023@11 AM
+Basant,20097018,NEWADA,Varachavar,Ghazipur_1,,360,,,,Not Started,,Not Started,11832,,Not Started,Not Started,Yes,Under mainteanance,Machine shifting after repairing
+Basant,20092071,SADO PUR,Varachavar,Ghazipur_1,,360,,,,Not Started,,Not Started,10375,,Not Started,Not Started,,,Not Started
+Basant,20091456,PATE PUR,Varachavar,Ghazipur_1,,360,,,,Not Started,,Not Started,7316,,Not Started,Not Started,,,Not Started
+Basant,20092073,DUBIHAN,Varachavar,Ghazipur_1,,360,,,,Not Started,,Not Started,9814,,Not Started,Not Started,,,Not Started
+Basant,20086361,GAIGHAT,Zamania,Ghazipur_1,,220,,,,Not Started,,Not Started,10470,,Not Started,Not Started,,,Not Started
+Basant,20086364,GADHICHAK JAHIRULLA & KARJAHI BHARWATIA URF MAKRANDPUR,Zamania,Ghazipur_1,,220,,,,Not Started,,Not Started,10970,,Not Started,Not Started,,,Not Started
+Basant,20097692,PHADANPUR,Sadar,Ghazipur_1,,200,,,,Not Started,,Not Started,3600,,Not Started,Not Started,,,Not Started
+Basant,20097726,"BARIKPUR, BADHUI KHURD",Sadar,Ghazipur_1,,200,,,,Not Started,,Not Started,10921,,Not Started,Not Started,,,Not Started
+Basant,20088261,"BAHLOLPUR , TANTI",Virno,Ghazipur_1,,360,,,,Not Started,,Not Started,15134,,Not Started,Not Started,,,Not Started
+Basant,20088275,NEWADA,Sadar,Ghazipur_1,,360,,,,Not Started,,Not Started,8110,,Not Started,Not Started,,,Not Started
+Basant,20088280,BANTARA,Virno,Ghazipur_1,,360,,,,Not Started,,Not Started,11069,,Not Started,Not Started,,,Not Started
+Basant,20088281,NASRABAD,Bhanwarkol,Ghazipur_1,,200,,,,Not Started,,Not Started,12635,,Not Started,Not Started,,,Not Started
+Basant,20088308,NIKROJPUR,Bhanwarkol,Ghazipur_1,,200,,,,Not Started,,Not Started,9420,,Not Started,Not Started,,,Not Started
+Basant,20088344,MUSALAHPUR,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,8920,,Not Started,Not Started,,,Not Started
+Basant,20088347,BARAURA & MAHRANPUR,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,15782,,Not Started,Not Started,,,Not Started
+Basant,20088195,SULEMAPUR,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,6343,,Not Started,Not Started,,,Not Started
+Basant,20088938,KAYAMPUR,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,11392,,Not Started,Not Started,,,Not Started
+Basant,20088352,BAHARAR,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,9542,,Not Started,Not Started,,,Not Started
+Basant,20088380,SHAHPUR USRI,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,8000,,Not Started,Not Started,,,Not Started
+Basant,20100535,HAMIRPUR,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,2782,,Not Started,Not Started,,,Not Started
+Basant,20088389,BHAURAHA,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,12198,,Not Started,Not Started,,,Not Started
+Basant,20097669,RASULABAD,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,4873,,Not Started,Not Started,Yes,working,Not Started
+Basant,20088202,HASANPUR,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,8224,,Not Started,Not Started,,,Not Started
+Basant,20088418,SAWANA,Kasimabad,Ghazipur_1,,100,,31/07/2023,01/08/2023,Completed,,Lowring Awaited,6559,,Not Started,Not Started,Yes,working,"Drilling done, Logging plan-02.08.2023"
+Basant,20088422,NASIRUDDIN PURA,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,10079,,Not Started,Not Started,,,Not Started
+Basant,20088430,JAIRAMPUR MAGWAL,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,7568,,Not Started,Not Started,,,Not Started
+Basant,20088437,REGA & FATE SARAYA,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,10079,,Not Started,Not Started,,,Not Started
+Basant,20088207,CHAURA BHOG,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,6591,,Not Started,Not Started,,,Not Started
+Basant,20088458,INDAURA & MANDAHI,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,14604,,Not Started,Not Started,,,Not Started
+Basant,20088463,MUBARAKPUR M HASANPUR,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,16281,,Not Started,Not Started,,,Not Started
+Basant,20088211,BHADASA,Kasimabad,Ghazipur_1,,100,,26/07/2023,29/07/2023,Completed,,Lowring Awaited,14127,,Not Started,Not Started,Yes,working,"logging report received, waiting for assembly chart"
+Basant,20088473,ROHILI,Kasimabad,Ghazipur_1,,100,,23/07/2023,24/07/2023,Completed,28/07/2023,Completed,11677,,Not Started,Not Started,,,Completed
+Basant,20097760,CIPAH,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,22893,,Not Started,Not Started,,,Not Started
+Basant,20088214,MALEHUN,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,13387,,Not Started,Not Started,,,Not Started
+Basant,20088477,ARAKHPUR,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,5887,,Not Started,Not Started,,,Not Started
+Basant,20088496,SHIWARI DIH,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,15719,,Not Started,Not Started,,,Not Started
+Basant,20088510,MUHAMMADPUR,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,11070,,Not Started,Not Started,,,Not Started
+Basant,20088513,HETAMAPUR AZMAL CHAUDHARI MOHA & HAMIDPUR,Zamania,Ghazipur_1,,220,,,,Not Started,,Not Started,19800,,Not Started,Not Started,,,Not Started
+Basant,20088543,NIHALPUR,Varachavar,Ghazipur_1,,360,,,,Not Started,,Not Started,6862,,Not Started,Not Started,,,Not Started
+Basant,20097735,MASAUNI,Bhanwarkol,Ghazipur_1,,200,,,,Not Started,,Not Started,12578,,Not Started,Not Started,,,Not Started
+Basant,20091937,DILSAZ PUR,Varachavar,Ghazipur_1,,360,,,,Not Started,,Not Started,10089,,Not Started,Not Started,,,Not Started
+Basant,20091942,BAREJI,Bhadaura,Ghazipur_1,,200,,,,Not Started,,Not Started,13126,,Not Started,Not Started,,,Not Started
+Basant,20091411,SHAKAPUR,Varachavar,Ghazipur_1,,360,,,,Not Started,,Not Started,9673,,Not Started,Not Started,,,Not Started
+Basant,20091417,SARAR URF HAIDARGANJ,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,21657,,Not Started,Not Started,,,Not Started
+Basant,20091994,SAMANPUR,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,13531,,Not Started,Not Started,,,Not Started
+Basant,20091997,DAMODAR PUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,8594,,Not Started,Not Started,,,Not Started
+Basant,20091424,GAURAR KHAS,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,8364,,Not Started,Not Started,,,Not Started
+Basant,20092002,REWARIA,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,9085,,Not Started,Not Started,,,Not Started
+Basant,20092005,SEMAUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,13092,,Not Started,Not Started,,,Not Started
+Basant,20092088,RAGHUNATHPUR BADHESAR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,8049,,Not Started,Not Started,,,Not Started
+Basant,20092007,KISHUN PUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,8632,,Not Started,Not Started,,,Not Started
+Basant,20092010,DHAMRAAV,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,6295,,Not Started,Not Started,,,Not Started
+Basant,20092089,BIRAHIM PUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,8936,,Not Started,Not Started,,,Not Started
+Basant,20092090,CHALNI,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,6020,,Not Started,Not Started,,,Not Started
+Basant,20092013,SADAR JAHANPUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,11192,,Not Started,Not Started,,,Not Started
+Basant,20097016,"DAWA, AMARI",Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,18057,,Not Started,Not Started,,,Not Started
+Basant,20092016,SULTANIPUR & SOUPHI PUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,12156,,Not Started,Not Started,,,Machine Shift to kashimabad Block
+Basant,20091426,PADUMPUR RAMRAI,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,12784,,Not Started,Not Started,,,Not Started
+Basant,20092091,SARAI DHANESH,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,6953,,Not Started,Not Started,,,Not Started
+Basant,20092095,NUYAW AND MOHAMMADPUR MANORATH,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,12420,,Not Started,Not Started,,,Not Started
+Basant,20094703,RAMPUR M. MUBARKARPUR/SIKAND ARPUR MU. PARSA,Varachavar,Ghazipur_1,,360,,,,Not Started,,Not Started,14680,,Not Started,Not Started,,,Not Started
+Basant,20097691,KHIJIRPUR,Ghazipur,Ghazipur_1,,200,,,,Not Started,,Not Started,3687,,Not Started,Not Started,,,Not Started
+Basant,20094363,TILWA,Revtipur,Ghazipur_1,,200,,,,Not Started,,Not Started,5432,,Not Started,Not Started,,,Not Started
+Basant,20094404,BARESAR,Zamania,Ghazipur_1,,220,,,,Not Started,,Not Started,12065,,Not Started,Not Started,,,Not Started
+Basant,20097772,DASWANTPUR,Revtipur,Ghazipur_1,,200,,,,Not Started,,Not Started,4497,,Not Started,Not Started,,,Not Started
+Basant,20094418,ILLAICHIPUR & MADHUMALPUR,Zamania,Ghazipur_1,,220,,,,Not Started,,Not Started,11904,,Not Started,Not Started,,,Not Started
+Basant,20094505,KHANPUR RAGHUBAR RAI & KRITSINGH PUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,16669,,Not Started,Not Started,,,Not Started
+Basant,20094413,BHURKURA & GAJADHAR PUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,17760,,Not Started,Not Started,,,Not Started
+Basant,20094722,MAHAR BUZURG,Jakhania,Ghazipur_1,,120,,27/07/2023,,Awaited,,Not Started,7686,,Not Started,Not Started,,,"water pit excavation done, Drilling start today"
+Basant,20097090,KHUDABAX PUR,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,11138,,Not Started,Not Started,,,Not Started
+Basant,20097086,TODAR PUR,Bhanwarkol,Ghazipur_1,,200,,,,Not Started,,Not Started,9947,,Not Started,Not Started,,,Not Started
+Basant,20097088,BELSAREE,Bhanwarkol,Ghazipur_1,,200,,,,Not Started,,Not Started,7582,,Not Started,Not Started,,,Not Started
+Basant,20097102,SURWAT SHAHPUR,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,27156,,Not Started,Not Started,,,Not Started
+Basant,20097089,DURGAASTHAN,Kasimabad,Ghazipur_1,,100,,,,Not Started,,Not Started,6521,,Not Started,Not Started,,,Not Started
+Basant,20097097,DALPATPUR & PARTIALLY RAISENPUR,Bhadaura,Ghazipur_1,,200,,,,Not Started,,Not Started,13225,,Not Started,Not Started,,,Not Started
+Basant,20097105,GEHUNDI & MAHIUDDINPUR,Mardah & Kasimabad,Ghazipur_1,,360,,,,Not Started,,Not Started,21510,,Not Started,Not Started,,,Not Started
+Basant,20097745,HATHAURI,Bhadaura,Ghazipur_1,,200,,,,Not Started,,Not Started,8397,,Not Started,Not Started,,,Not Started
+Basant,20097747,KARMA,Bhadaura,Ghazipur_1,,200,,,,Not Started,,Not Started,12650,,Not Started,Not Started,,,Not Started
+Basant,20100541,KOR,Virno,Ghazipur_1,,360,,,,Not Started,,Not Started,11209,,Not Started,Not Started,,,Not Started
+Basant,20100543,BHAKSI,Bhadaura,Ghazipur_1,,200,,,,Not Started,,Not Started,11150,,Not Started,Not Started,,,Not Started
+Basant,20100547,BALLIPUR,Virno,Ghazipur_1,,200,,,,Not Started,,Not Started,6551,,Not Started,Not Started,,,Not Started
+Basant,20100540,PALIA,Bhadaura,Ghazipur_1,,200,,,,Not Started,,Not Started,12768,,Not Started,Not Started,,,Not Started
+Basant,20102080,RAMPUR URF SALEMPUR,Zamania,Ghazipur_1,,Not Found,,,,Not Started,,Not Started,3942,,Not Started,Not Started,,,Not Started
+Basant,20100539,PALIA,Mardah,Ghazipur_1,,360,,,,Not Started,,Not Started,15731,,Not Started,Not Started,,,Not Started
+Basant,20100544,AMABANSI,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,15862,,Not Started,Not Started,Yes,working,"Pin Point clear, Drilling start Today"
+Basant,20100546,NEWADA DURGA VIJAI,Jakhania,Ghazipur_1,,120,,,,Not Started,,Not Started,7715,,Not Started,Not Started,,,Not Started
+Basant,20100549,PATHKHOLIYA,Revtipur,Ghazipur_1,,220,,,,Not Started,,Not Started,5769,,Not Started,Not Started,,,Not Started
+Basant,20100560,GODA,Ghazipur,Ghazipur_1,,200,,,,Not Started,,Not Started,5195,,Not Started,Not Started,,,Not Started
+Basant,20100561,SONHAULIYA URF BAKULIYAPUR,Ghazipur,Ghazipur_1,,200,,,,Not Started,,Not Started,14383,,Not Started,Not Started,,,Not Started
+Basant,20102398,SHERPURTKARAHIYA,Bhadaura,Ghazipur_1,,Not Found,,,,Not Started,,Not Started,3097,,Not Started,Not Started,,,Not Started
+Basant,20102081,CHAK KAMRAURA (HARDIYA),Mohammadabad,Ghazipur_1,,Not Found,,,,Not Started,,Not Started,4087,,Not Started,Not Started,,,Not Started
+Basant,20102083,PURAN PUR,Mohammadabad,Ghazipur_1,,Not Found,,,,Not Started,,Not Started,8243,,Not Started,Not Started,,,Not Started
+Basant,20102085,KALYANPUR URF HANUMANGANJ (TANDWA),Mohammadabad,Ghazipur_1,,Not Found,,,,Not Started,,Not Started,1145,,Not Started,Not Started,,,Not Started
+Basant,20102084,FARIDPUR,Bhadaura,Ghazipur_1,,Not Found,,,,Not Started,,Not Started,5646,,Not Started,Not Started,,,Not Started
