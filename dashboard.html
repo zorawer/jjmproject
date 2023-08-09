@@ -32,6 +32,7 @@
     <div class="chart-container">
         <div id="oht-excavation-pie-chart" class="chart"></div>
     </div>
+<div id="drilling-cumulative-completed" class="chart-annotation"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -135,7 +136,23 @@
                     legend: {
                         orientation: 'h',
                         y: -0.3
-                    }
+                    }, 
+                    annotations: [
+        {
+            x: drillingMonths[drillingMonths.length - 1],
+            y: cumulativeDrillingCompletedData[cumulativeDrillingCompletedData.length - 1],
+            xref: 'x',
+            yref: 'y',
+            text: `Cumulative Completed: ${cumulativeDrillingCompletedData[cumulativeDrillingCompletedData.length - 1]}`,
+            showarrow: true,
+            arrowhead: 4,
+            arrowsize: 1,
+            arrowwidth: 2,
+            arrowcolor: '#1f77b4',
+            ax: 0,
+            ay: -40
+        }
+ ]                
                 };
 
                 // Create the drilling chart
