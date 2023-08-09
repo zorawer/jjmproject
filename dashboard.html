@@ -89,10 +89,9 @@
                     y: drillingWIP,
                     type: 'bar',
                     mode: 'markers',
-                    textinfo: 'label'
                     name: 'WIP',
+                    text: drillingWIP.map(value => value === 0 ? '' : value),
                     marker: {
-                        
                         color: '#FFA500'
                     },
                     text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>')),
@@ -109,9 +108,9 @@
                 }));
 
                 const drillingTargetAnnotation = {
-                    x: 'July',
-                    y: 45,
-                    text: 'Target: 45',
+                    x: 'August',
+                    y: 60,
+                    text: 'Target: 60',
                     xanchor: 'left',
                     yanchor: 'middle',
                     showarrow: true,
