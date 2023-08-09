@@ -240,7 +240,8 @@
                 };
 
                 // Create the lowering chart
-                Plotly.newPlot('lowering-chart', [loweringChart, loweringWIPBar], loweringLayout);
+                Plotly.newPlot('lowering-chart',
+                [loweringChart, loweringWIPBar], loweringLayout);
 
                 // Group the data by D/N Pipe Laying Status
                 const pipeLayingStatusData = parsedData.reduce((accumulator, row) => {
