@@ -78,7 +78,6 @@
                     x: drillingMonths,
                     y: drillingCompleted,
                     type: 'bar',
-                    values: Completed,
                     name: 'Completed',
                     text: drillingCompleted.map(value => value === 0 ? '' : value),
                     marker: {
@@ -91,7 +90,6 @@
                     y: drillingWIP,
                     type: 'bar',
                     mode: 'markers',
-                    values: WIP,
                     name: 'WIP',
                     text: drillingWIP.map(value => value === 0 ? '' : value),
                     marker: {
@@ -110,7 +108,20 @@
                     showarrow: false
                 }));
 
-                
+                const drillingTargetAnnotation = {
+                    x: 'August',
+                    y: 60,
+                    text: 'Target: 60',
+                    xanchor: 'left',
+                    yanchor: 'middle',
+                    showarrow: true,
+                    arrowhead: 4,
+                    arrowsize: 1,
+                    arrowwidth: 2,
+                    arrowcolor: '#FF0000',
+                    ax: -40,
+                    ay: -30
+                };
 
                 const drillingLayout = {
                     title: 'Drilling Completion by Month',
@@ -125,8 +136,39 @@
                     legend: {
                         orientation: 'h',
                         y: -0.3
-                    }; 
-                    
+                    }, 
+                    annotations: [
+                        {
+                            x: drillingMonths[drillingMonths.length - 1],
+                            y: drillingCompleted[drillingMonths.length - 1],
+                            xref: 'x',
+                            yref: 'y',
+                            text: `Completed: ${drillingCompleted[drillingMonths.length - 1]}`,
+                            showarrow: true,
+                            arrowhead: 4,
+                            arrowsize: 1,
+                            arrowwidth: 2,
+                            arrowcolor: '#1f77b4',
+                            ax: 0,
+                            ay: -40
+                        },
+                        {
+                            x: drillingMonths[drillingMonths.length - 1],
+                            y: drillingWIP[drillingMonths.length - 1],
+                            xref: 'x',
+                            yref: 'y',
+                            text: `WIP: ${drillingWIP[drillingMonths.length - 1]}`,
+                            showarrow: true,
+                            arrowhead: 4,
+                            arrowsize: 1,
+                            arrowwidth: 2,
+                            arrowcolor: '#FFA500',
+                            ax: 0,
+                            ay: -60
+                        },
+                        drillingTargetAnnotation
+                    ]
+                };
 
                 // Create the drilling chart
                 Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPBar], drillingLayout);
