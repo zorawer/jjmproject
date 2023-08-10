@@ -32,6 +32,7 @@
     <div class="chart-container">
         <div id="oht-excavation-pie-chart" class="chart"></div>
     </div>
+    <div id="drilling-cumulative-completed" class="chart-annotation"></div>
 
     <script>
         // Fetch data from the CSV file
@@ -40,7 +41,6 @@
             .then(data => {
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
-                const parse = Plotly.d3.csv.parse;
 
                 // Group the data by month for drilling completion
                 const drillingData = parsedData.reduce((accumulator, row) => {
@@ -79,10 +79,6 @@
                     y: drillingCompleted,
                     type: 'bar',
                     name: 'Completed',
-                    values: drillingCompleted
-                    textposition: 'inside',
-                    hoverinfo: 'value',
-                    textinfo: 'value',
                     text: drillingCompleted.map(value => value === 0 ? '' : value),
                     marker: {
                         color: '#1f77b4'
@@ -112,6 +108,21 @@
                     showarrow: false
                 }));
 
+                const drillingTargetAnnotation = {
+                    x: 'August',
+                    y: 60,
+                    text: 'Target: 60',
+                    xanchor: 'left',
+                    yanchor: 'middle',
+                    showarrow: true,
+                    arrowhead: 4,
+                    arrowsize: 1,
+                    arrowwidth: 2,
+                    arrowcolor: '#FF0000',
+                    ax: -40,
+                    ay: -30
+                };
+
                 const drillingLayout = {
                     title: 'Drilling Completion by Month',
                     xaxis: {
@@ -125,8 +136,39 @@
                     legend: {
                         orientation: 'h',
                         y: -0.3
-                    },
-          
+                    }, 
+                    annotations: [
+                        {
+                            x: drillingMonths[drillingMonths.length - 1],
+                            y: drillingCompleted[drillingMonths.length - 1],
+                            xref: 'x',
+                            yref: 'y',
+                            text: `Completed: ${drillingCompleted[drillingMonths.length - 1]}`,
+                            showarrow: true,
+                            arrowhead: 4,
+                            arrowsize: 1,
+                            arrowwidth: 2,
+                            arrowcolor: '#1f77b4',
+                            ax: 0,
+                            ay: -40
+                        },
+                        {
+                            x: drillingMonths[drillingMonths.length - 1],
+                            y: drillingWIP[drillingMonths.length - 1],
+                            xref: 'x',
+                            yref: 'y',
+                            text: `WIP: ${drillingWIP[drillingMonths.length - 1]}`,
+                            showarrow: true,
+                            arrowhead: 4,
+                            arrowsize: 1,
+                            arrowwidth: 2,
+                            arrowcolor: '#FFA500',
+                            ax: 0,
+                            ay: -60
+                        },
+                        drillingTargetAnnotation
+                    ]
+                };
 
                 // Create the drilling chart
                 Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPBar], drillingLayout);
@@ -161,15 +203,11 @@
                 const loweringCompleted = loweringMonths.map(month => loweringData[month]['Completed'].length);
                 const loweringWIP = loweringMonths.map(month => loweringData[month]['WIP'].length);
 
-                // Correctly calculate the lowering WIP count
-                const loweringWIPCount = loweringWIP.reduce((total, count) => total + count, 0);
-
                 // Create the lowering chart
                 const loweringChart = {
                     x: loweringMonths,
                     y: loweringCompleted,
                     type: 'bar',
-                    mode: 'bar+markers',
                     name: 'Completed',
                     marker: {
                         color: '#1f77b4'
@@ -349,39 +387,6 @@
 
                 // Create the OHT excavation status pie chart
                 Plotly.newPlot('oht-excavation-pie-chart', [ohtExcavationPieChart], ohtExcavationPieLayout);
-
-                // Filter the data for WIP schemes in OHT excavation
-                const ohtWIPData = parsedData.filter(row => row['OHT Excavation Status'] === 'WIP');
-
-                // Calculate the total scope for OHT excavation
-                const ohtTotalScope = ohtWIPData.reduce((sum, row) => sum + parseInt(row['OHT Excavation Scope (m)']), 0);
-
-                // Calculate the total work done for WIP schemes in OHT excavation
-                const ohtWorkDone = ohtWIPData.reduce((sum, row) => sum + parseInt(row['OHT Excavation Work Done (m)']), 0);
-
-                // Create the pie chart for WIP schemes in OHT excavation
-                const ohtWipPieChart = {
-                    labels: ['Scope', 'Work Done'],
-                    values: [ohtTotalScope, ohtWorkDone],
-                    type: 'pie',
-                    textposition: 'inside',
-                    hoverinfo: 'label+value',
-                    textinfo: 'label+percent',
-                    marker: {
-                        colors: ['#818181', '#FFA500']
-                    }
-                };
-
-                const ohtWipPieLayout = {
-                    title: 'WIP Schemes for OHT Excavation',
-                    legend: {
-                        orientation: 'h',
-                        y: -0.3
-                    }
-                };
-
-                // Create the pie chart for WIP schemes in OHT excavation
-                Plotly.newPlot('oht-excavation-pie-chart', [ohtWipPieChart], ohtWipPieLayout);
             })
             .catch(error => console.error(error));
     </script>
