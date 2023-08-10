@@ -70,17 +70,20 @@
                 const drillingMonths = monthNames.filter(month => drillingData.hasOwnProperty(month));
                 drillingMonths.sort((a, b) => monthNames.indexOf(a) - monthNames.indexOf(b));
 
-                // Create the drilling chart data
-                const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed'].length);
-                const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP'].length);
-                const drillingTotal = drillingCompleted.map((value, index) => value + drillingWIP[index]);
+             // Create the drilling chart data
+             const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed'].length);
+             const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP'].length);
+
+             // Calculate the total completed and WIP for drilling
+             const drillingTotalCompleted = drillingCompleted.reduce((total, value) => total + value, 0);
+             const drillingTotalWIP = drillingWIP.reduce((total, value) => total + value, 0);
 
                 // Create the drilling chart
                 const drillingChart = {
                     x: drillingMonths,
                     y: drillingCompleted,
                     type: 'bar',
-                    name: `Completed (${drillingTotal.reduce((sum, value) => sum + value, 0)})`,
+                    name: `Completed (${drillingTotalCompleted})`,
                     values: drillingCompleted,
                     text: drillingCompleted.map(value => value === 0 ? '' : value),
                     marker: {
@@ -94,7 +97,7 @@
                     type: 'bar',
                     mode: 'markers',
                     values: drillingWIP,
-                    name: `WIP (${drillingTotal.reduce((sum, value) => sum + value, 0)})`,
+                    name: `WIP (${drillingTotalWIP})`,
                     text: drillingWIP.map(value => value === 0 ? '' : value),
                     marker: {
                         color: '#FFA500'
