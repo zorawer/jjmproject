@@ -73,6 +73,7 @@
                 // Create the drilling chart data
                 const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed'].length);
                 const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP'].length);
+                const drillingTotal = drillingCompleted.map((value, index) => value + drillingWIP[index]);
 
                 // Create the drilling chart
                 const drillingChart = {
