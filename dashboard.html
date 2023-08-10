@@ -190,21 +190,25 @@
                     x: loweringMonths,
                     y: loweringCompleted,
                     type: 'bar',
-                    name: 'Completed',
+                    name: `Completed (${loweringCompleted.reduce((sum, value) => sum + value, 0)})`,
+                    text: loweringCompleted.map(value => value === 0 ? '' : value),
+                    hoverinfo: 'y+text',
                     marker: {
                         color: '#1f77b4'
                     }
                 };
 
                 const loweringWIPBar = {
-                    x: loweringMonths,
-                    y: loweringWIP,
-                    type: 'bar',
-                    name: 'WIP',
-                    marker: {
-                        color: '#FFA500'
-                    }
-                };
+                x: loweringMonths,
+                y: loweringWIP,
+                type: 'bar',
+                name: `WIP (${loweringWIP.reduce((sum, value) => sum + value, 0)})`,
+                text: loweringWIP.map(value => value === 0 ? '' : value),
+                hoverinfo: 'y+text',
+                marker: {
+                color: '#FFA500'
+    }
+};
 
                 const loweringLayout = {
                     title: 'Lowering Completion by Month',
