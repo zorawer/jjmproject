@@ -42,26 +42,27 @@
                 // Process the data
                 const parsedData = Plotly.d3.csv.parse(data);
 
-                // Group the data by month for drilling completion
-                const drillingData = parsedData.reduce((accumulator, row) => {
-                    if (row['T/W Drill End Date'] && (row['Drilling Status'] === 'Completed' || row['Drilling Status'] === 'WIP')) {
-                        const dateParts = row['T/W Drill End Date'].split('/');
-                        const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
-                        if (accumulator.hasOwnProperty(month)) {
-                            accumulator[month][row['Drilling Status']].push(row['Scheme Name']);
-                        } else {
-                            accumulator[month] = {
-                                'Completed': [],
-                                'WIP': []
-                            };
-                            if (row['Drilling Status'] === 'Completed') {
-                                accumulator[month]['Completed'].push(row['Scheme Name']);
-                            } else if (row['Drilling Status'] === 'WIP') {
-                                accumulator[month]['WIP'].push(row['Scheme Name']);
-                            }
+           // Group the data by month for drilling completion
+            const drillingData = parsedData.reduce((accumulator, row) => {
+                if ((row['Drilling Status'] === 'Completed' && row['T/W Drill End Date']) ||
+                    (row['Drilling Status'] === 'WIP' && row['T/W Drill Start Date'])) {
+                    const dateParts = (row['Drilling Status'] === 'Completed') ? row['T/W Drill End Date'].split('/') : row['T/W Drill Start Date'].split('/');
+                    const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
+                    if (accumulator.hasOwnProperty(month)) {
+                        accumulator[month][row['Drilling Status']].push(row['Scheme Name']);
+                    } else {
+                        accumulator[month] = {
+                            'Completed': [],
+                            'WIP': []
+                        };
+                        if (row['Drilling Status'] === 'Completed') {
+                            accumulator[month]['Completed'].push(row['Scheme Name']);
+                        } else if (row['Drilling Status'] === 'WIP') {
+                            accumulator[month]['WIP'].push(row['Scheme Name']);
                         }
                     }
-                    return accumulator;
+                }
+                return accumulator;
                 }, {});
 
                 // Sort drilling months in chronological order
