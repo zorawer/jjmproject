@@ -44,8 +44,8 @@
 
                 // Group the data by month for drilling completion
                 const drillingData = parsedData.reduce((accumulator, row) => {
-                    if (row['T/W Drill Start Date'] && (row['Drilling Status'] === 'Completed' || row['Drilling Status'] === 'WIP')) {
-                        const dateParts = row['T/W Drill Start Date'].split('/');
+                    if (row['T/W Drill End Date'] && (row['Drilling Status'] === 'Completed' || row['Drilling Status'] === 'WIP')) {
+                        const dateParts = row['T/W Drill End Date'].split('/');
                         const month = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]).toLocaleString('default', { month: 'long' });
                         if (accumulator.hasOwnProperty(month)) {
                             accumulator[month][row['Drilling Status']].push(row['Scheme Name']);
