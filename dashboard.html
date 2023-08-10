@@ -94,15 +94,16 @@
 };
 
                const drillingWIPBar = {
+    const drillingWIPBar = {
     x: drillingMonths,
     y: drillingWIP,
     type: 'bar',
     name: `WIP`,
-    hovertemplate: 'Completed: %{y}<br>WIP Schemes: <br>%{text}<extra></extra>',
+    hovertemplate: 'Completed: %{y}<br>WIP Schemes: %{text}<extra></extra>',
     marker: {
         color: '#FFA500'
     },
-    text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>'))
+    text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>')).join('<br>')
 };
 
                 const drillingAnnotations = drillingMonths.map((month, index) => ({
