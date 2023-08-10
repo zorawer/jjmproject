@@ -126,21 +126,7 @@
                         orientation: 'h',
                         y: -0.3
                     },
-                    annotations: drillingAnnotations.concat([{
-                        x: drillingMonths[drillingMonths.length - 1],
-                        y: drillingCompleted[drillingCompleted.length - 1],
-                        xref: 'x',
-                        yref: 'y',
-                        text: `Cumulative Completed: ${drillingCompleted[drillingCompleted.length - 1]}`,
-                        showarrow: true,
-                        arrowhead: 4,
-                        arrowsize: 1,
-                        arrowwidth: 2,
-                        arrowcolor: '#1f77b4',
-                        ax: 0,
-                        ay: -40
-                    }])
-                };
+          
 
                 // Create the drilling chart
                 Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPBar], drillingLayout);
