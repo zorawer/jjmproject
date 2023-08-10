@@ -102,8 +102,8 @@
                     marker: {
                         color: '#FFA500'
                     },
-                    text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>')),
-                    hovertemplate: 'WIP Schemes: <br>%{text}<extra></extra>'
+                   hovertemplate: 'WIP Schemes: %{text} <br>Total: ' + drillingTotalWIP,
+                   text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>')),
                 };
 
                 const drillingAnnotations = drillingMonths.map((month, index) => ({
