@@ -79,7 +79,7 @@
                     x: drillingMonths,
                     y: drillingCompleted,
                     type: 'bar',
-                    name: 'Completed',
+                    name: `Completed (${drillingTotal.reduce((sum, value) => sum + value, 0)})`,
                     values: drillingCompleted,
                     text: drillingCompleted.map(value => value === 0 ? '' : value),
                     marker: {
