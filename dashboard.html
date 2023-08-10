@@ -81,16 +81,16 @@
              const drillingTotalWIP = drillingWIP.reduce((total, value) => total + value, 0);
 
                 // Create the drilling chart
-                const drillingChart = {
+     const drillingWIPBar = {
     x: drillingMonths,
-    y: drillingCompleted,
+    y: drillingWIP,
     type: 'bar',
-    name: `Completed`,
-    text: drillingTotal.map(value => value === 0 ? '' : value),
-    hoverinfo: 'y+text',
+    name: `WIP`,
+    hovertemplate: 'Completed: %{y}<br>WIP Schemes: %{text}<extra></extra>',
     marker: {
-        color: '#1f77b4'
-    }
+        color: '#FFA500'
+    },
+    text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>')).join('<br>')
 };
 
                const drillingWIPBar = {
