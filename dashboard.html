@@ -137,40 +137,14 @@
                     legend: {
                         orientation: 'h',
                         y: -0.3
-                    }, 
-                    annotations: [
-                        {
-                            x: drillingMonths[drillingMonths.length - 1],
-                            y: drillingCompleted[drillingMonths.length - 1],
-                            xref: 'x',
-                            yref: 'y',
-                            text: `Completed: ${drillingCompleted[drillingMonths.length - 1]}`,
-                            showarrow: true,
-                            arrowhead: 4,
-                            arrowsize: 1,
-                            arrowwidth: 2,
-                            arrowcolor: '#1f77b4',
-                            ax: 0,
-                            ay: -40
-                        },
-                        {
-                            x: drillingMonths[drillingMonths.length - 1],
-                            y: drillingWIP[drillingMonths.length - 1],
-                            xref: 'x',
-                            yref: 'y',
-                            text: `WIP: ${drillingWIP[drillingMonths.length - 1]}`,
-                            showarrow: true,
-                            arrowhead: 4,
-                            arrowsize: 1,
-                            arrowwidth: 2,
-                            arrowcolor: '#FFA500',
-                            ax: 0,
-                            ay: -60
-                        },
-                        drillingTargetAnnotation
-                    ]
-                };
-
+                        x: 0.5,
+                    xanchor: 'center',
+                    traceorder: 'reversed',
+                    itemsizing: 'constant',
+                    itemclick: 'toggle'
+                }
+            };
+                    
                 // Create the drilling chart
                 Plotly.newPlot('drilling-chart', [drillingChart, drillingWIPBar], drillingLayout);
 
