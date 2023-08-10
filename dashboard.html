@@ -73,38 +73,39 @@
              // Create the drilling chart data
              const drillingCompleted = drillingMonths.map(month => drillingData[month]['Completed'].length);
              const drillingWIP = drillingMonths.map(month => drillingData[month]['WIP'].length);
+             const drillingTotal = drillingCompleted.map((value, index) => value + drillingWIP[index]);
+
 
              // Calculate the total completed and WIP for drilling
              const drillingTotalCompleted = drillingCompleted.reduce((total, value) => total + value, 0);
              const drillingTotalWIP = drillingWIP.reduce((total, value) => total + value, 0);
 
                 // Create the drilling chart
-                const drillingChart = {
-                    x: drillingMonths,
-                    y: drillingCompleted,
-                    type: 'bar',
-                    name: `Completed (${drillingTotalCompleted})`,
-                    values: drillingCompleted,
-                    text: drillingCompleted.map(value => value === 0 ? '' : value),
-                    marker: {
-                        color: '#1f77b4'
-                    }
-                };
+                cconst drillingChart = {
+    x: drillingMonths,
+    y: drillingCompleted,
+    type: 'bar',
+    name: `Completed`,
+    text: drillingTotal.map(value => value === 0 ? '' : value),
+    hoverinfo: 'y+text',
+    marker: {
+        color: '#1f77b4'
+    }
+};
 
-                const drillingWIPBar = {
-                    x: drillingMonths,
-                    y: drillingWIP,
-                    type: 'bar',
-                    mode: 'markers',
-                    values: drillingWIP,
-                    name: `WIP (${drillingTotalWIP})`,
-                    text: drillingWIP.map(value => value === 0 ? '' : value),
-                    marker: {
-                        color: '#FFA500'
-                    },
-                   hovertemplate: 'WIP Schemes: %{text} <br>Total: ' + drillingTotalWIP,
-                   text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>')),
-                };
+               const drillingWIPBar = {
+    x: drillingMonths,
+    y: drillingWIP,
+    type: 'bar',
+    name: `WIP`,
+    text: drillingTotal.map(value => value === 0 ? '' : value),
+    hoverinfo: 'y+text',
+    marker: {
+        color: '#FFA500'
+    },
+    text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>')),
+    hovertemplate: 'WIP Schemes: <br>%{text}<extra></extra>'
+};
 
                 const drillingAnnotations = drillingMonths.map((month, index) => ({
                     x: month,
