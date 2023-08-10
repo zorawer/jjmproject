@@ -93,7 +93,7 @@
                     type: 'bar',
                     mode: 'markers',
                     values: drillingWIP,
-                    name: 'WIP',
+                    name: `WIP (${drillingTotal.reduce((sum, value) => sum + value, 0)})`,
                     text: drillingWIP.map(value => value === 0 ? '' : value),
                     marker: {
                         color: '#FFA500'
