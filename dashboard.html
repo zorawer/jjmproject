@@ -80,6 +80,7 @@
                     y: drillingCompleted,
                     type: 'bar',
                     name: 'Completed',
+                    values: Completed,
                     text: drillingCompleted.map(value => value === 0 ? '' : value),
                     marker: {
                         color: '#1f77b4'
@@ -91,6 +92,7 @@
                     y: drillingWIP,
                     type: 'bar',
                     mode: 'markers',
+                    values: WIP,
                     name: 'WIP',
                     text: drillingWIP.map(value => value === 0 ? '' : value),
                     marker: {
