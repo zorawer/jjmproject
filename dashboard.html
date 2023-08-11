@@ -91,20 +91,18 @@
                     }
                 };
 
-                const drillingWIPBar = {
-                    x: drillingMonths,
-                    y: drillingWIP,
-                    type: 'bar',
-                    mode: 'markers',
-                    values: drillingWIP,
-                    name: `WIP (${drillingTotalWIP})`,
-                    text: drillingWIP.map(value => value === 0 ? '' : value),
-                    marker: {
-                        color: '#FFA500'
-                    },
-                    text: drillingMonths.map(month => drillingData[month]['WIP'].join('<br>')),
-                    hovertemplate: 'WIP Schemes: <br>%{text}<extra></extra>'
-                };
+      const drillingWIPBar = {
+    x: drillingMonths,
+    y: drillingWIP,
+    type: 'bar',
+    mode: 'markers',
+    values: drillingWIP,
+    name: `WIP (${drillingTotalWIP})`,
+    marker: {
+        color: '#FFA500'
+    },
+    hovertemplate: 'WIP Schemes: <br>%{text}<extra></extra>'
+};
 
                 const drillingAnnotations = drillingMonths.map((month, index) => ({
                     x: month,
